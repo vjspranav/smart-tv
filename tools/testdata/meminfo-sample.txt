@@ -1,0 +1,81 @@
+Applications Memory Usage (in Kilobytes):
+Uptime: 157885339 Realtime: 272693047
+
+** MEMINFO in pid 27551 [com.google.android.apps.tv.launcherx] **
+                   Pss  Private  Private  SwapPss      Rss     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty    Total     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    46193    46068       32      778    46924    60360    46270     3983
+  Dalvik Heap    25178    24928      128      244    25940    32553    16277    16276
+ Dalvik Other     2650     2516       36      116     3208                           
+        Stack     1844     1828       16      140     1848                           
+       Ashmem       61        0        0        0      396                           
+    Other dev       40       16       20        0      344                           
+     .so mmap    12598      224     7188       34    36392                           
+    .jar mmap     5242        0     1628        0    26956                           
+    .apk mmap    32778      100    14544        0    56352                           
+    .ttf mmap     5152        0     5076        0     5240                           
+    .dex mmap    16267       52    13160       16    19740                           
+    .oat mmap     1885        0      916        0    12368                           
+    .art mmap     8803     7476      556      777    16048                           
+   Other mmap     1222      320      704        0     2364                           
+      Unknown      600      544       16       24      868                           
+        TOTAL   162642    84072    44020     2129   254988    92913    62547    20259
+ 
+ App Summary
+                       Pss(KB)                        Rss(KB)
+                        ------                         ------
+           Java Heap:    32960                          41988
+         Native Heap:    46068                          46924
+                Code:    42892                         157140
+               Stack:     1828                           1848
+            Graphics:        0                              0
+       Private Other:     4344
+              System:    34550
+             Unknown:                                    7088
+ 
+           TOTAL PSS:   162642            TOTAL RSS:   254988       TOTAL SWAP PSS:     2129
+ 
+ Objects
+               Views:      618         ViewRootImpl:        1
+         AppContexts:       21           Activities:        1
+              Assets:       36        AssetManagers:        0
+       Local Binders:      157        Proxy Binders:       89
+       Parcel memory:       71         Parcel count:      157
+    Death Recipients:       12      OpenSSL Sockets:        0
+            WebViews:        0
+ 
+ SQL
+         MEMORY_USED:     3295
+  PAGECACHE_OVERFLOW:     2096          MALLOC_SIZE:      505
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b)          cache  Dbname
+         4       48             74     1021/542/4  /data/user/0/com.google.android.apps.tv.launcherx/cache/SqliteKeyValueCache:LocalAppCacheData:Singleton.db
+         4        4                         0/0/0    (attached) temp
+         4       48             17         0/15/1  /data/user/0/com.google.android.apps.tv.launcherx/cache/SqliteKeyValueCache:LocalAppCacheData:Singleton.db (2)
+         4    24120             59         3/36/4  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/assets.db
+         4        8                         0/0/0    (attached) temp
+         4    24120             39         3/22/4  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/assets.db (1)
+         4       28             38         3/28/4  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/ads_data.db
+         4        8                         0/0/0    (attached) temp
+         4       28             30         2/21/3  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/ads_data.db (1)
+         4      120             17         0/22/1  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/channel_groups.db
+         4        8                         0/0/0    (attached) temp
+         4      120             38         3/23/4  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/channel_groups.db (1)
+         4      120             33         2/14/2  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/channel_groups.db (2)
+         4       24             17         0/21/1  /data/user/0/com.google.android.apps.tv.launcherx/databases/1_room_notifications.db
+         4        8                         0/0/0    (attached) temp
+         4       24             50         3/22/4  /data/user/0/com.google.android.apps.tv.launcherx/databases/1_room_notifications.db (1)
+         4       36             17         0/22/1  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/topics.db
+         4        8                         0/0/0    (attached) temp
+         4       36             55         3/23/4  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/topics.db (1)
+         4       28             17         0/21/1  /data/user/0/com.google.android.apps.tv.launcherx/no_backup/databases/gnp_fcm_database
+         4        8                         0/0/0    (attached) temp
+         4       28             92         4/23/5  /data/user/0/com.google.android.apps.tv.launcherx/no_backup/databases/gnp_fcm_database (1)
+         4     7276            118     160/134/13  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/stream_cache
+         4        8                         0/0/0    (attached) temp
+         4     7276             30         2/22/3  /data/user/0/com.google.android.apps.tv.launcherx/files/accounts/2/stream_cache (1)
+         4      104            117        16/54/7  /data/user/0/com.google.android.apps.tv.launcherx/no_backup/androidx.work.workdb
+         4        8                         0/0/0    (attached) temp
+         4      104             57         7/25/6  /data/user/0/com.google.android.apps.tv.launcherx/no_backup/androidx.work.workdb (1)
