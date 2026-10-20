@@ -1,0 +1,31 @@
+WATCHNEXT_ROWS=24
+WATCHNEXT com.apple.atve.androidtv.appletv | Berlin ER | Symptoms | 2685000 | 1750255900971
+WATCHNEXT com.apple.atve.androidtv.appletv | Dark Matter | Are You Happy in Your Life? | 2775000 | 1764590002174
+WATCHNEXT com.apple.atve.androidtv.appletv | Slow Horses | Work Drinks | 2912000 | 1791014800238
+WATCHNEXT com.apple.atve.androidtv.appletv | Severance | Half Loop | 3202000 | 1785759654379
+WATCHNEXT com.apple.atve.androidtv.appletv | Silo | The Janitor’s Boy | 3050000 | 1783608382493
+WATCHNEXT com.apple.atve.androidtv.appletv | Tehran | Emergency Landing in Tehran | 3014000 | 1771706211420
+WATCHNEXT com.netflix.ninja | Gilmore Girls | null | 2497000 | 1792228976000
+WATCHNEXT com.netflix.ninja | Below | null | 2855000 | 1792360021000
+WATCHNEXT in.startv.hotstar | Pokemon | null | 1271000 | 1792491560000
+WATCHNEXT in.startv.hotstar | Arceus and the Jewel of Life - Pokemon the Movie | null | 5421000 | 1792491009000
+WATCHNEXT in.startv.hotstar | Avengers: Endgame | null | 10868000 | 1792425607000
+WATCHNEXT in.startv.hotstar | Band Of Brothers | null | 0 | 1792341170000
+WATCHNEXT in.startv.hotstar | Alice In Wonderland | null | 6513000 | 1792265564000
+WATCHNEXT in.startv.hotstar | The Wire | null | 3572000 | 1790868900000
+WATCHNEXT in.startv.hotstar | Harry Potter And The Half-Blood Prince | null | 8829000 | 1790179806000
+WATCHNEXT in.startv.hotstar | Harry Potter And The Deathly Hallows - Part 2 | null | 7501000 | 1790096161000
+WATCHNEXT in.startv.hotstar | Harry Potter And The Prisoner Of Azkaban | null | 8152000 | 1789926178000
+WATCHNEXT in.startv.hotstar | Harry Potter And The Deathly Hallows - Part 1 | null | 8402000 | 1789834112000
+WATCHNEXT com.amazon.amazonvideo.livingroom | The Love Hypothesis | null | 6724000 | 1790528248077
+WATCHNEXT com.amazon.amazonvideo.livingroom | The Traitors | null | 4825000 | 1788004101750
+PICTURE_MODE=10
+INPUT org.videolan.vlc/.PreviewVideoInputService type=0 parent=null label=VLC state=0
+INPUT com.tcl.tvinput/.TvPassThroughService/HW3 type=1001 parent=null label=AV state=0
+INPUT com.tcl.tvinput/.TvPassThroughService/HW17 type=1007 parent=null label=HDMI 3 state=1
+INPUT com.tcl.tvinput/.TunerInputService/HW2 type=0 parent=null label=TV state=0
+INPUT com.tcl.tvinput/.TvPassThroughService/HW15 type=1007 parent=null label=HDMI 1 state=1
+INPUT com.tcl.channelplus/com.tcl.iptv.service.InputService type=0 parent=null label=Live TV state=0
+INPUT com.tcl.tvinput/.TvPassThroughService/HW16 type=1007 parent=null label=HDMI 2 state=1
+INPUT com.graymatrix.did/com.zee5.androidtv.pmr.live.TvInputService type=0 parent=null label=Zee 5 state=0
+INPUT com.tcl.tvinput/.TvPassThroughService/HDMI100004 type=1007 parent=com.tcl.tvinput/.TvPassThroughService/HW15 label=PlayStation 5 state=1 cec=PlayStation 5 port=1
