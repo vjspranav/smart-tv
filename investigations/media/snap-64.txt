@@ -1,0 +1,50 @@
+MEDIA SESSION SERVICE (dumpsys media_session)
+
+7 sessions listeners.
+Global priority session is null
+User Records:
+Record for full_user=0, profile_user=10
+  Volume key long-press listener: null
+  Volume key long-press listener package: 
+  Media key listener: null
+  Media key listener package: 
+  OnMediaKeyEventDispatchedListener: added 0 listener(s)
+  OnMediaKeyEventSessionChangedListener: added 1 listener(s)
+    from com.android.bluetooth
+  Last MediaButtonReceiver: null
+  Media button session is in.startv.hotstar/androidx.media3.session.id.dbd40561-0b64-453f-975e-cd657868db1c (userId=0)
+  Sessions Stack - have 2 sessions:
+    androidx.media3.session.id.dbd40561-0b64-453f-975e-cd657868db1c in.startv.hotstar/androidx.media3.session.id.dbd40561-0b64-453f-975e-cd657868db1c (userId=0)
+      ownerPid=30591, ownerUid=10098, userId=0
+      package=in.startv.hotstar
+      launchIntent=null
+      mediaButtonReceiver=null
+      active=true
+      flags=7
+      rating type=0
+      controllers: 4
+      state=PlaybackState {state=2, position=218260, buffered position=244000, speed=0.0, updated=273483937, actions=7339997, custom actions=[], active item id=0, error=null}
+      audioAttrs=AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_MUSIC flags=0x800 tags= bundle=null
+      volumeType=1, controlType=2, max=0, current=0
+      metadata: size=6, description=S14 E1 In the shadow of Zekrom!, null, null
+      queueTitle=null, size=1
+    BluetoothMediaBrowserService com.android.bluetooth/BluetoothMediaBrowserService (userId=0)
+      ownerPid=28910, ownerUid=1002, userId=0
+      package=com.android.bluetooth
+      launchIntent=null
+      mediaButtonReceiver=null
+      active=false
+      flags=3
+      rating type=0
+      controllers: 0
+      state=PlaybackState {state=7, position=0, buffered position=0, speed=0.0, updated=273144170, actions=0, custom actions=[], active item id=-1, error=Bluetooth audio disconnected}
+      audioAttrs=AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_UNKNOWN flags=0x800 tags= bundle=null
+      volumeType=1, controlType=2, max=0, current=0
+      metadata: null
+      queueTitle=Now playing, size=0
+Audio playback (lastly played comes first)
+  uid=10098 packages=in.startv.hotstar 
+Media session config:
+  media_button_receiver_fgs_allowlist_duration_ms: [cur: 10000, def: 10000]
+  media_session_calback_fgs_allowlist_duration_ms: [cur: 10000, def: 10000]
+  media_session_callback_fgs_while_in_use_temp_allow_duration_ms: [cur: 10000, def: 10000]

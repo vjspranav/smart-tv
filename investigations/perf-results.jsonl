@@ -1,0 +1,17 @@
+{"label": "A", "frames": 691, "janky": 4, "janky_pct": 0.58, "p50": 6, "p90": 7, "p95": 8, "p99": 9, "pss_kb": 22120, "pass": true}
+{"label": "G-layout", "frames": 719, "janky": 2, "janky_pct": 0.28, "p50": 6, "p90": 6, "p95": 7, "p99": 9, "pss_kb": 22548, "pass": true}
+{"label": "G-transform", "frames": 690, "janky": 1, "janky_pct": 0.14, "p50": 5, "p90": 5, "p95": 5, "p99": 7, "pss_kb": 22880, "pass": true}
+{"label": "N-record-off", "frames": 487, "janky": 0, "janky_pct": 0.0, "p50": 5, "p90": 5, "p95": 5, "p99": 7, "pss_kb": 17677, "pass": true}
+{"label": "N-record-on", "frames": 893, "janky": 0, "janky_pct": 0.0, "p50": 19, "p90": 21, "p95": 21, "p99": 22, "pss_kb": 17801, "pass": false}
+{"label": "A", "frames": 689, "janky": 4, "janky_pct": 0.58, "p50": 6, "p90": 7, "p95": 8, "p99": 9, "pss_kb": 20810, "pass": true}
+{"label": "G-layout", "frames": 720, "janky": 1, "janky_pct": 0.14, "p50": 6, "p90": 6, "p95": 6, "p99": 9, "pss_kb": 21349, "pass": true}
+{"label": "G-transform", "frames": 690, "janky": 0, "janky_pct": 0.0, "p50": 5, "p90": 5, "p95": 5, "p99": 7, "pss_kb": 21193, "pass": true}
+{"label": "N-record-off", "frames": 488, "janky": 0, "janky_pct": 0.0, "p50": 5, "p90": 5, "p95": 5, "p99": 7, "pss_kb": 15957, "pass": true}
+{"label": "N-record-on", "frames": 892, "janky": 0, "janky_pct": 0.0, "p50": 8, "p90": 9, "p95": 10, "p99": 11, "pss_kb": 16125, "pass": true}
+{"label": "A", "frames": 689, "janky": 4, "janky_pct": 0.58, "p50": 6, "p90": 7, "p95": 8, "p99": 10, "pss_kb": 20762, "pass": true}
+{"label": "G-layout", "frames": 721, "janky": 1, "janky_pct": 0.14, "p50": 6, "p90": 6, "p95": 6, "p99": 9, "pss_kb": 21709, "pass": true}
+{"label": "G-transform", "frames": 690, "janky": 0, "janky_pct": 0.0, "p50": 5, "p90": 5, "p95": 5, "p99": 8, "pss_kb": 21584, "pass": true}
+{"label": "N-record-off", "frames": 489, "janky": 0, "janky_pct": 0.0, "p50": 5, "p90": 5, "p95": 5, "p99": 6, "pss_kb": 16253, "pass": true}
+{"label": "N-record-on", "frames": 907, "janky": 0, "janky_pct": 0.0, "p50": 19, "p90": 21, "p95": 21, "p99": 22, "pss_kb": 16142, "pass": false}
+{"label":"N-idle-cpu","top":"13.3 0.0 0.0 13.0 0.5 0.0 13.0 1.0 0.0 "}
+{"label": "N-idle-record-on", "frames": 693, "janky": 0, "janky_pct": 0.0, "p50": 6, "p90": 6, "p95": 6, "p99": 8, "pss_kb": 15971, "pass": true}

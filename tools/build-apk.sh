@@ -1,7 +1,7 @@
 #!/bin/sh
 # Builds an APK without Gradle (same toolchain as tv-remote/tv-bridge/build.sh).
 # Usage: tools/build-apk.sh <appdir>   → <appdir>/build/$NAME.apk
-# <appdir>/app.conf sets NAME, SRC, KEYSTORE, KEYALIAS, KEYPASS.
+# <appdir>/app.conf sets NAME, SRC, KEYSTORE, KEYALIAS, KEYPASS. MANIFEST=<file> overrides the manifest.
 set -e
 APP="$(cd "${1:?usage: build-apk.sh <appdir>}" && pwd)"
 . "$APP/app.conf"
@@ -15,7 +15,7 @@ rm -rf "$B" && mkdir -p "$B/classes" "$B/dex"
 "$BT/d8" --min-api 26 --lib "$JAR" --output "$B/dex" $(find "$B/classes" -name '*.class')
 "$BT/aapt2" compile --dir res -o "$B/res.zip"
 ASSETS=""; [ -d assets ] && ASSETS="-A assets"
-"$BT/aapt2" link -o "$B/unsigned.apk" --manifest AndroidManifest.xml -I "$JAR" $ASSETS "$B/res.zip"
+"$BT/aapt2" link -o "$B/unsigned.apk" --manifest "${MANIFEST:-AndroidManifest.xml}" -I "$JAR" $ASSETS "$B/res.zip"
 (cd "$B/dex" && zip -q ../unsigned.apk classes.dex)
 "$BT/zipalign" -f 4 "$B/unsigned.apk" "$B/aligned.apk"
 [ -f "$KEYSTORE" ] || "$JAVA_HOME/bin/keytool" -genkeypair -keystore "$KEYSTORE" -storepass "$KEYPASS" -keypass "$KEYPASS" \

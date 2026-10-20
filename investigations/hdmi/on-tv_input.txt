@@ -1,0 +1,102 @@
+User Ids (Current user: 0):
+  0
+UserState (0):
+  inputMap: inputId -> TvInputState
+    org.videolan.vlc/.PreviewVideoInputService: info: TvInputInfo{id=org.videolan.vlc/.PreviewVideoInputService, pkg=org.videolan.vlc, service=org.videolan.vlc.PreviewVideoInputService}; state: 0
+    com.tcl.tvinput/.TvPassThroughService/HW3: info: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW3, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}; state: 0
+    com.tcl.tvinput/.TvPassThroughService/HW17: info: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW17, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}; state: 1
+    com.tcl.tvinput/.TunerInputService/HW2: info: TvInputInfo{id=com.tcl.tvinput/.TunerInputService/HW2, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TunerInputService}; state: 0
+    com.tcl.tvinput/.TvPassThroughService/HW15: info: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW15, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}; state: 0
+    com.tcl.channelplus/com.tcl.iptv.service.InputService: info: TvInputInfo{id=com.tcl.channelplus/com.tcl.iptv.service.InputService, pkg=com.tcl.channelplus, service=com.tcl.iptv.service.InputService}; state: 0
+    com.tcl.tvinput/.TvPassThroughService/HW16: info: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW16, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}; state: 1
+    com.graymatrix.did/com.zee5.androidtv.pmr.live.TvInputService: info: TvInputInfo{id=com.graymatrix.did/com.zee5.androidtv.pmr.live.TvInputService, pkg=com.graymatrix.did, service=com.zee5.androidtv.pmr.live.TvInputService}; state: 0
+    com.tcl.tvinput/.TvPassThroughService/HDMI100004: info: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HDMI100004, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}; state: 0
+  packageSet:
+    com.graymatrix.did
+    com.tcl.channelplus
+    com.tcl.tvinput
+    org.videolan.vlc
+  clientStateMap: ITvInputClient -> ClientState
+    android.os.BinderProxy@7bce821: com.android.server.tv.TvInputManagerService$ClientState@eccd988
+      sessionTokens:
+        android.os.Binder@5aac40f
+      clientTokens: android.os.BinderProxy@7bce821
+      userId: 0
+  serviceStateMap: ComponentName -> ServiceState
+    ComponentInfo{com.tcl.tvinput/com.tcl.tvinput.TunerInputService}: com.android.server.tv.TvInputManagerService$ServiceState@3f02db8
+      sessionTokens:
+      service: android.media.tv.ITvInputService$Stub$Proxy@f81b791
+      callback: com.android.server.tv.TvInputManagerService$ServiceCallback@b4f86f6
+      bound: true
+      reconnecting: false
+    ComponentInfo{com.tcl.tvinput/com.tcl.tvinput.TvPassThroughService}: com.android.server.tv.TvInputManagerService$ServiceState@43f9af7
+      sessionTokens:
+        android.os.Binder@5aac40f
+      service: android.media.tv.ITvInputService$Stub$Proxy@2566d64
+      callback: com.android.server.tv.TvInputManagerService$ServiceCallback@3793bcd
+      bound: true
+      reconnecting: false
+  sessionStateMap: ITvInputSession -> SessionState
+    android.os.Binder@5aac40f: com.android.server.tv.TvInputManagerService$SessionState@eb03f21
+      inputId: com.tcl.tvinput/.TvPassThroughService/HDMI100004
+      sessionId: ae2c25b6-acfd-4f07-901a-b0f50fcdf445
+      client: android.media.tv.ITvInputClient$Stub$Proxy@8cd1f46
+      seq: 0
+      callingUid: 1000
+      callingPid: 1106
+      userId: 0
+      sessionToken: android.os.Binder@5aac40f
+      session: android.media.tv.ITvInputSession$Stub$Proxy@501d507
+      hardwareSessionToken: null
+  mCallbacks:
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@6f4d875
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@e40ed52
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@8450040
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@cb56725
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@b2eb588
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@77153dc
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@f2a272
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@2e884
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@97f7639
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@8c6a1db
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@e6c147a
+    android.media.tv.TvInputManager$2@c1f64c4
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@e989cf3
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@44255fa
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@205e185
+    android.media.tv.ITvInputManagerCallback$Stub$Proxy@21e0360
+  mainSessionToken: android.os.Binder@5aac40f
+TvInputHardwareManager Info:
+  mConnections: deviceId -> Connection
+    1: Connection{ mHardwareInfo: TvInputHardwareInfo {id=1, type=2, audio_type=-2147467264, audio_addr=, cable_connection_status=1}, mInfo: null, mCallback: null, mConfigs: [TvStreamConfig {mStreamId=1;mType=1;mGeneration=2}], mCallingUid: null, mResolvedUserId: null, mResourceClientProfile: null }
+    2: Connection{ mHardwareInfo: TvInputHardwareInfo {id=2, type=2, audio_type=-2147467264, audio_addr=, cable_connection_status=1}, mInfo: null, mCallback: null, mConfigs: [TvStreamConfig {mStreamId=2;mType=1;mGeneration=2}], mCallingUid: null, mResolvedUserId: null, mResourceClientProfile: null }
+    3: Connection{ mHardwareInfo: TvInputHardwareInfo {id=3, type=3, audio_type=-2147450880, audio_addr=, cable_connection_status=1}, mInfo: null, mCallback: null, mConfigs: [TvStreamConfig {mStreamId=3;mType=1;mGeneration=2}], mCallingUid: null, mResolvedUserId: null, mResourceClientProfile: null }
+    15: Connection{ mHardwareInfo: TvInputHardwareInfo {id=15, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=1, cable_connection_status=1}, mInfo: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW15, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}, mCallback: android.media.tv.ITvInputHardwareCallback$Stub$Proxy@b1a0634, mConfigs: [TvStreamConfig {mStreamId=15;mType=1;mGeneration=2}], mCallingUid: 1000, mResolvedUserId: 0, mResourceClientProfile: android.media.tv.tunerresourcemanager.ResourceClientProfile@830ac5d }
+    16: Connection{ mHardwareInfo: TvInputHardwareInfo {id=16, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=2, cable_connection_status=1}, mInfo: null, mCallback: null, mConfigs: [TvStreamConfig {mStreamId=16;mType=1;mGeneration=2}], mCallingUid: null, mResolvedUserId: null, mResourceClientProfile: null }
+    17: Connection{ mHardwareInfo: TvInputHardwareInfo {id=17, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=3, cable_connection_status=1}, mInfo: null, mCallback: null, mConfigs: [TvStreamConfig {mStreamId=17;mType=1;mGeneration=2}], mCallingUid: null, mResolvedUserId: null, mResourceClientProfile: null }
+  mHardwareList:
+    TvInputHardwareInfo {id=1, type=2, audio_type=-2147467264, audio_addr=, cable_connection_status=1}
+    TvInputHardwareInfo {id=2, type=2, audio_type=-2147467264, audio_addr=, cable_connection_status=1}
+    TvInputHardwareInfo {id=3, type=3, audio_type=-2147450880, audio_addr=, cable_connection_status=1}
+    TvInputHardwareInfo {id=15, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=1, cable_connection_status=1}
+    TvInputHardwareInfo {id=16, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=2, cable_connection_status=1}
+    TvInputHardwareInfo {id=17, type=9, audio_type=-2147483616, audio_addr=, hdmi_port=3, cable_connection_status=1}
+  mHdmiDeviceList:
+    CEC: logical_address: 0x04 device_type: 4 cec_version: 5 vendor_id: 524358 display_name: PlayStation 5 power_status: 0 physical_address: 0x1000 port_id: 1
+  mHardwareInputIdMap: deviceId -> inputId
+    2: com.tcl.tvinput/.TunerInputService/HW2
+    3: com.tcl.tvinput/.TvPassThroughService/HW3
+    15: com.tcl.tvinput/.TvPassThroughService/HW15
+    16: com.tcl.tvinput/.TvPassThroughService/HW16
+    17: com.tcl.tvinput/.TvPassThroughService/HW17
+  mHdmiInputIdMap: id -> inputId
+    4: com.tcl.tvinput/.TvPassThroughService/HDMI100004
+  mInputMap: inputId -> inputInfo
+    com.tcl.tvinput/.TunerInputService/HW2: TvInputInfo{id=com.tcl.tvinput/.TunerInputService/HW2, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TunerInputService}
+    com.tcl.tvinput/.TvPassThroughService/HDMI100004: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HDMI100004, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}
+    com.tcl.tvinput/.TvPassThroughService/HW15: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW15, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}
+    com.tcl.tvinput/.TvPassThroughService/HW16: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW16, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}
+    com.tcl.tvinput/.TvPassThroughService/HW17: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW17, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}
+    com.tcl.tvinput/.TvPassThroughService/HW3: TvInputInfo{id=com.tcl.tvinput/.TvPassThroughService/HW3, pkg=com.tcl.tvinput, service=com.tcl.tvinput.TvPassThroughService}
+TclTvInputManagerService:start
+TclTvInputManagerService:end

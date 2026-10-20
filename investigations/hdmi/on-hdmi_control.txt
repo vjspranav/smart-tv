@@ -1,0 +1,341 @@
+mProhibitMode: false
+mPowerStatus: 0
+mIsCecAvailable: false
+mCecVersion: 5
+System_settings:
+  mMhlInputChangeEnabled: true
+  mSystemAudioActivated: false
+  mHdmiCecVolumeControlEnabled: 1
+mEarcMode: 1
+CEC settings:
+  hdmi_cec_enabled (int): 1 (default: 1) [modifiable]
+  hdmi_cec_version (int): 5 (default: 5) [modifiable]
+  power_control_mode (string): to_tv (default: to_tv) [modifiable]
+  power_state_change_on_active_source_lost (string): none (default: none) [modifiable]
+  system_audio_mode_muting (int): 1 (default: 1) [modifiable]
+  volume_control_enabled (int): 1 (default: 1) [modifiable]
+  tv_wake_on_one_touch_play (int): 0 (default: 1) [modifiable]
+  tv_send_standby_on_sleep (int): 1 (default: 1) [modifiable]
+  rc_profile_tv (int): 0 (default: 0) [modifiable]
+  rc_profile_source_handles_root_menu (int): 1 (default: 1) [modifiable]
+  rc_profile_source_handles_setup_menu (int): 1 (default: 1) [modifiable]
+  rc_profile_source_handles_contents_menu (int): 0 (default: 0) [modifiable]
+  rc_profile_source_handles_top_menu (int): 0 (default: 0) [modifiable]
+  rc_profile_source_handles_media_context_sensitive_menu (int): 0 (default: 0) [modifiable]
+mMhlController: 
+HDMI CEC Network
+  mPortInfo:
+    port_id: 1, type: HDMI_IN, address: 0x1000, cec: true, arc: false, mhl: false
+    port_id: 2, type: HDMI_IN, address: 0x2000, cec: true, arc: false, mhl: false
+    port_id: 3, type: HDMI_IN, address: 0x3000, cec: true, arc: true, mhl: false
+    port_id: 4, type: HDMI_IN, address: 0x4000, cec: true, arc: false, mhl: false
+  HdmiCecLocalDevice #0:
+    mDeviceType: 0
+    mAddress: 0
+    mPreferredAddress: 0
+    mDeviceInfo: CEC: logical_address: 0x00 device_type: 0 cec_version: 5 vendor_id: 7173227 display_name: Living Room TV power_status: 0 physical_address: 0x0000 port_id: 0
+    mActiveSource: (0x04, 0x1000)
+    mActiveRoutingPath: 0x1000
+    mArcEstablished: false
+    mArcFeatureEnabled: {1=false, 2=false, 3=true, 4=false}
+    mSystemAudioMute: false
+    mSystemAudioControlFeatureEnabled: true
+    mSkipRoutingControl: false
+    mPrevPortId: 1
+    Device TV:
+      isSystemAudioControlFeatureEnabled: true
+    Active Source history:
+      time=2026-10-21 00:19:44 active source=(0x00, 0x0000) isActiveSource=true from=HdmiCecLocalDeviceTv#handleSelectInternalSource()
+      time=2026-10-21 00:19:44 active source=(0x00, 0x0000) isActiveSource=true from=HdmiCecLocalDeviceTv#deviceSelect()
+      time=2026-10-21 00:21:54 active source=(0x04, 0x1000) isActiveSource=false from=ActiveSourceHandler
+      time=2026-10-21 00:22:08 active source=(0x00, 0x0000) isActiveSource=true from=HdmiCecLocalDeviceTv#handleSelectInternalSource()
+      time=2026-10-21 00:22:08 active source=(0x00, 0x0000) isActiveSource=true from=HdmiCecLocalDeviceTv#deviceSelect()
+      time=2026-10-21 01:22:18 active source=(0x00, 0x0000) isActiveSource=true from=RequestActiveSourceAction#finishWithCallback()
+      time=2026-10-21 01:31:56 active source=(0x00, 0x0000) isActiveSource=true from=RequestActiveSourceAction#finishWithCallback()
+      time=2026-10-21 01:42:49 active source=(0x04, 0x1000) isActiveSource=false from=ActiveSourceHandler
+      time=2026-10-21 01:42:51 active source=(0x04, 0x1000) isActiveSource=false from=ActiveSourceHandler
+      time=2026-10-21 01:42:52 active source=(0x04, 0x1000) isActiveSource=false from=ActiveSourceHandler
+  mDeviceInfos:
+    CEC: logical_address: 0x00 device_type: 0 cec_version: 5 vendor_id: 7173227 display_name: Living Room TV power_status: 0 physical_address: 0x0000 port_id: 0
+    CEC: logical_address: 0x04 device_type: 4 cec_version: 5 vendor_id: 524358 display_name: PlayStation 5 power_status: 0 physical_address: 0x1000 port_id: 1
+  CecSwitches:
+    0
+mCecController: 
+  CEC message history:
+    [S] time=2026-10-21 00:19:26 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:27 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:27 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:27 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:27 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:28 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:28 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:28 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:28 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:29 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:29 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:19:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:19:36 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:36 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:39 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:39 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:39 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:39 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:40 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:40 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:40 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:40 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:40 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:40 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:40 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:40 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:41 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:41 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:41 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:41 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:41 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:41 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:41 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:41 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:41 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:41 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:42 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:42 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:42 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:42 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:42 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:42 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:42 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:42 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:43 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:19:43 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:19:44 message=<Active Source> 0F:82:00:00
+    [S] time=2026-10-21 00:20:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:20:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:21:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:21:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:21:53 message=<Routing Change> 0F:80:00:00:10:00
+    [S] time=2026-10-21 00:21:54 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:21:54 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:21:54 message=<Set Stream Path> 0F:86:10:00
+    [R] time=2026-10-21 00:21:54 message=<Active Source> 4F:82:10:00
+    [R] time=2026-10-21 00:21:55 message=<Menu Status> 40:8E:00
+    [S] time=2026-10-21 00:21:56 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:56 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:57 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:57 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:57 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:57 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:57 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:57 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:58 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:58 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:59 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:59 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:59 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:59 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:21:59 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:21:59 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:22:00 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:22:00 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:22:01 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:22:01 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:22:01 message=<User Control Pressed> 04:44 <Redacted len=1>
+    [S] time=2026-10-21 00:22:01 message=<User Control Release> 04:45
+    [S] time=2026-10-21 00:22:08 message=<Active Source> 0F:82:00:00
+    [S] time=2026-10-21 00:22:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:22:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:23:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:23:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:24:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:24:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:25:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:25:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:26:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:26:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:27:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:27:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:28:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:28:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:29:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:29:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:30:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:30:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:31:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:31:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:32:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:32:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:33:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:33:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:34:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:34:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:35:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:35:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:36:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:36:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:37:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:37:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:38:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:38:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:39:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:39:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:40:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:40:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:41:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:41:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:42:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:42:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:43:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:43:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:44:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:44:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:45:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:45:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:46:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:46:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:47:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:47:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:48:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:48:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:49:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:49:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:50:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:50:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:51:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:51:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:52:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:52:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:53:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:53:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:54:30 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 00:54:30 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 00:54:32 message=<Standby> 0F:36
+    [H] time=2026-10-21 00:55:06 hotplug port=1 connected=false
+    [S] time=2026-10-21 01:22:14 message=<Report Physical Address> 0F:84:00:00:00
+    [S] time=2026-10-21 01:22:14 message=<Device Vendor Id> 0F:87:6D:74:6B
+    [S] time=2026-10-21 01:22:14 message=<Request Active Source> 0F:85
+    [S] time=2026-10-21 01:22:15 message=<Give Physical Address> 04:83
+    [R] time=2026-10-21 01:22:15 message=<Report Physical Address> 4F:84:10:00:04
+    [S] time=2026-10-21 01:22:15 message=<Give Osd Name> 04:46
+    [S] time=2026-10-21 01:22:16 message=<Request Active Source> 0F:85
+    [R] time=2026-10-21 01:22:16 message=<Set Osd Name> 40:47 <Redacted len=13>
+    [S] time=2026-10-21 01:22:16 message=<Give Device Vendor Id> 04:8C
+    [R] time=2026-10-21 01:22:16 message=<Device Vendor Id> 4F:87:08:00:46
+    [S] time=2026-10-21 01:22:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:22:16 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:22:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:22:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:22:18 message=<Active Source> 0F:82:00:00
+    [S] time=2026-10-21 01:23:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:23:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:24:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:24:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:25:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:25:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:26:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:26:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:27:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:27:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:28:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:28:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:29:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:29:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:30:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:30:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:31:16 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:31:17 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:31:48 message=<Standby> 0F:36
+    [S] time=2026-10-21 01:31:52 message=<Report Physical Address> 0F:84:00:00:00
+    [S] time=2026-10-21 01:31:52 message=<Device Vendor Id> 0F:87:6D:74:6B
+    [S] time=2026-10-21 01:31:52 message=<Request Active Source> 0F:85
+    [S] time=2026-10-21 01:31:53 message=<Give Physical Address> 04:83
+    [R] time=2026-10-21 01:31:53 message=<Report Physical Address> 4F:84:10:00:04
+    [S] time=2026-10-21 01:31:53 message=<Give Osd Name> 04:46
+    [S] time=2026-10-21 01:31:54 message=<Request Active Source> 0F:85
+    [R] time=2026-10-21 01:31:54 message=<Set Osd Name> 40:47 <Redacted len=13>
+    [S] time=2026-10-21 01:31:54 message=<Give Device Vendor Id> 04:8C
+    [S] time=2026-10-21 01:31:54 message=<Give Physical Address> 04:83
+    [R] time=2026-10-21 01:31:54 message=<Device Vendor Id> 4F:87:08:00:46
+    [S] time=2026-10-21 01:31:54 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:31:54 message=<Report Physical Address> 4F:84:10:00:04
+    [S] time=2026-10-21 01:31:54 message=<Give Osd Name> 04:46
+    [R] time=2026-10-21 01:31:55 message=<Report Power Status> 40:90:01
+    [R] time=2026-10-21 01:31:55 message=<Set Osd Name> 40:47 <Redacted len=13>
+    [S] time=2026-10-21 01:31:55 message=<Give Device Vendor Id> 04:8C
+    [R] time=2026-10-21 01:31:55 message=<Device Vendor Id> 4F:87:08:00:46
+    [S] time=2026-10-21 01:31:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:31:55 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:31:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:31:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:31:56 message=<Active Source> 0F:82:00:00
+    [S] time=2026-10-21 01:32:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:32:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:33:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:33:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:34:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:34:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:35:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:35:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:36:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:36:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:37:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:37:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:38:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:38:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:39:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:39:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:40:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:40:56 message=<Report Power Status> 40:90:01
+    [S] time=2026-10-21 01:41:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:41:56 message=<Report Power Status> 40:90:01
+    [H] time=2026-10-21 01:42:42 hotplug port=1 connected=true
+    [R] time=2026-10-21 01:42:42 message=<Report Physical Address> 4F:84:10:00:04
+    [S] time=2026-10-21 01:42:42 message=<Give Osd Name> 04:46
+    [R] time=2026-10-21 01:42:43 message=<Device Vendor Id> 4F:87:08:00:46
+    [R] time=2026-10-21 01:42:43 message=<Set Osd Name> 40:47 <Redacted len=13>
+    [R] time=2026-10-21 01:42:45 message=<Report Physical Address> 4F:84:10:00:04
+    [S] time=2026-10-21 01:42:46 message=<Give Osd Name> 04:46
+    [R] time=2026-10-21 01:42:46 message=<Device Vendor Id> 4F:87:08:00:46
+    [R] time=2026-10-21 01:42:46 message=<Set Osd Name> 40:47 <Redacted len=13>
+    [R] time=2026-10-21 01:42:49 message=<Text View On> 40:0D
+    [R] time=2026-10-21 01:42:49 message=<Active Source> 4F:82:10:00
+    [R] time=2026-10-21 01:42:49 message=<Menu Status> 40:8E:00
+    [R] time=2026-10-21 01:42:49 message=<Give Device Power Status> 40:8F
+    [S] time=2026-10-21 01:42:49 message=<Report Power Status> 04:90:00
+    [S] time=2026-10-21 01:42:51 message=<Set Stream Path> 0F:86:10:00
+    [S] time=2026-10-21 01:42:51 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:42:51 message=<Active Source> 4F:82:10:00
+    [R] time=2026-10-21 01:42:52 message=<Menu Status> 40:8E:00
+    [R] time=2026-10-21 01:42:52 message=<Report Power Status> 40:90:00
+    [S] time=2026-10-21 01:42:52 message=<Set Stream Path> 0F:86:10:00
+    [R] time=2026-10-21 01:42:52 message=<Active Source> 4F:82:10:00
+    [R] time=2026-10-21 01:42:52 message=<Menu Status> 40:8E:00
+    [S] time=2026-10-21 01:42:55 message=<Give Device Power Status> 04:8F
+    [R] time=2026-10-21 01:42:56 message=<Report Power Status> 40:90:00
+Service Status:
+  isWakeUpMessageReceived: false
+  isCtsEnable: false
+  mIsRespondViewOnTimeout: true
+  mIsRespondViewOnTimeoutWhileStandby: true
+Port Status:
+  Port1: true
+  Port2: false
+  Port3: false
+  Port4: false
+AudioDeviceOutType: 1
+ArcEnable: true
+EarcSupport: true
+EarcEnable: 2
+EarcMode: 1
+HdmiAudioCapabilities:
+  []
+TclHdmiConfig:
+  mEnable:true
+  mVersion:1
+  DefaultPassThroughSAD: [0x09 0x07 0x07 0x15 0x07 0x50 0x57 0x07 0x00 0x3d 0x07 0xc0 ]
+  DefaultAutoSAD: [0x09 0x07 0x07 ]
+  NonStandardFeatureTable:[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{7627628,TCL X937U};[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{4876429,TCL X937U};[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{5067851,JBL BAR 9.1};[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{240,JBL Bar 3.1};[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{7627628,TCL 93 serires};[SOUNDBAR_ROUTING_CHANGE_NO_RESPOND]{4876429,TCL 93 serires};[SOUNDBAR_INITIATE_ARC_SHOULD_BE_RESPOND]{524358,HT-G700};[SOUNDBAR_INITIATE_ARC_SHOULD_BE_RESPOND]{15384231,Sonos Beam};[SOUNDBAR_INITIATE_ARC_SHOULD_BE_RESPOND]{3954974,TCL 8212};[SOUNDBAR_REQUEST_ARC_TERMINATE_IGNORE]{240,JBL Bar 3.1};[SOUNDBAR_AUDIO_STATUS_ERROR]{5068288,Soundbar};[SOUNDBAR_SET_SYSTEM_AUDIO_MODE_ERROR]{5068288,TS3010};[SOUNDBAR_SET_SYSTEM_AUDIO_MODE_ERROR]{5068288,Soundbar};[SOUNDBAR_SET_SYSTEM_AUDIO_MUTE_ERROR]{5068288,Soundbar};[SOUNDBAR_SET_SYSTEM_AUDIO_MUTE_ERROR]{240,Soundbar};[SOUNDBAR_SET_SYSTEM_AUDIO_MUTE_ERROR]{57489,LG SOUND BAR};[SOUNDBAR_SET_SYSTEM_AUDIO_MUTE_ERROR]{524358,HT-G700};[SOUNDBAR_SET_SYSTEM_AUDIO_MUTE_ERROR]{41182,RX-V385};[PLAYBACK_NO_SEND_STANDBY]{7660,UWAP-101};[SOUNDBAR_FEATURE_ABORT_REQUEST_ARC_INITIATION_NEED_SYSTEM_AUDIO_MODE_REQUEST]{41182,YAS-207};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{240,HW-Q990C};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{240,HW-Q930C};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{1,Klipsch};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{240,JBL Bar 3.1};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{240,Soundbar};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{32837,AudioSystem};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{10249310,JBL AVR};[SOUNDBAR_AUDIO_STATUS_NO_RESPOND]{16777215,AudioSystem};[SOUNDBAR_ROUTING_INFOMATION_ERROR]{5068288,Soundbar};[SOUNDBAR_SHORT_AUDIO_DESCRIPTION_NO_RESPOND]{5068288,TS3010};[PLAYBACK_REQUEST_ACTIVE_SOURCE_ERROR]{1023,};[SOUNDBAR_MUTE_NO_RESPOND]{1485,AVR-X1700H};[SOUNDBAR_MUTE_NO_RESPOND]{1485,AVR-S970H};[SOUNDBAR_REQUEST_ARC_INITIATE_NO_RESPOND]{240,JBL Bar 3.1};[SOUNDBAR_USER_CONTROL_PRESSED_MUTE_ERROR]{5068288,TS3010};[SOUNDBAR_USER_CONTROL_PRESSED_MUTE_ERROR]{5068288,Soundbar};[SOUNDBAR_USER_CONTROL_PRESSED_MUTE_ERROR]{5068288,abc};[PLAYBACK_POWER_ON_NO_RESPOND]{32837,};[SOUNDBAR_NO_SOUND_AFTER_STR_RESUME]{240,};[SOUNDBAR_NO_SOUND_AFTER_STR_RESUME]{41182,};[SOUNDBAR_NO_SOUND_AFTER_STR_RESUME]{2471,B&O CORE};[SOUNDBAR_SOURCE_CHANGED_TO_HDMI_ERROR]{41182,ATS-1090};[SOUNDBAR_AUDIO_STATUS_NO_CHANGE]{1485,AVR-X1600H};[SOUNDBAR_AUDIO_STATUS_NO_CHANGE]{1485,AVR-X1700H};[SOUNDBAR_REPORT_PHYSICAL_ADDRESS_REPETITION_NO_NEED_REQUEST_ARC_INITIATION]{41182,YAS-207};[SOUNDBAR_REPORT_PHYSICAL_ADDRESS_REPETITION_NO_NEED_REQUEST_ARC_INITIATION]{16777215,AudioSystem};[SOUNDBAR_REPORT_PHYSICAL_ADDRESS_REPETITION_NO_NEED_REQUEST_ARC_INITIATION]{16777215,HK Enchant800};[SOUNDBAR_REPORT_PHYSICAL_ADDRESS_REPETITION_NO_NEED_REQUEST_ARC_INITIATION]{10249310,AudioSystem};[SOUNDBAR_REPORT_PHYSICAL_ADDRESS_REPETITION_NO_NEED_REQUEST_ARC_INITIATION]{10249310,HK Enchant800};[SOUNDBAR_SET_SYSTEM_AUDIO_UNMUTE_ERROR]{1598833,SOUNDBAR};[SOUNDBAR_STANDBY_ARC_STATUS_ERROR]{1527,AT-2300};
+  SoundbarDefaultSAD:[240,JBL Bar 3.1]{09,07,07,15,07,50,};[5068288,TS3010]{09,07,07,};
+  CecKeyCodeUnavailable:3;26;178;
+  TrdVendorId:4876429;7627628;
+  CecTestDevices:CECTester;
