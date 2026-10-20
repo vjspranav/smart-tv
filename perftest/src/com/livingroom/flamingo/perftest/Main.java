@@ -19,6 +19,7 @@ public class Main extends Activity {
         String s = getIntent().getStringExtra("scene");
         View v;
         if ("G".equals(s)) v = new SceneG(this, "layout".equals(getIntent().getStringExtra("mode")));
+        else if ("P".equals(s)) v = new Probe(this);
         else if ("N".equals(s)) v = new SceneN(this, getWindow(), !"off".equals(getIntent().getStringExtra("record")));
         else v = new SceneA(this);
         scene = (Scene) v;

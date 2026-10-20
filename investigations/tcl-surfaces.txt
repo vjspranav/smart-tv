@@ -1,0 +1,70 @@
+## services
+1	TCameraService: [tcl.tvcamera.ITCameraService]
+2	TFirmwareManagerService: [tcl.hardware.ITFirmwareManager]
+8	aio: [android.aio.ITclAioManager]
+48	com.tcl.component.ITclComponentService/default: []
+63	deviceinfo: [com.tcl.os.ITclDeviceInfoManager]
+86	hdmi_control: [android.hardware.hdmi.ITclHdmiControlServiceEx]
+100	lock_manager: [tcl.os.lock.ITLockManager]
+169	soundtrigger: [com.android.internal.app.ISoundTriggerService]
+170	soundtrigger_middleware: [android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService]
+184	tcl_componentinfomanager: [com.tcl.os.ITclComponentInfoManager]
+185	tcl_hotel_manager: [tcl.os.hotel.ITHotelManager]
+186	tcl_mode_manager: [android.mode.ITclModeManager]
+187	tcl_runningtime_manager: [android.os.ITRunningTimeManager]
+188	tcl_tv_display: []
+189	tcl_tvinput: [com.tcl.dtv.ITService]
+193	textclassification: [android.service.textclassifier.ITextClassifierService]
+196	tguard: [tcl.os.tguard.ITGuardService]
+211	vendor.tcl.airplaykey.IAirplayKey/default: []
+212	vendor.tcl.tvinput.extend.ITvExtendService/default: []
+219	wifi: [android.net.wifi.ITclWifiManagerEx]
+221	wifip2p: [android.net.wifi.p2p.ITclWifiP2pManagerEx]
+## framework jars
+boot-tcl-framework.vdex
+boot-tcl.webkit.vdex
+tcl-framework.jar
+tcl-service.jar
+tcl.webkit.jar
+com.tcl.ginga.porting.jar
+com.tcl.gingad.jar
+com.tcl.hbbtv.jar
+com.tcl.hdmi.jar
+com.tcl.tbrowser.jar
+com.tcl.tbrowser_player.jar
+com.tcl.tv.display.jar
+com.tcl.tvinput.jar
+tvos-framework-res
+package:/system_ext/framework/tvos-framework-res/tvos-framework-res.apk
+## com.tcl.tv providers/actions
+          Authority: "com.tcl.tv": -1
+## com.tcl.suspension providers/actions
+## com.tcl.providers.config providers/actions
+## com.tcl.systemserver providers/actions
+          Action: "com.dolby.android.audio.intent.action.AUDIO_DEVICE_CONNECTED"
+## com.android.tv.settings providers/actions
+          Action: "android.settings.ACCESSIBILITY_CAPTION_TV_OEM_LINK"
+          Action: "android.settings.ACCESSIBILITY_SETTINGS"
+          Action: "android.settings.ACCESSIBILITY_SHORTCUT_SERVICES_TV_OEM_LINK"
+          Action: "android.settings.ACCESSIBILITY_TV_OEM_LINK"
+          Action: "android.settings.ACCOUNT_SYNC_SETTINGS"
+          Action: "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
+          Action: "android.settings.action.MANAGE_OVERLAY_PERMISSION"
+          Action: "android.settings.ADD_ACCOUNT_SETTINGS"
+          Action: "android.settings.APP_LOCALE_SETTINGS"
+          Action: "android.settings.APPLICATION_DETAILS_SETTINGS"
+          Action: "android.settings.APPLICATION_DEVELOPMENT_SETTINGS"
+          Action: "android.settings.APPLICATION_SETTINGS"
+          Action: "android.settings.CAPTIONING_SETTINGS"
+          Action: "android.settings.DATA_ALERT_SETTINGS"
+          Action: "android.settings.DATA_SAVER_SETTINGS"
+          Action: "android.settings.DATE_SETTINGS"
+          Action: "android.settings.DEVICE_INFO_SETTINGS"
+          Action: "android.settings.DEVICE_NAME"
+          Action: "android.settings.DISPLAY_SETTINGS"
+          Action: "android.settings.ENTERPRISE_PRIVACY_SETTINGS"
+          Action: "android.settings.FACTORY_RESET_TV_OEM_LINK"
+          Action: "android.settings.HOME_SETTINGS"
+          Action: "android.settings.IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS"
+          Action: "android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS"
+          Action: "android.settings.INPUT_METHOD_SETTINGS"
