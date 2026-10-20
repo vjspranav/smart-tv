@@ -1,6 +1,7 @@
 package com.livingroom.flamingo.launcher.ui;
 
 import android.content.Context;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.view.ViewParent;
 import android.widget.TextView;
 
@@ -19,6 +21,11 @@ public final class Kit {
     public static final int OUTSET = 0x7f0f0001;
     /** View tag key: true on full-bleed artwork that text is allowed to sit on. */
     public static final int BACKDROP = 0x7f0f0002;
+
+    /** Rounded 16px clip for tiles and artwork. */
+    public static final ViewOutlineProvider ROUNDED_16 = new ViewOutlineProvider() {
+        @Override public void getOutline(View v, Outline o) { o.setRoundRect(0, 0, v.getWidth(), v.getHeight(), 16); }
+    };
 
     private Kit() { }
 

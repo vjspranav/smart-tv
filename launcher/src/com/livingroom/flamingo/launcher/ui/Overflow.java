@@ -12,7 +12,8 @@ import java.util.List;
 
 /**
  * Debug check for the no-overflow rule, run on the TV after layout. Reports:
- *  clip    — a view (with transforms and focus-ring outset) extends past the screen or past a clipping ancestor
+ *  clip    — a view (with transforms and focus-ring outset) is partly cut off by the screen or a clipping ancestor
+ *            (a view scrolled completely out of a clipping list is not a problem and is skipped)
  *  text    — a TextView's text is wider than its box and was not ellipsized
  *  overlap — a TextView's drawn text intersects another text, or a tile/image that isn't its ancestor
  *            (artwork tagged Kit.BACKDROP is allowed behind text)
@@ -52,6 +53,7 @@ public final class Overflow {
             Object o = v.getTag(Kit.OUTSET);
             float outset = o instanceof Integer ? (Integer) o : 0;
             RectF r = toRoot(v, root, new RectF(-outset, -outset, v.getWidth() + outset, v.getHeight() + outset));
+            if (scrolledAway(v, root, r)) return;
             String why = clipped(v, root, r);
             if (why != null) out.add("OVERFLOW clip " + name(v) + " " + why);
             if ((v instanceof ImageView || v.getBackground() != null) && !Boolean.TRUE.equals(v.getTag(Kit.BACKDROP))) {
@@ -89,6 +91,14 @@ public final class Overflow {
             if (!(cur.getParent() instanceof View)) break;
         }
         return r;
+    }
+
+    /** True if r lies entirely outside some clipping ancestor (e.g. a list item scrolled out of view). */
+    private static boolean scrolledAway(View v, View root, RectF r) {
+        for (View p = (View) v.getParent(); p != null && p != root; p = p.getParent() instanceof View ? (View) p.getParent() : null)
+            if (p instanceof ViewGroup && ((ViewGroup) p).getClipChildren()
+                    && !RectF.intersects(r, toRoot(p, root, new RectF(0, 0, p.getWidth(), p.getHeight())))) return true;
+        return false;
     }
 
     private static String clipped(View v, View root, RectF r) {
