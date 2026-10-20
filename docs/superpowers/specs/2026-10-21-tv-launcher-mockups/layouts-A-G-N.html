@@ -1,0 +1,235 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=Instrument+Serif:ital@0;1&family=Doto:wght@600;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  .cards{grid-template-columns:1fr!important}
+  .card-image{aspect-ratio:auto!important;padding:1.4%!important;display:grid!important;grid-template-columns:1fr 1fr;gap:1.4%;align-items:start}
+  .shot{display:flex;flex-direction:column;gap:6px}
+  .cap{font:600 11px/1.2 system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary,#888)}
+  .tv{container-type:inline-size;aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;border-radius:10px;color:#fff;background:#060608;font-family:"Inter Tight",system-ui,sans-serif}
+  .tv *{box-sizing:border-box}
+  .tv{font-size:.78cqw}
+  .tv .G-item,.tv .N-app,.tv .A-ban{white-space:nowrap}
+  .abs{position:absolute}
+  .mono{font-family:"Space Mono",monospace}
+  .serif{font-family:"Instrument Serif",serif}
+  .dots{font-family:"Doto",monospace;font-weight:900}
+  .spec{background:var(--bg-secondary,#fff);border:1px solid var(--border,#ddd);border-radius:12px;padding:14px 18px;margin:0 0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px 24px;font-size:13px}
+  .spec b{display:block;margin-bottom:2px}
+  .spec span{color:var(--text-secondary,#666)}
+
+  /* ---------- A · Cinema ---------- */
+  .A-art{position:absolute;inset:0;background:radial-gradient(55% 80% at 72% 28%,#e50914 0%,#7a0b0b 32%,transparent 66%),radial-gradient(40% 55% at 95% 80%,#ff7a4566,transparent 60%),#0a0507}
+  .A-ban{aspect-ratio:16/9;border-radius:.7em;display:flex;align-items:center;justify-content:center;font-weight:900;letter-spacing:-.02em;font-size:1.25em;flex:1}
+  .A-f{outline:.25em solid #fff;outline-offset:.35em;transform:scale(1.07);box-shadow:0 1.5em 3em rgba(0,0,0,.6)}
+  .yt{background:#f1f1f1;color:#ff0033}.nf{background:#fff;color:#e50914}.hs{background:linear-gradient(120deg,#1f80e0,#b4148c)}.pv{background:#1a6be0}.ps{background:linear-gradient(135deg,#00439c,#0070d1)}
+  .sp{background:#1db954;color:#000}.z5{background:#2b0a3d}.mx{background:#1565c0}.kd{background:#17b2e7}.vl{background:#ff8800}.at{background:#111;border:1px solid #333}.ym{background:#ff0033}
+  .A-rowlbl{font-size:.85em;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin:0 0 .7em}
+  .A-set{flex:1;height:4.8em;border-radius:.7em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:.9em 1em;display:flex;flex-direction:column;justify-content:space-between}
+  .A-set small{opacity:.6}
+  .A-set b{font-size:1.5em;letter-spacing:-.02em}
+
+  /* ---------- G · Editorial ---------- */
+  .G-item{font-weight:900;letter-spacing:-.035em;line-height:1.08;opacity:.25}
+  .G-on{opacity:1}
+  .G-sec{font-family:"Space Mono",monospace;font-size:.75em;letter-spacing:.2em;opacity:.5;border-bottom:1px solid #ffffff2a;padding-bottom:.5em;margin-bottom:.6em}
+
+  /* ---------- N · Nothing ---------- */
+  .N{background:#000}
+  .N-grid{position:absolute;inset:0;background-image:radial-gradient(#ffffff17 .09em,transparent .1em);background-size:1.2em 1.2em}
+  .N-w{position:absolute;border-radius:1.6em;background:#121212;border:1px solid #ffffff1c;padding:1.2em 1.3em}
+  .N-lbl{font-family:"Space Mono",monospace;font-size:.72em;letter-spacing:.18em;text-transform:uppercase;opacity:.5}
+  .N-app{border-radius:999px;border:1px solid #ffffff30;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-size:.95em;letter-spacing:.02em;color:#fff}
+  .N-on{background:#fff;color:#000;border-color:#fff}
+  .red{color:#ff2a1a}
+  .led{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:#ff2a1a;box-shadow:0 0 .6em #ff2a1a}
+  .ledoff{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:#333}
+  .dotbar{height:.55em;background-image:radial-gradient(circle,#fff .2em,transparent .22em);background-size:.7em .55em;background-repeat:repeat-x}
+  .dotbar.dim{background-image:radial-gradient(circle,#ffffff33 .2em,transparent .22em)}
+</style>
+
+<h2>Three layouts, each with its own "everything" screen</h2>
+<p class="subtitle">Choose one in Home screen settings. The left side is home; press ↓ for the right side. All three do exactly the same things. Shows, setting values and device states are samples.</p>
+
+<div class="spec">
+  <div><b>Home</b><span>Clock · "continue" from your own watch history · YouTube, Netflix, Hotstar, Prime, PS5</span></div>
+  <div><b>Everything › Inputs</b><span>HDMI 1 (PS5), HDMI 2, HDMI 3 with signal state; OK switches</span></div>
+  <div><b>Everything › Apps</b><span>Spotify pinned first, then every other app; OK opens</span></div>
+  <div><b>Everything › TV</b><span>Picture mode, Sound mode, Sleep timer with current values; OK changes · All settings</span></div>
+  <div><b>Everything › Home screen</b><span>Layout (A / G / N), app order, HDMI names</span></div>
+</div>
+
+<div class="cards" data-multiselect>
+
+<!-- ======================= A ======================= -->
+<div class="card" data-choice="A" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">A · Home</div>
+      <div class="tv">
+        <div class="A-art"></div>
+        <div class="abs" style="inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75),transparent 60%)"></div>
+        <div class="abs" style="right:5%;top:6%;font-size:1.3em;opacity:.85">8:42 PM</div>
+        <div class="abs" style="left:5%;top:22%;width:60%">
+          <div style="font-size:.85em;letter-spacing:.22em;opacity:.7">CONTINUE ON NETFLIX</div>
+          <div style="font-size:4.4em;font-weight:900;letter-spacing:-.035em;line-height:1;margin:.25em 0 .2em">Stranger Things</div>
+          <div style="font-size:1.25em;opacity:.8">S4 · E7 · 38 min left</div>
+          <div style="height:.3em;width:45%;background:#ffffff33;border-radius:1em;margin-top:1em"><div style="height:100%;width:62%;background:#fff;border-radius:1em"></div></div>
+        </div>
+        <div class="abs" style="left:5%;right:5%;bottom:9%;display:flex;gap:2.4%">
+          <div class="A-ban yt">YouTube</div><div class="A-ban nf A-f">NETFLIX</div><div class="A-ban hs">JioHotstar</div><div class="A-ban pv">prime video</div><div class="A-ban ps">PS5</div>
+        </div>
+        <div class="abs" style="left:0;right:0;bottom:2.5%;text-align:center;font-size:.8em;opacity:.45">↓ Everything</div>
+      </div></div>
+
+    <div class="shot"><div class="cap">A · Everything</div>
+      <div class="tv">
+        <div class="A-art" style="filter:saturate(.5) brightness(.35)"></div>
+        <div class="abs" style="inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.85) 40%)"></div>
+        <!-- hero describes the focused item, like on home -->
+        <div class="abs" style="left:5%;top:6%">
+          <div style="font-size:.85em;letter-spacing:.22em;opacity:.7">INPUT · HDMI 1</div>
+          <div style="font-size:2.9em;font-weight:900;letter-spacing:-.035em;line-height:1.05;margin-top:.15em">PlayStation 5</div>
+          <div style="font-size:1.1em;opacity:.75;margin-top:.2em">● Signal · press OK to switch</div>
+        </div>
+        <div class="abs" style="left:5%;right:5%;top:28%">
+          <div class="A-rowlbl">Inputs</div>
+          <div style="display:flex;gap:2.4%;width:50%">
+            <div class="A-ban ps A-f">PS5</div>
+            <div class="A-ban" style="background:#1d1d22;font-weight:500;opacity:.7">HDMI 2</div>
+            <div class="A-ban" style="background:#1d1d22;font-weight:500;opacity:.7">HDMI 3</div>
+          </div>
+          <div class="A-rowlbl" style="margin-top:1.3em">Apps</div>
+          <div style="display:flex;gap:2.4%">
+            <div class="A-ban sp" style="flex:1">Spotify</div><div class="A-ban ym">YT Music</div><div class="A-ban z5">ZEE5</div><div class="A-ban at"> tv</div><div class="A-ban mx">MX Player</div><div class="A-ban kd">Kodi</div>
+          </div>
+          <div class="A-rowlbl" style="margin-top:1.3em">TV</div>
+          <div style="display:flex;gap:2.4%">
+            <div class="A-set"><small>Picture</small><b>Movie</b></div>
+            <div class="A-set"><small>Sound</small><b>Dolby</b></div>
+            <div class="A-set"><small>Sleep</small><b>Off</b></div>
+            <div class="A-set"><small>All</small><b>Settings ›</b></div>
+            <div class="A-set"><small>Home screen</small><b>Layout A ›</b></div>
+            <div style="flex:1"></div>
+          </div>
+        </div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>A · Cinema</h3><p>"Everything" keeps A's language: the same 16:9 banners and white focus ring, with rows that scroll up under the poster, which dims and blurs. The big title at the top always describes what's focused, just like on home.</p></div>
+</div>
+
+<!-- ======================= G ======================= -->
+<div class="card" data-choice="G" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">G · Home</div>
+      <div class="tv">
+        <div class="A-art"></div>
+        <div class="abs" style="inset:0;background:linear-gradient(90deg,#05030a 0%,rgba(5,3,10,.9) 34%,rgba(5,3,10,.2) 72%,transparent)"></div>
+        <div class="abs mono" style="left:6%;top:8%;font-size:.8em;letter-spacing:.2em;opacity:.55">TUE 21 OCT · 8:42 PM</div>
+        <div class="abs" style="left:6%;top:16%;font-size:3.5em">
+          <div class="G-item">YouTube</div>
+          <div class="G-item G-on">Netflix</div>
+          <div style="font-size:.26em;font-weight:500;margin:.3em 0 .9em;opacity:.9">▶ Resume · Stranger Things · S4 E7 · 38 min left
+            <div style="height:.25em;width:55%;background:#ffffff33;border-radius:1em;margin-top:.7em"><div style="height:100%;width:62%;background:#fff;border-radius:1em"></div></div></div>
+          <div class="G-item">Hotstar</div>
+          <div class="G-item">Prime Video</div>
+          <div class="G-item">PlayStation</div>
+        </div>
+        <div class="abs" style="left:6%;bottom:6%;font-size:.9em;opacity:.45">↓ Everything</div>
+      </div></div>
+
+    <div class="shot"><div class="cap">G · Everything</div>
+      <div class="tv" style="background:#0b0a09">
+        <div class="abs" style="right:0;top:0;bottom:0;width:42%;background:linear-gradient(90deg,#0b0a09,transparent 35%),radial-gradient(70% 70% at 65% 45%,#0058d6,#001a44 55%,#0b0a09 85%)"></div>
+        <div class="abs" style="right:5%;top:12%;width:30%;text-align:right">
+          <div class="mono" style="font-size:.75em;letter-spacing:.2em;opacity:.6">HDMI 1 · SIGNAL</div>
+          <div class="serif" style="font-size:3.2em;line-height:1;font-style:italic;margin-top:.2em">switch to<br>PlayStation</div>
+        </div>
+        <div class="abs" style="left:6%;top:8%;right:42%;display:grid;grid-template-columns:1fr 1fr;gap:2.4em 3em">
+          <div><div class="G-sec">01 — INPUTS</div>
+            <div style="font-size:2.3em"><div class="G-item G-on">PlayStation 5</div><div class="G-item">HDMI 2</div><div class="G-item">HDMI 3</div></div></div>
+          <div><div class="G-sec">02 — APPS</div>
+            <div style="font-size:2.3em"><div class="G-item" style="opacity:.55">Spotify</div><div class="G-item">YT Music</div><div class="G-item">ZEE5</div><div class="G-item" style="font-size:.5em;font-weight:500;opacity:.4;margin-top:.4em">+ 5 more ›</div></div></div>
+          <div><div class="G-sec">03 — THE TV</div>
+            <div style="font-size:1.6em;line-height:1.45;font-weight:300;opacity:.55">Picture <span class="serif" style="font-style:italic;opacity:1">Movie</span><br>Sound <span class="serif" style="font-style:italic">Dolby</span><br>Sleep <span class="serif" style="font-style:italic">off</span><br>All settings ›</div></div>
+          <div><div class="G-sec">04 — HOME</div>
+            <div style="font-size:1.6em;line-height:1.45;font-weight:300;opacity:.55">Layout <span class="serif" style="font-style:italic">Editorial</span><br>App order ›<br>HDMI names ›</div></div>
+        </div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>G · Editorial</h3><p>"Everything" is a contents page: four numbered sections in G's big type, with settings values in italic serif. The right side shows what the focused item will do, the way G's home shows your show.</p></div>
+</div>
+
+<!-- ======================= N ======================= -->
+<div class="card" data-choice="N" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">N · Home</div>
+      <div class="tv N">
+        <div class="N-grid"></div>
+        <div class="abs dots" style="left:5%;top:8%;font-size:6.5em;line-height:.9;letter-spacing:.02em">20:42</div>
+        <div class="abs mono" style="left:5.4%;top:34%;font-size:.95em;letter-spacing:.2em;opacity:.6">TUE 21 OCT <span class="red">●</span> LIVING ROOM</div>
+        <!-- continue widget -->
+        <div class="N-w" style="right:5%;top:7%;width:38%;height:36%;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+          <div class="abs" style="inset:0;background:radial-gradient(70% 90% at 80% 20%,#ffffff22,transparent 60%);filter:grayscale(1)"></div>
+          <div class="N-lbl" style="position:relative">Continue · Netflix</div>
+          <div style="position:relative"><div style="font-size:2em;font-weight:700;letter-spacing:-.02em">Stranger Things</div>
+            <div class="mono" style="font-size:.8em;opacity:.6;margin:.3em 0 .7em">S4 E7 · 38 MIN LEFT</div>
+            <div style="display:flex;gap:0"><div class="dotbar" style="width:62%"></div><div class="dotbar dim" style="width:38%"></div></div></div>
+        </div>
+        <!-- apps as pills -->
+        <div class="abs" style="left:5%;right:5%;bottom:10%;display:flex;gap:1.6%">
+          <div class="N-app" style="flex:1;height:5.2em">YouTube</div>
+          <div class="N-app N-on" style="flex:1;height:5.2em"><span class="red" style="margin-right:.6em">●</span>Netflix</div>
+          <div class="N-app" style="flex:1;height:5.2em">Hotstar</div>
+          <div class="N-app" style="flex:1;height:5.2em">Prime</div>
+          <div class="N-app" style="flex:1;height:5.2em">PS5</div>
+        </div>
+        <div class="abs mono" style="left:0;right:0;bottom:3%;text-align:center;font-size:.75em;letter-spacing:.2em;opacity:.4">↓ EVERYTHING</div>
+      </div></div>
+
+    <div class="shot"><div class="cap">N · Everything</div>
+      <div class="tv N">
+        <div class="N-grid"></div>
+        <div class="abs dots" style="left:5%;top:5%;font-size:3em">20:42</div>
+        <div class="abs mono" style="right:5%;top:7%;font-size:.75em;letter-spacing:.2em;opacity:.5">↑ HOME</div>
+        <!-- inputs -->
+        <div class="N-w" style="left:5%;top:18%;width:37%;height:42%;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="N-lbl">Input</div>
+          <div style="display:flex;flex-direction:column;gap:.5em">
+            <div style="display:flex;align-items:center;gap:.8em;padding:.7em 1em;border-radius:99px;background:#fff;color:#000;font-weight:700;outline:.2em solid #fff;outline-offset:.3em"><span class="led"></span>PlayStation 5<span class="mono" style="margin-left:auto;font-size:.75em;opacity:.6">HDMI 1</span></div>
+            <div style="display:flex;align-items:center;gap:.8em;padding:.7em 1em;border-radius:99px;border:1px solid #ffffff26;opacity:.6"><span class="ledoff"></span>HDMI 2<span class="mono" style="margin-left:auto;font-size:.75em">NO SIGNAL</span></div>
+            <div style="display:flex;align-items:center;gap:.8em;padding:.7em 1em;border-radius:99px;border:1px solid #ffffff26;opacity:.6"><span class="ledoff"></span>HDMI 3<span class="mono" style="margin-left:auto;font-size:.75em">NO SIGNAL</span></div>
+          </div>
+        </div>
+        <!-- spotify record -->
+        <div class="N-w" style="left:44%;top:18%;width:22%;height:42%;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="N-lbl">Listen</div>
+          <div class="abs" style="right:-25%;top:16%;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0 13%,#000 14% 16%,transparent 17%),repeating-radial-gradient(circle,#1b1b1b 0 .12em,#0a0a0a .12em .24em)"></div>
+          <div style="position:relative"><div style="font-weight:700;font-size:1.3em">Spotify</div><div class="mono" style="font-size:.7em;opacity:.55">LIKED SONGS ›</div></div>
+        </div>
+        <!-- TV knobs -->
+        <div class="N-w" style="left:68%;top:18%;width:27%;height:42%;display:flex;flex-direction:column;justify-content:space-between">
+          <div class="N-lbl">TV</div>
+          <div style="display:flex;justify-content:space-between">
+            <div style="text-align:center"><div style="width:3.4em;aspect-ratio:1;border-radius:50%;background:conic-gradient(#fff 0 62%,#2a2a2a 62%);display:flex;align-items:center;justify-content:center"><div style="width:78%;aspect-ratio:1;border-radius:50%;background:#121212"></div></div><div class="mono" style="font-size:.62em;margin-top:.5em;opacity:.7">MOVIE</div></div>
+            <div style="text-align:center"><div style="width:3.4em;aspect-ratio:1;border-radius:50%;background:conic-gradient(#fff 0 35%,#2a2a2a 35%);display:flex;align-items:center;justify-content:center"><div style="width:78%;aspect-ratio:1;border-radius:50%;background:#121212"></div></div><div class="mono" style="font-size:.62em;margin-top:.5em;opacity:.7">DOLBY</div></div>
+            <div style="text-align:center"><div style="width:3.4em;aspect-ratio:1;border-radius:50%;border:.15em dashed #444"></div><div class="mono" style="font-size:.62em;margin-top:.5em;opacity:.7">SLEEP</div></div>
+          </div>
+          <div class="mono" style="font-size:.7em;opacity:.6">ALL SETTINGS ›</div>
+        </div>
+        <!-- app drawer -->
+        <div class="N-w" style="left:5%;right:5%;top:64%;bottom:6%;display:flex;flex-direction:column;justify-content:space-between">
+          <div style="display:flex;justify-content:space-between"><div class="N-lbl">Apps</div><div class="N-lbl">Home screen · Layout N ›</div></div>
+          <div style="display:flex;gap:1.2%">
+            <div class="N-app" style="flex:1.3;height:3.4em"><span class="red" style="margin-right:.5em">●</span>Spotify</div>
+            <div class="N-app" style="flex:1;height:3.4em">YT Music</div>
+            <div class="N-app" style="flex:1;height:3.4em">ZEE5</div>
+            <div class="N-app" style="flex:1;height:3.4em">Apple TV</div>
+            <div class="N-app" style="flex:1;height:3.4em">MX Player</div>
+            <div class="N-app" style="flex:1;height:3.4em">Kodi</div>
+            <div class="N-app" style="flex:1;height:3.4em">VLC</div>
+          </div>
+        </div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>N · Nothing</h3><p>Pure black with a faint dot grid, a dot-matrix clock, monospace labels and one red accent. Apps are monochrome pills instead of colourful banners, and "continue" is a widget with a dotted progress bar. "Everything" is a set of widgets: the input switch with its red light, the Spotify record, the TV knobs, and an app drawer.</p></div>
+</div>
+
+</div>

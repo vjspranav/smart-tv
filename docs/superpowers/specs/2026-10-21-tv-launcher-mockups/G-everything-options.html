@@ -1,0 +1,177 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  .cards{grid-template-columns:1fr!important}
+  .card-image{aspect-ratio:auto!important;padding:1.4%!important;display:grid!important;grid-template-columns:1fr 1fr;gap:1.4%;align-items:start}
+  .shot{display:flex;flex-direction:column;gap:6px}
+  .cap{font:600 11px/1.2 system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary,#888)}
+  .tv{container-type:inline-size;aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;border-radius:10px;color:#fff;background:#0b0a09;font-family:"Inter Tight",system-ui,sans-serif;font-size:.78cqw}
+  .tv *{box-sizing:border-box}
+  .abs{position:absolute}
+  .mono{font-family:"Space Mono",monospace}
+  .serif{font-family:"Instrument Serif",serif;font-weight:400}
+  .it{font-style:italic}
+  .clip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lbl{font-family:"Space Mono",monospace;font-size:.75em;letter-spacing:.2em;text-transform:uppercase;opacity:.5}
+  .rule{height:1px;background:#ffffff26}
+  .art-nf{background:radial-gradient(60% 80% at 60% 35%,#e50914 0%,#7a0b0b 35%,#160606 70%),#0a0507}
+  .art-ps{background:radial-gradient(60% 80% at 60% 40%,#0a6cff 0%,#062a6e 38%,#050a18 75%)}
+  .dim{opacity:.28}
+  .on{opacity:1}
+  .chev{opacity:.5;font-family:"Space Mono",monospace}
+</style>
+
+<h2>Three new directions for G</h2>
+<p class="subtitle">Each keeps G's idea (big type, no tiles) with a different structure. Everything screens have the same features as A and N. Settings change in place (‹ Movie ›), and lists scroll inside their own area, so nothing ever runs off the edge.</p>
+
+<div class="cards" data-multiselect>
+
+<!-- ======================= G1 Spread ======================= -->
+<div class="card" data-choice="G1" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">G1 · Home</div>
+      <div class="tv">
+        <!-- right page: framed photo with caption -->
+        <div class="abs art-nf" style="right:5%;top:9%;width:44%;height:66%;border-radius:.4em"></div>
+        <div class="abs" style="right:5%;top:78%;width:44%">
+          <div class="rule" style="margin-bottom:.8em"></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1em">
+            <div class="serif it clip" style="font-size:2.2em">Stranger Things</div>
+            <div class="lbl" style="flex:none">S4 · E7</div></div>
+          <div class="mono" style="font-size:.75em;opacity:.55;margin-top:.4em">38 MIN LEFT — OK TO RESUME IN NETFLIX</div>
+        </div>
+        <!-- left page: index -->
+        <div class="abs lbl" style="left:6%;top:9%">Tuesday 21 October</div>
+        <div class="abs serif" style="left:6%;top:14%;font-size:3.2em;line-height:1">8:42 <span class="it" style="opacity:.6">pm</span></div>
+        <div class="abs" style="left:6%;top:34%;width:40%;font-size:3.1em;font-weight:900;letter-spacing:-.035em;line-height:1.12">
+          <div class="dim clip">YouTube</div><div class="on clip">Netflix <span style="display:inline-block;width:.35em;height:.35em;background:#e50914;border-radius:50%;vertical-align:middle"></span></div><div class="dim clip">Hotstar</div><div class="dim clip">Prime Video</div><div class="dim clip">PlayStation</div>
+        </div>
+        <div class="abs lbl" style="left:6%;bottom:7%">↓ Everything</div>
+      </div></div>
+
+    <div class="shot"><div class="cap">G1 · Everything</div>
+      <div class="tv">
+        <div class="abs lbl" style="left:6%;top:9%">Everything</div>
+        <div class="abs" style="left:6%;top:16%;width:30%;font-size:2.6em;font-weight:900;letter-spacing:-.035em;line-height:1.25">
+          <div class="dim clip">Inputs</div><div class="dim clip">Apps</div><div class="on clip">The TV <span class="chev" style="font-size:.4em">→</span></div><div class="dim clip">Home screen</div>
+        </div>
+        <div class="abs" style="left:39%;top:9%;bottom:9%;width:1px;background:#ffffff1f"></div>
+        <!-- right page: section content -->
+        <div class="abs" style="left:44%;right:6%;top:9%">
+          <div class="lbl">03 — The TV</div>
+          <div style="margin-top:1.4em">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.75em 0;border-bottom:1px solid #ffffff1a;background:#ffffff0d;margin:0 -.8em;padding-left:.8em;padding-right:.8em;border-radius:.3em">
+              <span style="font-size:1.6em;font-weight:500">Picture</span><span class="serif it" style="font-size:2.2em"><span class="chev" style="font-size:.5em">‹ </span>Movie<span class="chev" style="font-size:.5em"> ›</span></span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.75em 0;border-bottom:1px solid #ffffff1a;opacity:.55">
+              <span style="font-size:1.6em;font-weight:500">Sound</span><span class="serif it" style="font-size:2.2em">Dolby</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.75em 0;border-bottom:1px solid #ffffff1a;opacity:.55">
+              <span style="font-size:1.6em;font-weight:500">Sleep timer</span><span class="serif it" style="font-size:2.2em">off</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.75em 0;opacity:.55">
+              <span style="font-size:1.6em;font-weight:500">All settings</span><span class="chev" style="font-size:1.2em">→</span></div>
+          </div>
+          <div class="mono" style="font-size:.75em;opacity:.45;margin-top:1.4em">← → CHANGES THE VALUE · NO MENUS</div>
+        </div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>G1 · Spread</h3><p>Like an open magazine. The left page is the index (your apps on home, the four sections in Everything), and the right page shows the selected item: a framed photo with a caption on home, or that section's options as clean rows. Settings change right there with ← →, with no menus to open.</p></div>
+</div>
+
+<!-- ======================= G2 Headline ======================= -->
+<div class="card" data-choice="G2" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">G2 · Home</div>
+      <div class="tv">
+        <div class="abs art-nf" style="inset:0;opacity:.55"></div>
+        <div class="abs" style="inset:0;background:linear-gradient(180deg,rgba(11,10,9,.2),rgba(11,10,9,.92) 72%)"></div>
+        <div class="abs lbl" style="left:6%;top:8%">Tue 21 Oct</div>
+        <div class="abs lbl" style="right:6%;top:8%">8:42 pm</div>
+        <!-- one huge headline, neighbours fade at edges -->
+        <div class="abs" style="left:0;right:0;top:40%;display:flex;justify-content:center;align-items:baseline;gap:4%;font-weight:900;letter-spacing:-.04em;white-space:nowrap">
+          <span style="font-size:3em;opacity:.15">YouTube</span>
+          <span style="font-size:8em;line-height:1">Netflix</span>
+          <span style="font-size:3em;opacity:.15">Hotstar</span>
+        </div>
+        <div class="abs" style="left:0;right:0;top:70%;text-align:center">
+          <div class="serif it clip" style="font-size:2em;max-width:70%;margin:0 auto">“Stranger Things” — Season 4, Episode 7</div>
+          <div style="width:22%;height:.25em;margin:1em auto 0;background:#ffffff33;border-radius:1em"><div style="width:62%;height:100%;background:#fff;border-radius:1em"></div></div>
+        </div>
+        <div class="abs" style="left:0;right:0;bottom:6%;display:flex;justify-content:center;gap:1.2em">
+          <span style="width:.5em;height:.5em;border-radius:50%;background:#fff;opacity:.3"></span><span style="width:1.6em;height:.5em;border-radius:1em;background:#fff"></span><span style="width:.5em;height:.5em;border-radius:50%;background:#fff;opacity:.3"></span><span style="width:.5em;height:.5em;border-radius:50%;background:#fff;opacity:.3"></span><span style="width:.5em;height:.5em;border-radius:50%;background:#fff;opacity:.3"></span></div>
+      </div></div>
+
+    <div class="shot"><div class="cap">G2 · Everything</div>
+      <div class="tv">
+        <div class="abs lbl" style="left:6%;top:8%">Everything</div>
+        <div class="abs" style="left:6%;right:6%;top:15%;display:flex;gap:3.5%;font-size:1.5em;font-weight:700;white-space:nowrap">
+          <span class="dim">Inputs</span><span class="dim">Apps</span><span style="border-bottom:.12em solid #fff;padding-bottom:.2em">The TV</span><span class="dim">Home screen</span></div>
+        <div class="abs" style="left:6%;right:6%;top:34%;display:grid;grid-template-columns:repeat(3,1fr);gap:4%">
+          <div style="border-top:2px solid #fff;padding-top:1em">
+            <div class="lbl" style="opacity:.7">Picture</div>
+            <div class="serif it clip" style="font-size:4.4em;line-height:1.05;margin-top:.15em">Movie</div>
+            <div class="mono clip" style="font-size:.75em;opacity:.5;margin-top:.6em">‹ STANDARD · <span style="opacity:1;color:#fff">MOVIE</span> · GAME ›</div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:1em;opacity:.5">
+            <div class="lbl" style="opacity:.7">Sound</div>
+            <div class="serif it clip" style="font-size:4.4em;line-height:1.05;margin-top:.15em">Dolby</div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:1em;opacity:.5">
+            <div class="lbl" style="opacity:.7">Sleep</div>
+            <div class="serif it clip" style="font-size:4.4em;line-height:1.05;margin-top:.15em">Off</div></div>
+        </div>
+        <div class="abs mono" style="left:6%;bottom:8%;font-size:.8em;opacity:.55">ALL SETTINGS →</div>
+        <div class="abs mono" style="right:6%;bottom:8%;font-size:.8em;opacity:.4">↑ HOME</div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>G2 · Headline</h3><p>Home is one giant word: the app you're on, in huge type in the middle of the screen, with its neighbours fading at the edges. ← → slides between them like flipping headlines, and your show sits underneath as an italic subtitle. In Everything the sections are tabs, and each value is set in huge serif type with its choices listed underneath.</p></div>
+</div>
+
+<!-- ======================= G3 Columns ======================= -->
+<div class="card" data-choice="G3" onclick="toggleSelect(this)">
+  <div class="card-image">
+    <div class="shot"><div class="cap">G3 · Home</div>
+      <div class="tv">
+        <div class="abs lbl" style="left:5%;top:8%">The Living Room</div>
+        <div class="abs lbl" style="right:5%;top:8%">Tue 21 Oct · 8:42 pm</div>
+        <div class="abs" style="left:5%;right:5%;top:16%;bottom:9%;display:grid;grid-template-columns:1fr 2.6fr 1fr 1fr 1fr;gap:1.4%">
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.45"><div class="mono" style="font-size:2.6em">01</div><div style="font-weight:700;font-size:1.3em" class="clip">YouTube</div></div>
+          <!-- focused column opens up -->
+          <div style="border-top:2px solid #fff;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+            <div class="abs art-nf" style="left:0;right:0;top:22%;bottom:30%;border-radius:.3em"></div>
+            <div class="mono" style="font-size:2.6em;position:relative">02</div>
+            <div style="position:relative"><div style="font-weight:900;font-size:2.6em;letter-spacing:-.03em" class="clip">Netflix</div>
+              <div class="serif it clip" style="font-size:1.5em;opacity:.85">Stranger Things, S4 E7</div>
+              <div style="height:.25em;background:#ffffff33;border-radius:1em;margin-top:.7em"><div style="width:62%;height:100%;background:#fff;border-radius:1em"></div></div></div>
+          </div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.45"><div class="mono" style="font-size:2.6em">03</div><div style="font-weight:700;font-size:1.3em" class="clip">Hotstar</div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.45"><div class="mono" style="font-size:2.6em">04</div><div style="font-weight:700;font-size:1.3em" class="clip">Prime</div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.45"><div class="mono" style="font-size:2.6em">05</div><div style="font-weight:700;font-size:1.3em" class="clip">PS5</div></div>
+        </div>
+      </div></div>
+
+    <div class="shot"><div class="cap">G3 · Everything</div>
+      <div class="tv">
+        <div class="abs lbl" style="left:5%;top:8%">Everything</div>
+        <div class="abs lbl" style="right:5%;top:8%">↑ Home</div>
+        <div class="abs" style="left:5%;right:5%;top:16%;bottom:9%;display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr;gap:1.6%">
+          <!-- focused: inputs -->
+          <div style="border-top:2px solid #fff;padding-top:.8em;display:flex;flex-direction:column;gap:.9em">
+            <div class="lbl" style="opacity:.8">01 — Inputs</div>
+            <div style="display:flex;flex-direction:column;gap:.4em;margin-top:auto">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;background:#fff;color:#000;padding:.6em .8em;border-radius:.3em"><b style="font-size:1.6em" class="clip">PlayStation 5</b><span class="mono" style="font-size:.75em;flex:none">● HDMI 1</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.6em .8em;opacity:.5"><span style="font-size:1.6em">HDMI 2</span><span class="mono" style="font-size:.75em">NO SIGNAL</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:.6em .8em;opacity:.5"><span style="font-size:1.6em">HDMI 3</span><span class="mono" style="font-size:.75em">NO SIGNAL</span></div>
+            </div>
+          </div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.5;overflow:hidden">
+            <div class="lbl" style="opacity:.8">02 — Apps</div>
+            <div style="font-size:1.3em;line-height:1.5"><div class="clip">Spotify</div><div class="clip">YT Music</div><div class="clip">ZEE5</div><div class="mono" style="font-size:.6em">+5 ↓</div></div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.5">
+            <div class="lbl" style="opacity:.8">03 — TV</div>
+            <div style="font-size:1.3em;line-height:1.5"><div class="clip">Picture <span class="serif it">Movie</span></div><div class="clip">Sound <span class="serif it">Dolby</span></div><div class="clip">Sleep <span class="serif it">off</span></div></div></div>
+          <div style="border-top:1px solid #ffffff33;padding-top:.8em;display:flex;flex-direction:column;justify-content:space-between;opacity:.5">
+            <div class="lbl" style="opacity:.8">04 — Home</div>
+            <div style="font-size:1.3em;line-height:1.5"><div class="clip">Layout <span class="serif it">G</span></div><div class="clip">App order</div><div class="clip">HDMI names</div></div></div>
+        </div>
+      </div></div>
+  </div>
+  <div class="card-body"><h3>G3 · Columns</h3><p>A Swiss-style grid of numbered columns, 01 to 05. The selected column widens to show its artwork and your show, while the others stay slim. Everything uses the same grid: four section columns, with the selected one opening up to show its options. Moving ← → feels like widening one column at a time.</p></div>
+</div>
+
+</div>
