@@ -1,4 +1,7 @@
 #!/bin/sh
+# RETIRED 2026-10-21 — do not run. Disabling launcherx is unsafe on this TV (see report section 2);
+# known flaws: Ctrl-C does not abort (trap returns), restore() does not verify success.
+echo "launcherx-check.sh is retired; see docs/superpowers/reports/2026-10-launcher-groundwork.md" >&2; exit 1
 # Plan 1 / Task 8: does the TV keep working with Google TV's home (launcherx) disabled?
 # Usage: investigations/launcherx-check.sh [--no-restore]
 #   --no-restore leaves launcherx disabled on exit (used once, to test a reboot); restore by hand after.
