@@ -10,6 +10,12 @@ public class Home extends Activity {
         super.onCreate(b);
         String probe = getIntent().getStringExtra("probe");
         if (probe != null) { Probe.run(this, probe, getIntent().getIntExtra("pic", -1)); finish(); return; }
+        if (getIntent().getBooleanExtra("dump", false)) {
+            if (getIntent().getBooleanExtra("notcl", false)) com.livingroom.flamingo.launcher.data.Sources.tclAllowed = false;
+            final com.livingroom.flamingo.launcher.data.Sources src = com.livingroom.flamingo.launcher.data.Sources.get(this);
+            src.listen(new Runnable() { public void run() { src.dump(); src.unlisten(this); finish(); } });
+            return;
+        }
         final View v;
         if (getIntent().getBooleanExtra("kittest", false)) v = com.livingroom.flamingo.launcher.ui.Debug.kitTest(this);
         else { v = new View(this); v.setBackgroundColor(Color.BLACK); }
