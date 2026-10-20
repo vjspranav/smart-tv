@@ -112,14 +112,45 @@ The mockups are the visual reference. Where the mockups and this document disagr
 - **OK opens the app.** It doesn't deep-link into the episode; the owner accepted this.
 - When an app has no history, show its banner/brand colour instead of a show (and no progress bar).
 
-### Replacing Google TV
+### Replacing Google TV — "safer XDA" method (owner's decision after Plan 1)
 
-- **Become the home screen:** install the launcher, then disable `com.google.android.apps.tv.launcherx` with `pm disable-user`. The owner approved this.
-- **What stays working:** voice search (`com.google.android.katniss`), casting, Play Store, apps.
-- **What goes away:** Google TV's tabs and profile switcher. The owner accepted this.
-- **Undo:** `pm enable --user 0 com.google.android.apps.tv.launcherx`, then uninstall the launcher.
-- Record both in `debloat.sh` or a sibling script, so undo lives in one place.
-- **Disabling Google TV is only a means to an end** *(designer's call)*. Before anything else is built, verify on the TV that voice search, the remote's Home and Input buttons, the screensaver, casting and Play Store still work with `launcherx` disabled. If any of them breaks, leave `launcherx` enabled and make the launcher the default home instead (for example `cmd package set-home-activity`). Nothing the owner uses today may stop working.
+Plan 1 found:
+- Disabling only Google TV home sends Home to the Setup Wizard's recovery screen.
+- Setting a default home is ignored while Google TV home is enabled.
+- Disabling the Setup Wizard **deleted the saved Wi-Fi network**. It was probably created by the wizard; the owner has since re-entered it in Settings.
+- While both are disabled, Android saves the only remaining HOME app as the default, and that choice survives re-enabling the Setup Wizard.
+
+Procedure (owner present, Wi-Fi password at hand):
+1. Install and verify the launcher first. It must offer Settings and Wi-Fi settings from its own screens, so the TV can never be left unreachable.
+2. Start a restore watcher. It re-enables both packages if the TV stops responding to the launcher check.
+3. Disable `com.google.android.apps.tv.launcherx` and `com.google.android.tungsten.setupwraith`, then press Home and confirm our launcher (choose "Always" if a chooser appears).
+4. **Re-enable `setupwraith` immediately.** Only `launcherx` stays disabled.
+5. Verify: Home and boot open our launcher; Wi-Fi is still John Doe 5G; voice, Input, screensaver and Play Store still work.
+6. Record it in `debloat.sh`, with an undo script (enable `launcherx`).
+
+**Never disable `setupwraith` for longer than step 3.**
+
+### Decisions from Plan 1 results (2026-10-21)
+
+**Smoothness and layout**
+- All three layouts passed the smoothness target. G keeps the **faithful widening columns**.
+- The N Spotify record **spins only while Spotify is playing**. Otherwise it stays still, to save idle CPU and keep frame times low.
+
+**Data sources**
+- **Picture mode:** read (and write if proven) through the `com.tcl.tv.display` shared library (`TvPqManager`).
+- **Sound mode:** opens TCL's Sound screen (`com.android.tv.settings/com.tcl.settings.SoundActivity`).
+- **Sleep timer:** opens TCL's sleep panel (action `com.tcl.action.sleep`).
+- **HDMI:** names and on/standby come from HDMI-CEC (the PS5 reports "PlayStation 5"). Ports without a CEC device show as Empty.
+- **Continue:**
+  - Media sessions give titles for YouTube and Hotstar, track info for Spotify, and only "playing" for Netflix and Prime.
+  - Also test `READ_TV_LISTINGS` (runtime-grantable here) for Watch Next rows from other apps. Prefer real titles wherever either source has them.
+
+**Ideas from ArcLauncher** (GPL-3; no code copied)
+- One activity carrying HOME + DEFAULT + LEANBACK_LAUNCHER + LAUNCHER, in `singleTask` mode.
+- An app banner, and the leanback feature declared.
+- An app list combining leanback and sideloaded apps.
+- A LauncherApps callback, so the list updates live.
+- An "am I the default home?" check.
 
 ## Hard quality rules
 
