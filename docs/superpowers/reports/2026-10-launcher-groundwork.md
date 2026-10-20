@@ -80,3 +80,10 @@ The design's plan to disable Google TV's home doesn't work here, and its fallbac
 - **A and N:** focused items clipped at the screen edges.
 
 **Cause:** the scale-up on focus wasn't given room, so parent containers clipped it. In G's transform variant, every column was laid out at full width, so names spilled over. Added to the design as "Focus states must never clip". This doesn't change the performance numbers: the fix is layout room, not extra drawing.
+
+## 7. Why the TV went offline (follow-up)
+- **What happened:** disabling the Setup Wizard **deleted the saved Wi-Fi network**. The TV had no network, and the owner joined the open guest Wi-Fi because it needed no password.
+- **Likely cause (unverified):** the old "John Doe 5G" entry was a hidden-SSID network created by the Setup Wizard during first setup, and Android removes an app's networks when that app is disabled.
+- **Now:** the network was re-entered by hand in Settings, so Settings owns it.
+- **Your observation:** after the Setup Wizard was re-enabled, Home kept opening the test app. Android had saved the only remaining home app as the default. This is why the XDA method works.
+- **ArcLauncher** (`meddouribadis/arclauncher`, GPL-3, read for ideas only) reads Watch Next using `android.permission.READ_TV_LISTINGS`. On this TV that is a *dangerous* (grantable) permission. Plan 2 must test whether it exposes Netflix/Prime "continue" rows to our launcher.
