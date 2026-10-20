@@ -72,3 +72,11 @@ The design's plan to disable Google TV's home doesn't work here, and its fallbac
 - Google TV home and Setup Wizard are enabled.
 - Only the 19 debloat packages are disabled.
 - The Pi remote is unaffected.
+
+## 6. Owner's visual review of the test scenes (rules for Plan 2)
+- **A:** the focus ring wasn't drawn fully around the banners; the first and last banners clipped at the left and right edges when focused. (The banner text was dummy; real app banners come in Plan 2.)
+- **G:** "01" touched the column's left edge, and names overlapped neighbouring columns in one variant.
+- **N:** pill borders were clipped top and bottom when focused.
+- **A and N:** focused items clipped at the screen edges.
+
+**Cause:** the scale-up on focus wasn't given room, so parent containers clipped it. In G's transform variant, every column was laid out at full width, so names spilled over. Added to the design as "Focus states must never clip". This doesn't change the performance numbers: the fix is layout room, not extra drawing.

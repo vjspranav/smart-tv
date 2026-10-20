@@ -142,6 +142,15 @@ The mockups are the visual reference. Where the mockups and this document disagr
 - Every list scrolls inside its own region; nothing pushes layout off-screen.
 - Test with stress data: very long titles and app names, 40+ apps, long HDMI names, missing artwork. Check every screen by screenshot.
 
+**Focus states must never clip** (owner's review of the Plan 1 test scenes, 2026-10-21)
+- A focused item's scale-up, ring and shadow must be fully visible. This includes the first and last item in a row, against every screen edge, and top and bottom.
+- Reserve room for the focused size in the layout: padding, plus no clipping by parent containers.
+- The A focus ring must be drawn completely around the banner.
+- N pill borders must stay intact top and bottom when focused.
+- Text never overlaps neighbouring items. In G, a narrow column's name must fit or be cut off with "…" inside its own column, never spill into the next one.
+- Every panel or column has inner padding: G's "01" must not touch the column's left edge.
+- Screenshot every focus state at both row ends, in every layout.
+
 **Fonts and assets**
 - The mockups use Inter Tight, Instrument Serif, Space Mono and Doto (dot-matrix), all from Google Fonts under the SIL OFL.
 - Nothing's own fonts are not licensed for this; use Doto instead.
