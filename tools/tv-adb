@@ -17,7 +17,7 @@ if [ "$(state)" != device ]; then
   adb disconnect "$TV" >/dev/null 2>&1
   # adb connect can block for minutes on an unreachable host; cap it at 8 s
   adb connect "$TV" >/dev/null 2>&1 & pid=$!
-  ( sleep 8; kill "$pid" 2>/dev/null ) & killer=$!
+  ( sleep 8; kill "$pid" 2>/dev/null ) >/dev/null 2>&1 & killer=$!
   wait "$pid" 2>/dev/null; kill "$killer" 2>/dev/null
   i=0; while [ $i -lt 5 ] && [ "$(state)" != device ]; do sleep 1; i=$((i + 1)); done
 fi

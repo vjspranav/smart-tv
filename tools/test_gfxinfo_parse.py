@@ -38,6 +38,10 @@ class ParseGfx(unittest.TestCase):
         self.assertFalse(g.result('x', g.parse_gfx(synthetic('0.50', 17)), 1)['pass'])
         self.assertFalse(g.result('x', g.parse_gfx(synthetic('1.00', 16)), 1)['pass'])
 
+    def test_result_includes_elapsed(self):
+        self.assertEqual(g.result('x', g.parse_gfx(synthetic('0.50', 16)), 1, elapsed_s=12.5)['elapsed_s'], 12.5)
+        self.assertNotIn('elapsed_s', g.result('x', g.parse_gfx(synthetic('0.50', 16)), 1))
+
     def test_zero_frames_raise(self):
         # gfxinfo reports 4950ms percentiles when nothing rendered; that is not a measurement
         with self.assertRaises(ValueError):

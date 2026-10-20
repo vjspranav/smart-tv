@@ -1,6 +1,8 @@
+__pycache__/
 .superpowers/
-**/build/
 *.apk
 *.keystore
-__pycache__/
+**/build/
+/.superpowers/
 investigations/tvos/
+tools/lib/

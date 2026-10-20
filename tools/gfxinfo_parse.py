@@ -1,6 +1,6 @@
 """Parse `dumpsys gfxinfo` / `dumpsys meminfo` output into one perf result line.
 
-CLI: python3 gfxinfo_parse.py <gfx.txt> <meminfo.txt> <label>  → prints one JSON line.
+CLI: python3 gfxinfo_parse.py <gfx.txt> <meminfo.txt> <label> [elapsed_s]  → prints one JSON line.
 Pass = under 1% janky frames and 95th-percentile frame time at or below 16 ms.
 """
 import json
@@ -30,10 +30,12 @@ def parse_pss_kb(text):
     return int(_num(r'TOTAL PSS:\s+(\d+)', text).group(1))
 
 
-def result(label, gfx, pss_kb):
+def result(label, gfx, pss_kb, elapsed_s=None):
     r = {'label': label}
     r.update(gfx)
     r['pss_kb'] = pss_kb
+    if elapsed_s is not None:
+        r['elapsed_s'] = elapsed_s
     r['pass'] = gfx['janky_pct'] < 1.0 and gfx['p95'] <= 16
     return r
 
@@ -44,4 +46,5 @@ if __name__ == '__main__':
         gfx = parse_gfx(f.read())
     with open(mem_path) as f:
         pss = parse_pss_kb(f.read())
-    print(json.dumps(result(label, gfx, pss)))
+    elapsed = float(sys.argv[4]) if len(sys.argv) > 4 else None
+    print(json.dumps(result(label, gfx, pss, elapsed)))
