@@ -143,9 +143,26 @@ public abstract class AllAppsView extends FrameLayout {
             return true;
         }
         int n = Nav.find(items, focus, k, this);
-        if (n >= 0) move(n, true);
+        if (n < 0) return true;
+        // Coming up into the view switch lands on the current view, so leaving the apps never flips it
+        if (targets.get(n).mode != null && targets.get(focus).mode == null)
+            for (int i = 0; i < targets.size(); i++) if (targets.get(i).mode == mode) { n = i; break; }
+        move(n, true);
+        // Moving along the switch is the choice itself: no OK needed
+        Mode to = targets.get(n).mode;
+        if (to != null && to != mode) switchTo(to);
         return true;
     }
+
+    private void switchTo(Mode m) {
+        mode = m;
+        src.setAppsAz(m == Mode.AZ);
+        rebuild("mode:" + m);
+        switched();
+    }
+
+    /** The view just changed (Groups / A–Z); layouts animate the new content in. */
+    protected void switched() { }
 
     protected void move(int n, boolean animate) {
         moved = true;
@@ -159,10 +176,7 @@ public abstract class AllAppsView extends FrameLayout {
         Target t = targets.get(focus);
         if (t.app != null) src.openApp(t.app.pkg);
         else if (t.mode != null) {
-            if (t.mode == mode) return;
-            mode = t.mode;
-            src.setAppsAz(mode == Mode.AZ);
-            rebuild("mode:" + mode);
+            if (t.mode != mode) switchTo(t.mode);
         } else if (t.letter != null || t.group != null) {
             int n = jumpTarget(t);
             if (n >= 0) move(n, true);

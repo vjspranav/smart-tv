@@ -140,8 +140,10 @@ public final class AllAppsA extends AllAppsView {
                 none.setText(mode == Mode.HIDDEN ? "Nothing hidden" : "No apps");
                 sheet.addView(none, at(-1, -2, 0, 0));
             }
-            grid(apps, cols, tileH, 0);
+            y = grid(apps, cols, tileH, 0);
         }
+        // The sheet holds all of its content: children laid out past a parent's bounds may not draw once it slides
+        ((LayoutParams) sheet.getLayoutParams()).height = Math.max(y, WIN_B - WIN_T);
     }
 
     private void buildRail(Context c) {
@@ -219,6 +221,14 @@ public final class AllAppsA extends AllAppsView {
     }
 
     // ---------- focus ----------
+
+    @Override protected void switched() {
+        // the new view rises in under the pill as it slides: one short layer, then plain drawing again
+        sheet.setAlpha(0f);
+        sheet.setTranslationY(16);
+        sheet.animate().alpha(1f).translationY(0).setDuration(180).withLayer().start();
+        for (View r : rail) { r.setAlpha(0f); r.animate().alpha(1f).setDuration(180).start(); }
+    }
 
     @Override protected void moved(int old, int now, boolean animate) {
         if (old >= 0 && old < items.size()) styleFocus(old, false);

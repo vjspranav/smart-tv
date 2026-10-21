@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G Everything Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f2ef;--fg:#1a1a1a;--muted:#6b6b6b;--card:#fff;--line:#e2ded8}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111;--fg:#eee;--muted:#999;--card:#1a1a1a;--line:#2a2a2a}}
+  :root[data-theme="dark"]{--bg:#111;--fg:#eee;--muted:#999;--card:#1a1a1a;--line:#2a2a2a}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+  main{max-width:1400px;margin:0 auto;padding:32px 16px 64px}
+  h1{font-size:26px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 24px;max-width:900px}
+  section{margin:0 0 40px}
+  section h2{font-size:18px;margin:0 0 4px}
+  section p{color:var(--muted);margin:0 0 12px;max-width:900px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cap{font:600 11px/1.2 system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  @media (max-width:800px){.pair{grid-template-columns:1fr}}
+
+  /* 128em × 72em canvas (1em = 15px on the TV) */
+  .tv{container-type:inline-size;aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;border-radius:10px;color:#fff;background:#05030a;font-family:"Inter Tight",system-ui,sans-serif}
+  .tv *{box-sizing:border-box}
+  .tv>.c{position:absolute;inset:0;font-size:.78125cqw}
+  .abs{position:absolute}
+  .mono{font-family:"Space Mono",monospace}
+  .serif{font-family:"Instrument Serif",serif;font-weight:400}
+  .it{font-style:italic}
+  .clip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lbl{font-family:"Space Mono",monospace;font-size:1.45em;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+  .big{font-weight:900;letter-spacing:-.035em;line-height:1.08}
+  .dim{opacity:.25}
+  /* G home's backdrop language: artwork behind a dark left fade */
+  .art-ps{background:radial-gradient(45% 70% at 72% 42%,#0a6cff 0%,#073a8f 35%,#05030a 75%)}
+  .art-pk{background:radial-gradient(45% 70% at 72% 42%,#c4122e 0%,#5e0716 40%,#05030a 78%)}
+  .fade{background:linear-gradient(90deg,#05030a 0%,rgba(5,3,10,.9) 34%,rgba(5,3,10,.2) 72%,transparent)}
+</style>
+</head>
+<body>
+<main>
+  <h1>G · Everything — three calmer directions</h1>
+  <p class="sub">All three keep G's Home look (big bold type, mono date, artwork behind a dark left fade) and do exactly what Everything does now. Each is shown twice: on Inputs, and in Apps lower down the list. The backdrop is the focused item's colour or artwork.</p>
+
+  <!-- ============ E1 Index ============ -->
+  <section>
+    <h2>E1 · Index — Everything is the Home list, continued</h2>
+    <p>Same big list as Home, now the five sections. The focused section opens a line underneath (like Home's resume line) with its items in a row; ← → moves along it. ↑ ↓ moves between sections.</p>
+    <div class="pair">
+      <div><div class="cap">On Inputs</div><div class="tv"><div class="c">
+        <div class="abs art-ps" style="inset:0"></div><div class="abs fade" style="inset:0"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING · WED 21 OCT · 17:42</div>
+        <div class="abs" style="left:7.7em;top:11.5em;width:76em">
+          <div class="big" style="font-size:5.6em">Inputs</div>
+          <div style="display:flex;gap:1.1em;align-items:center;margin:.9em 0 1.9em;font-size:2em;font-weight:500">
+            <span style="background:#fff;color:#000;padding:.25em .7em;border-radius:.3em">PlayStation 5</span>
+            <span style="opacity:.6">HDMI 2</span><span style="opacity:.6">HDMI 3</span>
+            <span class="serif it" style="opacity:.8;margin-left:.4em">standby · OK to switch</span>
+          </div>
+          <div class="big dim" style="font-size:5.6em">Listen</div>
+          <div class="big dim" style="font-size:5.6em">Apps</div>
+          <div class="big dim" style="font-size:5.6em">TV</div>
+          <div class="big dim" style="font-size:5.6em">Home screen</div>
+        </div>
+        <div class="abs" style="left:7.7em;bottom:4.3em;font-size:1.73em;opacity:.45">↑ Home</div>
+      </div></div></div>
+      <div><div class="cap">On Apps</div><div class="tv"><div class="c">
+        <div class="abs art-pk" style="inset:0"></div><div class="abs fade" style="inset:0"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING · WED 21 OCT · 17:42</div>
+        <div class="abs" style="left:7.7em;top:11.5em;width:96em">
+          <div class="big dim" style="font-size:5.6em">Inputs</div>
+          <div class="big dim" style="font-size:5.6em">Listen</div>
+          <div class="big" style="font-size:5.6em">Apps</div>
+          <div style="display:flex;gap:1.1em;align-items:center;margin:.9em 0 1.9em;font-size:2em;font-weight:500;white-space:nowrap">
+            <span class="mono" style="font-size:.6em;opacity:.6">‹ 3</span>
+            <span style="opacity:.6">Settings</span><span style="background:#fff;color:#000;padding:.25em .7em;border-radius:.3em">JioHotstar</span>
+            <span style="opacity:.6">Kodi</span><span style="opacity:.6">MX Player</span><span style="opacity:.6">VLC</span>
+            <span class="mono" style="font-size:.6em;opacity:.6">11 ›</span>
+          </div>
+          <div class="big dim" style="font-size:5.6em">TV</div>
+          <div class="big dim" style="font-size:5.6em">Home screen</div>
+        </div>
+        <div class="abs" style="left:7.7em;bottom:4.3em;font-size:1.73em;opacity:.45">↑ Home</div>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ E2 Contents ============ -->
+  <section>
+    <h2>E2 · Contents — sections left, the open section's items right</h2>
+    <p>A contents page: the five sections in G's bold type on the left; the focused section's items as one clean numbered list on the right, values in italic serif. ← → between the two sides, ↑ ↓ within.</p>
+    <div class="pair">
+      <div><div class="cap">On Inputs</div><div class="tv"><div class="c">
+        <div class="abs art-ps" style="inset:0;opacity:.55"></div><div class="abs" style="inset:0;background:linear-gradient(90deg,#05030a 0%,rgba(5,3,10,.92) 45%,rgba(5,3,10,.6) 100%)"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING</div>
+        <div class="abs mono" style="right:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">WED 21 OCT · 17:42</div>
+        <div class="abs" style="left:7.7em;top:13em;width:44em">
+          <div class="big" style="font-size:4.6em">Inputs</div>
+          <div class="big dim" style="font-size:4.6em">Listen</div>
+          <div class="big dim" style="font-size:4.6em">Apps</div>
+          <div class="big dim" style="font-size:4.6em">TV</div>
+          <div class="big dim" style="font-size:4.6em">Home screen</div>
+        </div>
+        <div class="abs" style="left:56em;top:13em;bottom:9em;width:1px;background:#ffffff26"></div>
+        <div class="abs" style="left:60em;right:7.7em;top:13em">
+          <div style="display:grid;grid-template-columns:3.4em 1fr auto;align-items:baseline;row-gap:1.6em;font-size:2.3em">
+            <span class="mono" style="font-size:.5em;opacity:.5">01</span><b>PlayStation 5</b><span class="serif it" style="opacity:.85">standby</span>
+            <span class="mono" style="font-size:.5em;opacity:.5">02</span><span style="opacity:.45">HDMI 2</span><span class="serif it" style="opacity:.4">empty</span>
+            <span class="mono" style="font-size:.5em;opacity:.5">03</span><span style="opacity:.45">HDMI 3</span><span class="serif it" style="opacity:.4">empty</span>
+          </div>
+          <div class="abs" style="left:-1.6em;top:-.2em;width:.35em;height:3.2em;background:#fff;border-radius:1em"></div>
+        </div>
+        <div class="abs serif it" style="left:60em;bottom:6em;font-size:2.4em;opacity:.8">OK switches to PlayStation 5</div>
+      </div></div></div>
+      <div><div class="cap">On Apps</div><div class="tv"><div class="c">
+        <div class="abs art-pk" style="inset:0;opacity:.55"></div><div class="abs" style="inset:0;background:linear-gradient(90deg,#05030a 0%,rgba(5,3,10,.92) 45%,rgba(5,3,10,.6) 100%)"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING</div>
+        <div class="abs mono" style="right:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">20 APPS · ALL APPS ›</div>
+        <div class="abs" style="left:7.7em;top:13em;width:44em">
+          <div class="big dim" style="font-size:4.6em">Inputs</div>
+          <div class="big dim" style="font-size:4.6em">Listen</div>
+          <div class="big" style="font-size:4.6em">Apps</div>
+          <div class="big dim" style="font-size:4.6em">TV</div>
+          <div class="big dim" style="font-size:4.6em">Home screen</div>
+        </div>
+        <div class="abs" style="left:56em;top:13em;bottom:9em;width:1px;background:#ffffff26"></div>
+        <div class="abs" style="left:60em;right:7.7em;top:13em">
+          <div style="display:grid;grid-template-columns:3.4em 1fr auto;align-items:baseline;row-gap:1.6em;font-size:2.3em">
+            <span class="mono" style="font-size:.5em;opacity:.5">05</span><span style="opacity:.45">Settings</span><span></span>
+            <span class="mono" style="font-size:.5em;opacity:.5">06</span><b>JioHotstar</b><span class="serif it" style="opacity:.85">continue Pokemon</span>
+            <span class="mono" style="font-size:.5em;opacity:.5">07</span><span style="opacity:.45">Kodi</span><span></span>
+            <span class="mono" style="font-size:.5em;opacity:.5">08</span><span style="opacity:.45">MX Player</span><span></span>
+            <span class="mono" style="font-size:.5em;opacity:.5">09</span><span style="opacity:.45">VLC</span><span></span>
+            <span class="mono" style="font-size:.5em;opacity:.5">10</span><span style="opacity:.45">YouTube Music</span><span></span>
+          </div>
+          <div class="abs" style="left:-1.6em;top:4.2em;width:.35em;height:3.2em;background:#fff;border-radius:1em"></div>
+        </div>
+        <div class="abs mono" style="left:60em;bottom:6em;font-size:1.3em;letter-spacing:.2em;opacity:.55">06 / 19 ↓</div>
+      </div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ E3 Calm columns ============ -->
+  <section>
+    <h2>E3 · Calm columns — the G3 grid, tidied</h2>
+    <p>The columns you picked, made orderly: every column starts at the same line with a large serif number, its items in the same rhythm, no gaps. The focused column is bright and a little wider; the others stay readable at low contrast.</p>
+    <div class="pair">
+      <div><div class="cap">On Inputs</div><div class="tv"><div class="c">
+        <div class="abs art-ps" style="inset:0;opacity:.45"></div><div class="abs" style="inset:0;background:rgba(5,3,10,.82)"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING</div>
+        <div class="abs mono" style="right:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">WED 21 OCT · 17:42</div>
+        <div class="abs" style="left:7.7em;right:7.7em;top:12em;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3em">
+          <div style="border-top:2px solid #fff;padding:1.4em 1.4em 0">
+            <div class="serif" style="font-size:6em;line-height:1">01</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Inputs</div>
+            <div style="font-size:2.2em;line-height:2"><div style="background:#fff;color:#000;border-radius:.25em;padding:0 .5em;margin:0 -.5em;font-weight:700">PlayStation 5</div><div style="opacity:.5">HDMI 2</div><div style="opacity:.5">HDMI 3</div></div>
+            <div class="serif it" style="font-size:2em;opacity:.8;margin-top:1.4em">standby · OK to switch</div>
+          </div>
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">02</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Apps</div>
+            <div style="font-size:2.2em;line-height:2" class="clip"><div class="clip">Listen</div><div class="clip">All apps</div><div class="clip">Spotify</div><div class="clip">Settings</div><div class="mono" style="font-size:.55em">+15</div></div>
+          </div>
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">03</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">TV</div>
+            <div style="font-size:2.2em;line-height:2"><div class="clip">Picture</div><div class="clip">Sound</div><div class="clip">Sleep timer</div><div class="clip">Wi-Fi</div><div class="clip">All settings</div></div>
+          </div>
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">04</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Home</div>
+            <div style="font-size:2.2em;line-height:2"><div class="clip">Layout</div></div>
+          </div>
+        </div>
+      </div></div></div>
+      <div><div class="cap">On TV</div><div class="tv"><div class="c">
+        <div class="abs art-pk" style="inset:0;opacity:.45"></div><div class="abs" style="inset:0;background:rgba(5,3,10,.82)"></div>
+        <div class="abs mono" style="left:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">EVERYTHING</div>
+        <div class="abs mono" style="right:7.7em;top:5.7em;font-size:1.47em;letter-spacing:.2em;opacity:.55">WED 21 OCT · 17:42</div>
+        <div class="abs" style="left:7.7em;right:7.7em;top:12em;display:grid;grid-template-columns:1fr 1fr 1.5fr 1fr;gap:3em">
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">01</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Inputs</div>
+            <div style="font-size:2.2em;line-height:2"><div class="clip">PlayStation 5</div><div class="clip">HDMI 2</div><div class="clip">HDMI 3</div></div>
+          </div>
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">02</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Apps</div>
+            <div style="font-size:2.2em;line-height:2"><div class="clip">Listen</div><div class="clip">All apps</div><div class="clip">Spotify</div><div class="clip">Settings</div><div class="mono" style="font-size:.55em">+15</div></div>
+          </div>
+          <div style="border-top:2px solid #fff;padding:1.4em 1.4em 0">
+            <div class="serif" style="font-size:6em;line-height:1">03</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">TV</div>
+            <div style="font-size:2.2em;line-height:2">
+              <div style="background:#fff;color:#000;border-radius:.25em;padding:0 .5em;margin:0 -.5em;display:flex;justify-content:space-between"><b>Picture</b><span class="serif it">‹ Intelligent ›</span></div>
+              <div style="display:flex;justify-content:space-between;opacity:.6"><span>Sound</span><span class="serif it">open</span></div>
+              <div style="display:flex;justify-content:space-between;opacity:.6"><span>Sleep timer</span><span class="serif it">open</span></div>
+              <div style="display:flex;justify-content:space-between;opacity:.6"><span>Wi-Fi</span><span class="serif it">John Doe 5G</span></div>
+              <div style="display:flex;justify-content:space-between;opacity:.6"><span>All settings</span><span class="serif it">›</span></div>
+            </div>
+          </div>
+          <div style="border-top:1px solid #ffffff40;padding:1.4em 1.4em 0;opacity:.45">
+            <div class="serif" style="font-size:6em;line-height:1">04</div>
+            <div class="lbl" style="opacity:.8;margin:.8em 0 2.2em">Home</div>
+            <div style="font-size:2.2em;line-height:2"><div class="clip">Layout</div></div>
+          </div>
+        </div>
+      </div></div></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
