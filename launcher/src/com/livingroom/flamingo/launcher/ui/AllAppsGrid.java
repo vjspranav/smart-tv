@@ -17,32 +17,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A · Cinema All apps: the focused app's name in big type, a Groups | A–Z switch (plus a letter index in A–Z),
- * groups on the left that jump the grid, and A's 16:9 banners with the white ring. Rows page; nothing is half shown.
+ * All apps: the focused app's name in big type, a Groups | A–Z switch (plus a letter index in A–Z), groups on the
+ * left that jump the grid, and 16:9 banners. Rows page; nothing is half shown. Dressed by the layout's
+ * Everything.Style (A: rounded tiles and a ring; G: sharp tiles, a bar under the focused one, the rest dimmed).
  */
-public final class AllAppsA extends AllAppsView {
-    private static final int SIDE = 96, WIN_T = 330, WIN_B = 1016, GAP = 32, ROW_GAP = 34, RING = 10;
-    private static final float GROW = 1.08f;
+public final class AllAppsGrid extends AllAppsView {
+    private static final int SIDE = 96, WIN_T = 330, WIN_B = 1016, GAP = 32, ROW_GAP = 34;
 
-    private final Typeface bold, black, mid;
+    private final Everything.Style st;
+    private final android.view.ViewOutlineProvider clip;
+    private final int pill;   // the switch's corner radius
+    private final Typeface bold, mid;
     private final TextView eyebrow, title, meta, clock;
     private FrameLayout sheet;
     private final List<View> paged = new ArrayList<>();     // views on the sheet that page in and out
     private final List<int[]> spans = new ArrayList<>();    // their [top, bottom, isTile] on the sheet
     private final List<View> rail = new ArrayList<>();
     private final List<TextView> letters = new ArrayList<>();
-    private int off, tileW;
-    private int baseColor = 0xff0a0507;
+    private int off, tileW, tileH;
+    private final int baseColor;
 
-    public AllAppsA(Context c, Sources src, Runnable close) {
+    public AllAppsGrid(Context c, Sources src, Everything.Style st, Runnable close) {
         super(c, src, close);
-        bold = Fonts.get(c, Fonts.INTER, 700);
-        black = Fonts.get(c, Fonts.INTER, 900);
-        mid = Fonts.get(c, Fonts.INTER, 500);
-        eyebrow = caps(c, 22, 0xb3ffffff);
-        title = Kit.label(c, black, 72, Color.WHITE);
+        this.st = st;
+        final int r = st.radius;
+        clip = new android.view.ViewOutlineProvider() {
+            @Override public void getOutline(View v, android.graphics.Outline o) { o.setRoundRect(0, 0, v.getWidth(), v.getHeight(), r); }
+        };
+        pill = st.radius >= 16 ? 25 : 4;
+        baseColor = st.base;
+        bold = st.bold;
+        mid = st.mid;
+        eyebrow = caps(c, st.eyebrowPx - 2, 0xb3ffffff);
+        title = Kit.label(c, st.title, 72, Color.WHITE);
+        title.setLetterSpacing(st.titleSpacing);
         Kit.fit(title, 72, 48);
-        meta = Kit.label(c, mid, 26, 0xccffffff);
+        meta = Kit.label(c, st.meta, st.metaPx - 6, st.metaColor);
         clock = Kit.label(c, mid, 34, 0xd9ffffff);
     }
 
@@ -78,7 +88,7 @@ public final class AllAppsA extends AllAppsView {
             tileW = 320;
         } else {
             LinearLayout sw = new LinearLayout(c);
-            sw.setBackground(Kit.rounded(0, 30, 2, 0x40ffffff));
+            sw.setBackground(Kit.rounded(0, pill + 5, 2, 0x40ffffff));
             sw.setPadding(5, 5, 5, 5);
             sw.setClipChildren(false);   // the focused option's ring draws outside the pill
             sw.setClipToPadding(false);
@@ -90,7 +100,7 @@ public final class AllAppsA extends AllAppsView {
                 l.setGravity(Gravity.CENTER);
                 l.setPadding(26, 0, 26, 0);
                 o.addView(l, new LayoutParams(-2, -1));
-                if (m == mode) o.setBackground(Kit.rounded(Color.WHITE, 25, 0, 0));
+                if (m == mode) o.setBackground(Kit.rounded(Color.WHITE, pill, 0, 0));
                 sw.addView(o, new LinearLayout.LayoutParams(-2, 50));
                 add(o, mode(m));
             }
@@ -123,10 +133,11 @@ public final class AllAppsA extends AllAppsView {
         sheet = new FrameLayout(c);
         sheet.setClipChildren(false);
         addView(sheet, at(W() - sheetX - SIDE, WIN_B - WIN_T, sheetX, WIN_T));
-        int cols = mode == Mode.GROUPS ? 4 : 5, tileH = tileW * 9 / 16, y = 0;
+        int cols = mode == Mode.GROUPS ? 4 : 5, y = 0;
+        tileH = tileW * 9 / 16;
         if (mode == Mode.GROUPS) {
             for (AllApps.Section s : screen.groups) {
-                TextView l = caps(c, 22, 0x8cffffff);
+                TextView l = caps(c, st.labelPx, 0x8cffffff);
                 l.setText(s.group.title);
                 sheet.addView(l, at(-1, 30, 0, y));
                 page(l, y, y + 30, false);
@@ -170,7 +181,7 @@ public final class AllAppsA extends AllAppsView {
         n.setTag("name");
         f.addView(n, at(-1, -2, 18, 0, Gravity.CENTER_VERTICAL));
         ((LayoutParams) n.getLayoutParams()).rightMargin = 60;
-        TextView k = Kit.label(c, Fonts.get(c, Fonts.MONO, 400), 18, 0x73ffffff);
+        TextView k = Kit.label(c, Fonts.get(c, Fonts.MONO), 18, 0x73ffffff);
         k.setText(count);
         LayoutParams kp = new LayoutParams(-2, -2, Gravity.END | Gravity.CENTER_VERTICAL);
         kp.rightMargin = 14;
@@ -206,11 +217,11 @@ public final class AllAppsA extends AllAppsView {
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setImageBitmap(b);
             iv.setContentDescription(a.label);
-            iv.setOutlineProvider(Kit.ROUNDED_16);
+            iv.setOutlineProvider(clip);
             iv.setClipToOutline(true);
             f.addView(iv, new LayoutParams(-1, -1));
         } else {
-            f.setBackground(Kit.rounded(0xff1d1d22, 16, 0, 0));
+            f.setBackground(Kit.rounded(0xff1d1d22, st.radius, 0, 0));
             TextView t = Kit.label(getContext(), bold, 30, Color.WHITE);
             t.setGravity(Gravity.CENTER);
             t.setText(a.label);
@@ -236,8 +247,8 @@ public final class AllAppsA extends AllAppsView {
         Target t = targets.get(now);
         describe(t);
         markRailAndLetter(t);
-        if (t.app != null) scrollTo(items.get(now), animate);
-        else if (old < 0) scrollTo(null, false);
+        // always re-applied: in G the tiles beside the focused one dim, and all light up when focus leaves the grid
+        scrollTo(t.app != null ? items.get(now) : null, animate && (t.app != null || st.dim < 1f));
     }
 
     private void styleFocus(int i, boolean on) {
@@ -246,9 +257,9 @@ public final class AllAppsA extends AllAppsView {
         if (t.mode != null) {   // switch option: the chosen one is filled white; the focused one is lit and ringed
             boolean chosen = t.mode == mode;
             FrameLayout o = (FrameLayout) v;
-            o.setBackground(chosen ? Kit.rounded(Color.WHITE, 25, 0, 0) : on ? Kit.rounded(0x4dffffff, 25, 0, 0) : null);
+            o.setBackground(chosen ? Kit.rounded(Color.WHITE, pill, 0, 0) : on ? Kit.rounded(0x4dffffff, pill, 0, 0) : null);
             ((TextView) o.getChildAt(0)).setTextColor(chosen ? Color.BLACK : on ? Color.WHITE : 0x99ffffff);
-            o.setForeground(on ? Kit.ring(o, 25, 3, 7, Color.WHITE) : null);
+            o.setForeground(on ? Kit.ring(o, pill, 3, 7, Color.WHITE) : null);
             o.setTag(Kit.OUTSET, on ? 7 : 0);
             o.animate().scaleX(on ? 1.08f : 1f).scaleY(on ? 1.08f : 1f).setDuration(150).start();
             return;
@@ -258,11 +269,10 @@ public final class AllAppsA extends AllAppsView {
             v.animate().scaleX(on ? 1.25f : 1f).scaleY(on ? 1.25f : 1f).setDuration(150).start();
             return;
         }
-        boolean tile = t.app != null;
-        int ring = tile ? RING : 6;
-        v.setForeground(on ? Kit.ring(v, tile ? 16 : 30, tile ? 5 : 3, ring, Color.WHITE) : null);
-        v.setTag(Kit.OUTSET, on ? ring : 0);
-        if (tile) v.animate().scaleX(on ? GROW : 1f).scaleY(on ? GROW : 1f).setDuration(150).start();
+        if (t.app != null) { st.mark(v, on, tileH); return; }
+        // rail rows: a thin ring
+        v.setForeground(on ? Kit.ring(v, Math.min(12, st.radius), 3, 6, Color.WHITE) : null);
+        v.setTag(Kit.OUTSET, on ? 6 : 0);
     }
 
     private void describe(Target t) {
@@ -337,7 +347,7 @@ public final class AllAppsA extends AllAppsView {
             TextView n = r.findViewWithTag("name");
             n.setTextColor(on ? Color.WHITE : rt.group == null ? 0x4dffffff : 0x73ffffff);
             n.setTypeface(on ? bold : mid);
-            r.setBackground(on ? Kit.rounded(0x14ffffff, 12, 0, 0) : null);
+            r.setBackground(on ? Kit.rounded(0x14ffffff, Math.min(12, st.radius), 0, 0) : null);
         }
         Character l = t.app != null && mode == Mode.AZ ? Character.valueOf(AllApps.letter(t.app)) : t.letter;   // boxed: t.letter may be null
         for (TextView lt : letters)
@@ -361,8 +371,9 @@ public final class AllAppsA extends AllAppsView {
             boolean in = s[0] - off >= 0 && s[1] - off <= winH;
             // a heading shows only with its first row
             if (in && s[2] == 0 && i + 1 < spans.size()) in = spans.get(i + 1)[1] - off <= winH;
-            float a = in ? 1f : 0f;
             View pv = paged.get(i);
+            boolean dimmed = s[2] == 1 && v != null && pv != v;
+            float a = in ? (dimmed ? st.dim : 1f) : 0f;
             Kit.fade(pv, a, animate);
         }
     }
@@ -376,7 +387,7 @@ public final class AllAppsA extends AllAppsView {
     }
 
     private TextView caps(Context c, float px, int color) {
-        TextView t = Kit.label(c, Fonts.get(c, Fonts.INTER, 500), px, color);
+        TextView t = Kit.label(c, st.caps, px, color);
         t.setLetterSpacing(0.2f);
         t.setAllCaps(true);
         return t;
@@ -403,4 +414,6 @@ public final class AllAppsA extends AllAppsView {
     }
 
     @Override protected Typeface menuFont() { return mid; }
+
+    @Override protected int menuRadius() { return st.radius >= 16 ? 24 : 8; }
 }

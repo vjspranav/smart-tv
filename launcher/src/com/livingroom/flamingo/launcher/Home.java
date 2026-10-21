@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import com.livingroom.flamingo.launcher.data.Sources;
 import com.livingroom.flamingo.launcher.model.HomeConfig;
-import com.livingroom.flamingo.launcher.ui.AllAppsA;
+import com.livingroom.flamingo.launcher.ui.AllAppsGrid;
+import com.livingroom.flamingo.launcher.ui.Everything;
 import com.livingroom.flamingo.launcher.ui.AllAppsView;
 import com.livingroom.flamingo.launcher.ui.Debug;
 import com.livingroom.flamingo.launcher.ui.LayoutA;
@@ -102,7 +103,8 @@ public class Home extends Activity {
     /** All apps in the current layout's style. The layout underneath stops drawing while it's open. */
     private void showAllApps(boolean on) {
         if (on && allApps == null) {
-            allApps = new AllAppsA(this, src, () -> showAllApps(false));   // G and N get their own in Tasks 9 and 10
+            Everything.Style st = src.config().layout == HomeConfig.Layout.G ? Everything.Style.editorial(this) : Everything.Style.cinema(this);
+            allApps = new AllAppsGrid(this, src, st, () -> showAllApps(false));   // N gets its own style in Task 10
             root.addView(allApps, new FrameLayout.LayoutParams(-1, -1));
             allApps.bind(src.snapshot(stress));
             layout.setVisibility(View.INVISIBLE);

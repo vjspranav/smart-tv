@@ -12,11 +12,11 @@ import java.util.List;
  * Layouts only decide how sections and items look and how focus moves.
  */
 public final class Sections {
-    public enum Kind { INPUT, LISTEN, APP, ALLAPPS, SETTING, HOME }
+    public enum Kind { INPUT, APP, ALLAPPS, SETTING, HOME }
 
     public static final class Item {
         public final Kind kind;
-        public final String key, label, value;   // value: state, track, or current setting ("" if none)
+        public final String key, label, value;   // value: state, current setting, or Spotify's track ("" if none)
         public final Runnable action;
         public final List<String> choices;       // non-empty → OK opens an inline chooser instead of action
         public final HdmiPort port;              // INPUT only
@@ -45,7 +45,7 @@ public final class Sections {
         return p.state == HdmiPort.State.ON ? "On" : p.state == HdmiPort.State.STANDBY ? "Standby" : "Empty";
     }
 
-    /** Sections in order: Inputs, Listen (if Spotify is installed), Apps (starting with All apps), TV, Home. */
+    /** Sections in order: Inputs, Apps (starting with All apps), TV, Home. */
     public static List<Section> build(Screen s, final Sources src, final Runnable openHomeSettings, final Runnable openAllApps) {
         List<Section> out = new ArrayList<>();
         Section inputs = new Section("Inputs");
@@ -53,20 +53,14 @@ public final class Sections {
             inputs.items.add(new Item(Kind.INPUT, "hdmi:" + p.port, p.name, state(p), () -> src.openInput(p), null, p));
         out.add(inputs);
 
-        boolean spotify = false;
-        for (AppEntry a : s.apps) spotify |= a.pkg.equals(AppOrder.SPOTIFY);
-        if (spotify) {
-            Section listen = new Section("Listen");
-            String track = s.listen == null || s.listen.title == null ? "Open Spotify"
-                    : s.listen.title + (s.listen.subtitle != null ? " — " + s.listen.subtitle : "");
-            listen.items.add(new Item(Kind.LISTEN, "listen:" + AppOrder.SPOTIFY, "Spotify", track, () -> src.openApp(AppOrder.SPOTIFY), null, null));
-            out.add(listen);
-        }
-
         Section apps = new Section("Apps");
         // All apps leads the row so it's one step from wherever you enter the row (owner: easier to reach)
         apps.items.add(new Item(Kind.ALLAPPS, "allapps", "All apps", s.az.size() + " apps", openAllApps, null, null));
-        for (final AppEntry a : s.apps) apps.items.add(new Item(Kind.APP, a.pkg, a.label, "", () -> src.openApp(a.pkg), null, null));
+        // Spotify's tile carries what's playing (a separate Listen row only repeated the app; owner: redundant)
+        String track = s.listen == null || s.listen.title == null ? ""
+                : s.listen.title + (s.listen.subtitle != null ? " — " + s.listen.subtitle : "");
+        for (final AppEntry a : s.apps)
+            apps.items.add(new Item(Kind.APP, a.pkg, a.label, a.pkg.equals(AppOrder.SPOTIFY) ? track : "", () -> src.openApp(a.pkg), null, null));
         out.add(apps);
 
         Section tv = new Section("TV");

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Everything screen shared by the layouts: banner rows (Inputs, Listen, Apps, TV, Home screen) under a head
+ * The Everything screen shared by the layouts: banner rows (Inputs, Apps, TV, Home screen) under a head
  * whose big title always describes the focused item. Rows page instead of scrolling so no tile is ever half
  * visible. A Style gives each layout its own type, corners and focus mark; behaviour is identical.
  * The tile builders are also used for A's Home row.
@@ -37,7 +37,17 @@ public final class Everything extends FrameLayout {
         float grow = 1.08f, dim = 1f, titleSpacing = 0f, titlePx = 84, metaPx = 32, eyebrowPx = 24, labelPx = 22;
         boolean underline, numbered;
         Typeface title, meta, caps, bold, black, mid;
-        int metaColor = 0xccffffff;
+        int metaColor = 0xccffffff, base = 0xff0a0507;   // base: All apps' backdrop colour
+
+        /** A's ring around the tile, or G's bar under it (h: the tile's height, which places the bar). */
+        public void mark(View v, boolean on, int h) {
+            Drawable d = null;
+            if (on && underline) d = new InsetDrawable(Kit.rounded(Color.WHITE, 2, 0, 0), 0, h + outset - 4, 0, -outset);
+            else if (on) d = Kit.ring(v, radius, 5, outset, Color.WHITE);
+            v.setTag(Kit.OUTSET, on ? outset : 0);
+            v.setForeground(d);
+            v.animate().scaleX(on ? grow : 1f).scaleY(on ? grow : 1f).setDuration(150).start();
+        }
 
         /** A · Cinema: rounded tiles, a white ring, Inter throughout. */
         public static Style cinema(Context c) {
@@ -65,6 +75,7 @@ public final class Everything extends FrameLayout {
             s.caps = Fonts.get(c, Fonts.MONO);
             s.eyebrowPx = 20;
             s.labelPx = 18;
+            s.base = 0xff05030a;
             return s;
         }
     }
@@ -84,7 +95,7 @@ public final class Everything extends FrameLayout {
     private Screen screen;
     private List<Sections.Section> secs;
     private Choice choice;
-    private boolean shown;
+    private boolean shown, moved;   // moved: the owner has moved since opening, so refreshes keep their place
 
     /** leave: Back, or Up from the top row (back to Home). */
     public Everything(Context c, Sources src, Style st, Runnable leave) {
@@ -121,7 +132,7 @@ public final class Everything extends FrameLayout {
     }
 
     private void build() {
-        String keep = shown && focus < items.size() ? items.get(focus).key : null;
+        String keep = shown && moved && focus < items.size() ? items.get(focus).key : null;
         rows.removeAllViews();
         tiles.clear();
         items.clear();
@@ -142,7 +153,7 @@ public final class Everything extends FrameLayout {
             strip.setClipChildren(false);
             for (Sections.Item it : sec.items) {
                 View t = tile(it);
-                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(it.kind == Sections.Kind.LISTEN ? TILE_W * 2 + GAP : TILE_W, TILE_H);
+                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(TILE_W, TILE_H);
                 p.rightMargin = GAP;
                 strip.addView(t, p);
                 tiles.add(t);
@@ -212,25 +223,20 @@ public final class Everything extends FrameLayout {
         switch (it.kind) {
             case INPUT: return inputTile(it.port);
             case APP: return banner(it.key, it.label);
-            case LISTEN: {
+            case ALLAPPS: {
                 FrameLayout f = frame();
-                f.setBackground(Kit.rounded(0xff10251a, st.radius, 0, 0));
-                Bitmap art = src.art(screen.listen);
-                if (art != null) {
-                    ImageView iv = new ImageView(getContext());
-                    iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    iv.setImageBitmap(art);
-                    iv.setOutlineProvider(clip);
-                    iv.setClipToOutline(true);
-                    f.addView(iv, new LayoutParams(TILE_H, TILE_H));
-                }
-                int left = art != null ? TILE_H + 24 : 24;
-                TextView name = Kit.label(getContext(), st.bold, 34, Color.WHITE);
+                ImageView iv = new ImageView(getContext());
+                iv.setImageBitmap(mosaic());
+                iv.setOutlineProvider(clip);
+                iv.setClipToOutline(true);
+                iv.setTag(Kit.BACKDROP, true);   // the tile's own picture; its labels sit on it by design
+                f.addView(iv, new LayoutParams(-1, -1));
+                TextView name = Kit.label(getContext(), st.black, 36, Color.WHITE);
                 name.setText(it.label);
-                f.addView(name, inTile(left, 32, 24));
-                TextView v = Kit.label(getContext(), st.mid, 26, 0xccffffff);
-                v.setText(it.value);
-                f.addView(v, inTile(left, 92, 24));
+                f.addView(name, bottom(22, 22, 52));
+                TextView n = caps(getContext(), 18, 0xccffffff);
+                n.setText(it.value);
+                f.addView(n, bottom(22, 22, 22));
                 return f;
             }
             default: {
@@ -270,24 +276,65 @@ public final class Everything extends FrameLayout {
         };
     }
 
-    /** Focus mark: A's ring around the tile, or G's bar under it. Also used for A's Home row. */
-    public void mark(View v, boolean on) {
-        Drawable d = null;
-        if (on && st.underline) {
-            // a 4px bar 10px below the tile (the tile's fixed height places it)
-            d = new InsetDrawable(Kit.rounded(Color.WHITE, 2, 0, 0), 0, TILE_H + st.outset - 4, 0, -st.outset);
-            v.setTag(Kit.OUTSET, st.outset);
-        } else if (on) d = Kit.ring(v, st.radius, 5, st.outset, Color.WHITE);
-        if (!on) v.setTag(Kit.OUTSET, 0);
-        v.setForeground(d);
-        v.animate().scaleX(on ? st.grow : 1f).scaleY(on ? st.grow : 1f).setDuration(150).start();
-    }
+    /** Focus mark (see Style.mark). Also used for A's Home row. */
+    public void mark(View v, boolean on) { st.mark(v, on, TILE_H); }
 
     public int pad() { return (int) Math.ceil(TILE_W * (st.grow - 1) / 2) + st.outset; }
 
     public float grow() { return st.grow; }
 
     public int outset() { return st.outset; }
+
+    private Bitmap mosaic;
+    private String mosaicKey = "";
+
+    /**
+     * The All apps tile's picture: a tilted wall of the installed apps' banners under a dark fade, baked once into
+     * one small bitmap (redrawn only when the apps change), so it costs a single image draw like any banner.
+     */
+    private Bitmap mosaic() {
+        List<Bitmap> pics = new ArrayList<>();
+        StringBuilder key = new StringBuilder();
+        // round-robin across groups so the wall mixes colours instead of showing one group
+        for (int round = 0; pics.size() < 12 && round < 12; round++)
+            for (com.livingroom.flamingo.launcher.model.AllApps.Section g : screen.groups) {
+                if (round >= g.apps.size() || pics.size() >= 12) continue;
+                Bitmap b = src.banner(g.apps.get(round).pkg);
+                if (b == null) continue;
+                pics.add(b);
+                key.append(g.apps.get(round).pkg).append(',');
+            }
+        if (mosaic != null && key.toString().equals(mosaicKey)) return mosaic;
+        mosaicKey = key.toString();
+        Bitmap out = Bitmap.createBitmap(TILE_W, TILE_H, Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas cv = new android.graphics.Canvas(out);
+        cv.drawColor(0xff141418);
+        android.graphics.Paint p = new android.graphics.Paint(android.graphics.Paint.FILTER_BITMAP_FLAG | android.graphics.Paint.ANTI_ALIAS_FLAG);
+        if (!pics.isEmpty()) {
+            cv.save();
+            cv.rotate(-12, TILE_W / 2f, TILE_H / 2f);
+            int w = 112, h = 63, gap = 8, k = 0;
+            android.graphics.Path round = new android.graphics.Path();
+            for (int row = 0; row < 4; row++)
+                for (int col = 0; col < 4; col++) {
+                    float x = -64 + col * (w + gap) + (row % 2) * 40, y = -52 + row * (h + gap);
+                    android.graphics.RectF r = new android.graphics.RectF(x, y, x + w, y + h);
+                    round.reset();
+                    round.addRoundRect(r, 6, 6, android.graphics.Path.Direction.CW);
+                    cv.save();
+                    cv.clipPath(round);
+                    cv.drawBitmap(pics.get(k++ % pics.size()), null, r, p);
+                    cv.restore();
+                }
+            cv.restore();
+        }
+        android.graphics.Paint shade = new android.graphics.Paint();
+        shade.setShader(new android.graphics.LinearGradient(0, 0, 0, TILE_H, new int[]{0x4d000000, 0x99000000, 0xf2000000},
+                new float[]{0f, 0.45f, 1f}, android.graphics.Shader.TileMode.CLAMP));
+        cv.drawRect(0, 0, TILE_W, TILE_H, shade);
+        mosaic = out;
+        return out;
+    }
 
     // ---------- head ----------
 
@@ -296,12 +343,12 @@ public final class Everything extends FrameLayout {
         title.setText(it.label);
         meta.setText(choice != null && choice.item == it ? "← → choose · OK to apply · Back to cancel"
                 : it.kind == Sections.Kind.INPUT ? Sections.state(it.port) + " · press OK to switch"
-                : it.kind == Sections.Kind.APP ? "Press OK to open" : it.value);
+                : it.kind == Sections.Kind.APP ? (it.value.isEmpty() ? "Press OK to open" : "Now playing · " + it.value)
+                : it.kind == Sections.Kind.ALLAPPS ? it.value + " · by group or A to Z" : it.value);
     }
 
     private static String sectionName(Sections.Item it) {
         switch (it.kind) {
-            case LISTEN: return "Listen";
             case APP: case ALLAPPS: return "Apps";
             case SETTING: return "TV";
             case HOME: return "Home screen";
@@ -375,6 +422,7 @@ public final class Everything extends FrameLayout {
             if (k == KeyEvent.KEYCODE_DPAD_UP) leave.run();
             return true;
         }
+        moved = true;
         move(n, true);
         return true;
     }
@@ -411,6 +459,7 @@ public final class Everything extends FrameLayout {
     public void reset(boolean shownNow) {
         shown = shownNow;
         choice = null;
+        moved = false;
         if (tiles.isEmpty()) return;
         firstRow = 0;
         java.util.Arrays.fill(stripFirst, 0);
