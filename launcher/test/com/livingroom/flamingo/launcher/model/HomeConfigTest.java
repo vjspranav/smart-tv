@@ -48,4 +48,35 @@ public class HomeConfigTest {
         assertEquals(HomeConfig.defaults().serialize(), HomeConfig.parse("garbage=\u0000\nlayout=Q").serialize());
         assertEquals(HomeConfig.defaults().serialize(), HomeConfig.parse(null).serialize());
     }
+
+    @Test public void moveMainShiftsOneStep() {
+        HomeConfig c = HomeConfig.defaults();
+        assertEquals(1, c.moveMain(0, 1));
+        assertEquals("com.netflix.ninja", c.main.get(0));
+        assertEquals("com.google.android.youtube.tv", c.main.get(1));
+        assertEquals(0, c.moveMain(0, -1));   // already first: stays
+        assertEquals(4, c.moveMain(4, 1));    // already last: stays
+    }
+
+    @Test public void replaceMainSwapsWhenAlreadyOnTheRow() {
+        HomeConfig c = HomeConfig.defaults();
+        c.replaceMain(0, "hdmi:1");
+        assertEquals("hdmi:1", c.main.get(0));
+        c.replaceMain(1, "hdmi:1");             // already in slot 0: the two trade places
+        assertEquals("hdmi:1", c.main.get(1));
+        assertEquals("com.netflix.ninja", c.main.get(0));
+        assertEquals(5, c.main.size());
+    }
+
+    @Test public void blankHdmiNameFallsBackToDefault() {
+        HomeConfig c = HomeConfig.defaults();
+        c.setHdmiName(2, "  Xbox  ");
+        assertEquals("Xbox", c.hdmiNames.get(2));
+        c.setHdmiName(2, "   ");
+        assertFalse(c.hdmiNames.containsKey(2));
+        c.setHdmiName(1, null);
+        assertFalse(c.hdmiNames.containsKey(1));
+        c.setHdmiName(3, "A\nB");
+        assertEquals("A\nB", HomeConfig.parse(c.serialize()).hdmiNames.get(3));
+    }
 }

@@ -94,6 +94,12 @@ public class Home extends Activity {
                     : new LayoutA(this, src, hs, aa);
             root.addView(layout, 0, new FrameLayout.LayoutParams(-1, -1));
             shown = want;
+            if (settings != null) {   // picked a new layout in settings: reopen them in its dress
+                root.removeView(settings);
+                settings = null;
+                showSettings(true);
+                settings.focusLayout();
+            }
         }
         layout.bind(src.snapshot(stress));
         if (settings != null) settings.bind(src.config(), src.snapshot(stress));
@@ -103,10 +109,7 @@ public class Home extends Activity {
     /** All apps in the current layout's style. The layout underneath stops drawing while it's open. */
     private void showAllApps(boolean on) {
         if (on && allApps == null) {
-            HomeConfig.Layout l = src.config().layout;
-            Everything.Style st = l == HomeConfig.Layout.G ? Everything.Style.editorial(this)
-                    : l == HomeConfig.Layout.N ? Everything.Style.nothing(this) : Everything.Style.cinema(this);
-            allApps = new AllAppsGrid(this, src, st, () -> showAllApps(false));
+            allApps = new AllAppsGrid(this, src, Everything.Style.forLayout(this, src.config().layout), () -> showAllApps(false));
             root.addView(allApps, new FrameLayout.LayoutParams(-1, -1));
             allApps.bind(src.snapshot(stress));
             layout.setVisibility(View.INVISIBLE);
@@ -120,12 +123,14 @@ public class Home extends Activity {
 
     private void showSettings(boolean on) {
         if (on && settings == null) {
-            settings = new SettingsView(this, src, shown, () -> showSettings(false));
+            settings = new SettingsView(this, src, Everything.Style.forLayout(this, shown), () -> showSettings(false));
             root.addView(settings, new FrameLayout.LayoutParams(-1, -1));
             settings.bind(src.config(), src.snapshot(stress));
+            layout.setVisibility(View.INVISIBLE);   // covered: don't draw it underneath
         } else if (!on && settings != null) {
             root.removeView(settings);
             settings = null;
+            layout.setVisibility(View.VISIBLE);
             rebind();
         }
     }

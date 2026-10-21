@@ -64,6 +64,11 @@ public final class Everything extends FrameLayout {
             v.animate().scaleX(on ? grow : 1f).scaleY(on ? grow : 1f).setDuration(150).start();
         }
 
+        public static Style forLayout(Context c, com.livingroom.flamingo.launcher.model.HomeConfig.Layout l) {
+            return l == com.livingroom.flamingo.launcher.model.HomeConfig.Layout.G ? editorial(c)
+                    : l == com.livingroom.flamingo.launcher.model.HomeConfig.Layout.N ? nothing(c) : cinema(c);
+        }
+
         /** A · Cinema: rounded tiles, a white ring, Inter throughout. */
         public static Style cinema(Context c) {
             Style s = new Style();

@@ -30,6 +30,32 @@ public final class HomeConfig {
         return c;
     }
 
+    /** Moves main slot i one step (dir -1 or +1), trading places with its neighbour; returns where it is now. */
+    public int moveMain(int i, int dir) {
+        int j = i + dir;
+        if (i < 0 || i >= main.size() || j < 0 || j >= main.size()) return i;
+        main = new ArrayList<>(main);
+        String t = main.get(i);
+        main.set(i, main.get(j));
+        main.set(j, t);
+        return j;
+    }
+
+    /** Puts key in slot i; if it was already on the row, it trades places with what slot i held. */
+    public void replaceMain(int i, String key) {
+        if (i < 0 || i >= main.size()) return;
+        main = new ArrayList<>(main);
+        int was = main.indexOf(key);
+        if (was >= 0) main.set(was, main.get(i));
+        main.set(i, key);
+    }
+
+    /** The owner's name for an input; blank or null goes back to the TV's own name. */
+    public void setHdmiName(int port, String name) {
+        if (name == null || name.trim().isEmpty()) hdmiNames.remove(port);
+        else hdmiNames.put(port, name.trim());
+    }
+
     public String serialize() {
         StringBuilder b = new StringBuilder("layout=").append(layout.name()).append('\n');
         b.append("main=").append(String.join(",", main)).append('\n');
