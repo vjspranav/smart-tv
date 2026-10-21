@@ -7,6 +7,8 @@
 # Exit 0 only if no OVERFLOW lines (kittest: exactly 4). Screenshots: investigations/overflow/<case>.png
 here="$(cd "$(dirname "$0")" && pwd)"; root="$(dirname "$here")"
 A="$here/tv-adb"; C=com.livingroom.flamingo.launcher/.Home
+# However the run ends, leave the launcher on real data (a stress run otherwise stays in the running app)
+trap '"$A" shell am start -S -n $C >/dev/null 2>&1' EXIT
 shots="$root/investigations/overflow"; mkdir -p "$shots"
 bad=0; total=0
 
