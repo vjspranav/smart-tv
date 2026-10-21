@@ -94,6 +94,15 @@ public final class Kit {
         return new InsetDrawable(g, -outsetPx);
     }
 
+    /**
+     * Fades v to alpha a (instantly when !animate) without touching its other animations: cancelling the
+     * animator would also stop a focused tile's grow, leaving it the wrong size.
+     */
+    public static void fade(View v, float a, boolean animate) {
+        v.animate().alpha(a).setDuration(animate ? 160 : 0).start();
+        if (!animate) v.setAlpha(a);
+    }
+
     public static GradientDrawable rounded(int fill, int radiusPx, int strokePx, int strokeColor) {
         GradientDrawable g = new GradientDrawable();
         g.setColor(fill);

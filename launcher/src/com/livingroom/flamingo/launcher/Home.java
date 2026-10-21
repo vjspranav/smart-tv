@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import com.livingroom.flamingo.launcher.data.Sources;
 import com.livingroom.flamingo.launcher.model.HomeConfig;
+import com.livingroom.flamingo.launcher.ui.AllAppsA;
+import com.livingroom.flamingo.launcher.ui.AllAppsView;
 import com.livingroom.flamingo.launcher.ui.Debug;
 import com.livingroom.flamingo.launcher.ui.LayoutA;
 import com.livingroom.flamingo.launcher.ui.LayoutG;
@@ -20,7 +22,7 @@ import com.livingroom.flamingo.launcher.ui.SettingsView;
 
 /**
  * The launcher's only activity. Hosts the chosen layout (or Home screen settings) and routes keys.
- * Debug extras: reset (config back to defaults), layout=A|G|N, screen=home|everything|settings, focus=first|last, stress, check, dump, probe, kittest, notcl.
+ * Debug extras: reset (config back to defaults), appsaz=true|false, layout=A|G|N, screen=home|everything|settings|allapps, focus=first|last, stress, check, dump, probe, kittest, notcl.
  */
 public class Home extends Activity {
     private final Handler h = new Handler(Looper.getMainLooper());
@@ -28,6 +30,7 @@ public class Home extends Activity {
     private FrameLayout root;
     private LayoutView layout;
     private SettingsView settings;
+    private AllAppsView allApps;
     private HomeConfig.Layout shown;
     private boolean stress;
     private final Runnable rebind = this::rebind, tick = new Runnable() {
@@ -55,6 +58,7 @@ public class Home extends Activity {
         root.setClipChildren(false);
         setContentView(root);
         if (in.getBooleanExtra("reset", false)) src.saveConfig(HomeConfig.defaults());
+        if (in.hasExtra("appsaz")) src.setAppsAz(in.getBooleanExtra("appsaz", false));
         String forced = in.getStringExtra("layout");
         if (forced != null) {
             HomeConfig cfg = src.config();
@@ -66,8 +70,9 @@ public class Home extends Activity {
         String screen = in.getStringExtra("screen"), focus = in.getStringExtra("focus");
         if ("everything".equals(screen)) layout.showEverything(true);
         if ("settings".equals(screen)) showSettings(true);
+        if ("allapps".equals(screen)) { layout.showEverything(true); showAllApps(true); }
         if (focus != null) {
-            if (settings != null) settings.focus(focus); else layout.focus(focus);
+            if (allApps != null) allApps.focus(focus); else if (settings != null) settings.focus(focus); else layout.focus(focus);
         }
         if (in.getBooleanExtra("check", false)) h.postDelayed(() -> Overflow.check(root), 2500);
     }
@@ -82,14 +87,31 @@ public class Home extends Activity {
         HomeConfig.Layout want = src.config().layout;
         if (layout == null || want != shown) {
             if (layout != null) root.removeView(layout);
-            layout = want == HomeConfig.Layout.G ? new LayoutG(this, src, () -> showSettings(true))
-                    : want == HomeConfig.Layout.N ? new LayoutN(this, src, () -> showSettings(true))
-                    : new LayoutA(this, src, () -> showSettings(true));
+            Runnable hs = () -> showSettings(true), aa = () -> showAllApps(true);
+            layout = want == HomeConfig.Layout.G ? new LayoutG(this, src, hs, aa)
+                    : want == HomeConfig.Layout.N ? new LayoutN(this, src, hs, aa)
+                    : new LayoutA(this, src, hs, aa);
             root.addView(layout, 0, new FrameLayout.LayoutParams(-1, -1));
             shown = want;
         }
         layout.bind(src.snapshot(stress));
         if (settings != null) settings.bind(src.config(), src.snapshot(stress));
+        if (allApps != null) allApps.bind(src.snapshot(stress));
+    }
+
+    /** All apps in the current layout's style. The layout underneath stops drawing while it's open. */
+    private void showAllApps(boolean on) {
+        if (on && allApps == null) {
+            allApps = new AllAppsA(this, src, () -> showAllApps(false));   // G and N get their own in Tasks 9 and 10
+            root.addView(allApps, new FrameLayout.LayoutParams(-1, -1));
+            allApps.bind(src.snapshot(stress));
+            layout.setVisibility(View.INVISIBLE);
+        } else if (!on && allApps != null) {
+            root.removeView(allApps);
+            allApps = null;
+            layout.setVisibility(View.VISIBLE);
+            rebind();
+        }
     }
 
     private void showSettings(boolean on) {
@@ -123,6 +145,7 @@ public class Home extends Activity {
     @Override protected void onNewIntent(Intent i) {
         super.onNewIntent(i);
         if (layout == null) return;
+        showAllApps(false);
         showSettings(false);
         layout.showEverything(false);
         layout.focus("first");
@@ -130,6 +153,8 @@ public class Home extends Activity {
 
     @Override public boolean dispatchKeyEvent(KeyEvent e) {
         int k = e.getKeyCode();
+        if (allApps != null && k != KeyEvent.KEYCODE_HOME && k != KeyEvent.KEYCODE_VOLUME_UP
+                && k != KeyEvent.KEYCODE_VOLUME_DOWN && k != KeyEvent.KEYCODE_VOLUME_MUTE) return allApps.dispatch(e);
         boolean ours = k == KeyEvent.KEYCODE_DPAD_UP || k == KeyEvent.KEYCODE_DPAD_DOWN || k == KeyEvent.KEYCODE_DPAD_LEFT
                 || k == KeyEvent.KEYCODE_DPAD_RIGHT || k == KeyEvent.KEYCODE_DPAD_CENTER || k == KeyEvent.KEYCODE_ENTER
                 || k == KeyEvent.KEYCODE_BACK;

@@ -14,6 +14,13 @@ final class Stress {
 
     private Stress() { }
 
+    /** 40 apps with very long names, spread over every All apps group. */
+    static List<AppEntry> apps() {
+        List<AppEntry> apps = new ArrayList<>();
+        for (int i = 0; i < 40; i++) apps.add(new AppEntry("stress.app" + i, LONG + " " + i, i % 2 == 0, i % 5 - 1));
+        return apps;
+    }
+
     static Screen screen(HomeConfig.Layout layout, String clock, String ampm, String date) {
         List<Screen.Slot> main = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -28,8 +35,7 @@ final class Stress {
         main.add(new Screen.Slot(null, HdmiPort.resolve(1, "stress.hdmi1", LONG, null, 0), null));
         List<HdmiPort> inputs = new ArrayList<>();
         for (int p = 1; p <= 3; p++) inputs.add(HdmiPort.resolve(p, "stress.hdmi" + p, LONG + " " + p, null, p == 1 ? 0 : 1));
-        List<AppEntry> apps = new ArrayList<>();
-        for (int i = 0; i < 40; i++) apps.add(new AppEntry("stress.app" + i, LONG + " " + i, i % 2 == 0));
+        List<AppEntry> apps = apps();
         MediaItem listen = new MediaItem();
         listen.pkg = "com.spotify.tv.android";
         listen.title = LONG;

@@ -33,3 +33,11 @@
 {"label": "A-everything", "frames": 536, "janky": 1, "janky_pct": 0.19, "p50": 7, "p90": 7, "p95": 8, "p99": 11, "pss_kb": 51933, "elapsed_s": 18.0, "pass": true}
 {"label": "A-home", "frames": 360, "janky": 0, "janky_pct": 0.0, "p50": 7, "p90": 7, "p95": 7, "p99": 8, "pss_kb": 52929, "elapsed_s": 10.0, "pass": true}
 {"label": "A-everything", "frames": 536, "janky": 2, "janky_pct": 0.37, "p50": 7, "p90": 7, "p95": 8, "p99": 10, "pss_kb": 51913, "elapsed_s": 18.0, "pass": true}
+{"label": "A-everything", "frames": 590, "janky": 1, "janky_pct": 0.17, "p50": 6, "p90": 8, "p95": 10, "p99": 12, "pss_kb": 61351, "elapsed_s": 18.0, "pass": true}
+{"label": "A-allapps", "frames": 314, "janky": 25, "janky_pct": 7.96, "p50": 18, "p90": 19, "p95": 24, "p99": 29, "pss_kb": 73168, "elapsed_s": 17.0, "pass": false}
+{"label": "A-everything", "frames": 546, "janky": 1, "janky_pct": 0.18, "p50": 7, "p90": 7, "p95": 8, "p99": 11, "pss_kb": 51545, "elapsed_s": 19.0, "pass": true}
+{"label": "A-allapps", "frames": 304, "janky": 25, "janky_pct": 8.22, "p50": 18, "p90": 19, "p95": 19, "p99": 27, "pss_kb": 62894, "elapsed_s": 17.0, "pass": false}
+{"label": "A-allapps", "frames": 317, "janky": 7, "janky_pct": 2.21, "p50": 6, "p90": 8, "p95": 9, "p99": 21, "pss_kb": 54687, "elapsed_s": 17.0, "pass": false}
+{"label": "A-allapps", "frames": 304, "janky": 3, "janky_pct": 0.99, "p50": 6, "p90": 8, "p95": 8, "p99": 13, "pss_kb": 70931, "elapsed_s": 17.0, "pass": true}
+{"label": "A-allapps", "frames": 304, "janky": 1, "janky_pct": 0.33, "p50": 6, "p90": 7, "p95": 7, "p99": 9, "pss_kb": 65071, "elapsed_s": 17.0, "pass": true}
+{"label": "A-allapps", "frames": 314, "janky": 2, "janky_pct": 0.64, "p50": 6, "p90": 7, "p95": 8, "p99": 17, "pss_kb": 77799, "elapsed_s": 16.0, "pass": true}

@@ -12,7 +12,7 @@ import java.util.List;
  * Layouts only decide how sections and items look and how focus moves.
  */
 public final class Sections {
-    public enum Kind { INPUT, LISTEN, APP, SETTING, HOME }
+    public enum Kind { INPUT, LISTEN, APP, ALLAPPS, SETTING, HOME }
 
     public static final class Item {
         public final Kind kind;
@@ -45,8 +45,8 @@ public final class Sections {
         return p.state == HdmiPort.State.ON ? "On" : p.state == HdmiPort.State.STANDBY ? "Standby" : "Empty";
     }
 
-    /** Sections in order: Inputs, Listen (if Spotify is installed), Apps, TV, Home. */
-    public static List<Section> build(Screen s, final Sources src, final Runnable openHomeSettings) {
+    /** Sections in order: Inputs, Listen (if Spotify is installed), Apps (starting with All apps), TV, Home. */
+    public static List<Section> build(Screen s, final Sources src, final Runnable openHomeSettings, final Runnable openAllApps) {
         List<Section> out = new ArrayList<>();
         Section inputs = new Section("Inputs");
         for (final HdmiPort p : s.inputs)
@@ -64,6 +64,8 @@ public final class Sections {
         }
 
         Section apps = new Section("Apps");
+        // All apps leads the row so it's one step from wherever you enter the row (owner: easier to reach)
+        apps.items.add(new Item(Kind.ALLAPPS, "allapps", "All apps", s.az.size() + " apps", openAllApps, null, null));
         for (final AppEntry a : s.apps) apps.items.add(new Item(Kind.APP, a.pkg, a.label, "", () -> src.openApp(a.pkg), null, null));
         out.add(apps);
 

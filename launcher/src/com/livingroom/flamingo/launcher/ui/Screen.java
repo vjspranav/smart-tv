@@ -1,5 +1,6 @@
 package com.livingroom.flamingo.launcher.ui;
 
+import com.livingroom.flamingo.launcher.model.AllApps;
 import com.livingroom.flamingo.launcher.model.AppEntry;
 import com.livingroom.flamingo.launcher.model.HdmiPort;
 import com.livingroom.flamingo.launcher.model.HomeConfig;
@@ -31,6 +32,10 @@ public final class Screen {
     public final MediaItem listen;          // Spotify, may be null
     public final String picture;            // current picture mode name, or "Open"
     public final String clock, ampm, date;  // ampm empty in 24-hour mode
+    // All apps: by group, A–Z, the hidden ones, and which view the owner last used
+    public List<AllApps.Section> groups = java.util.Collections.emptyList();
+    public List<AppEntry> az = java.util.Collections.emptyList(), hidden = java.util.Collections.emptyList();
+    public boolean appsAz;
 
     public Screen(HomeConfig.Layout layout, List<Slot> main, List<HdmiPort> inputs, List<AppEntry> apps,
                   MediaItem listen, String picture, String clock, String ampm, String date) {

@@ -28,7 +28,7 @@ public final class LayoutA extends LayoutView {
     private static final float GROW = 1.08f;
     // Text column width; artwork shown as a card sits to its right (see compose)
     private static final int INFO_W = 1060;
-    private static final int ROWS_TOP = 330, ROW_H = 232, ROWS_SHOWN = 3;
+    private static final int ROWS_TOP = 300, ROW_H = 250, ROWS_SHOWN = 3;
 
     private final Typeface bold, black, mid;
     private final ImageView under, over;
@@ -51,8 +51,8 @@ public final class LayoutA extends LayoutView {
         @Override protected boolean removeEldestEntry(java.util.Map.Entry<String, Bitmap> e) { return size() > 8; }
     };
 
-    public LayoutA(Context c, Sources src, Runnable openHomeSettings) {
-        super(c, src, openHomeSettings);
+    public LayoutA(Context c, Sources src, Runnable openHomeSettings, Runnable openAllApps) {
+        super(c, src, openHomeSettings, openAllApps);
         bold = Fonts.get(c, Fonts.INTER, 700);
         black = Fonts.get(c, Fonts.INTER, 900);
         mid = Fonts.get(c, Fonts.INTER, 500);
@@ -152,7 +152,7 @@ public final class LayoutA extends LayoutView {
         allItems.clear();
         allRowOf.clear();
         strips.clear();
-        List<Sections.Section> secs = Sections.build(screen, src, openHomeSettings);
+        List<Sections.Section> secs = Sections.build(screen, src, openHomeSettings, openAllApps);
         Context c = getContext();
         for (int r = 0; r < secs.size(); r++) {
             Sections.Section sec = secs.get(r);
@@ -175,7 +175,8 @@ public final class LayoutA extends LayoutView {
                 allItems.add(it);
                 allRowOf.add(r);
             }
-            row.addView(strip, lp(-2, TILE_H, 16));
+            // a focused tile grows ~7px and rings 10px out: keep 30px so it never covers the heading
+            row.addView(strip, lp(-2, TILE_H, 30));
             strips.add(strip);
             LinearLayout.LayoutParams rp = new LinearLayout.LayoutParams(-2, ROW_H);
             rp.leftMargin = SIDE;
@@ -453,7 +454,7 @@ public final class LayoutA extends LayoutView {
     private static String sectionName(Sections.Item it) {
         switch (it.kind) {
             case LISTEN: return "Listen";
-            case APP: return "Apps";
+            case APP: case ALLAPPS: return "Apps";
             case SETTING: return "TV";
             case HOME: return "Home screen";
             default: return "Inputs";
@@ -471,7 +472,7 @@ public final class LayoutA extends LayoutView {
         for (int r = 0; r < rows.getChildCount(); r++) {
             float a = r >= firstRow && r < firstRow + ROWS_SHOWN ? 1f : 0f;
             View v = rows.getChildAt(r);
-            if (animate) v.animate().alpha(a).setDuration(160).start(); else v.setAlpha(a);
+            Kit.fade(v, a, animate);
         }
         // horizontal: every strip shows one whole page; the focused strip pages to keep its tile in view
         LinearLayout focused = strips.get(row);
@@ -490,7 +491,7 @@ public final class LayoutA extends LayoutView {
             for (int i = 0; i < strip.getChildCount(); i++) {
                 float a = i >= first && i < first + shown ? 1f : 0f;
                 View v = strip.getChildAt(i);
-                if (anim) v.animate().alpha(a).setDuration(160).start(); else { v.animate().cancel(); v.setAlpha(a); }
+                Kit.fade(v, a, anim);
             }
         }
     }

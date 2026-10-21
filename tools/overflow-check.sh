@@ -37,7 +37,7 @@ fi
 stress=false; suffix=""
 [ "$1" = stress ] && { stress=true; suffix="-stress"; }
 for layout in ${LAYOUTS:-A G N}; do
-  for screen in home everything settings; do
+  for screen in home everything allapps settings; do
     for focus in first last; do
       run_case "$layout-$screen-$focus$suffix" --es layout $layout --es screen $screen --es focus $focus --ez stress $stress
     done

@@ -15,7 +15,7 @@ import java.util.List;
  *  clip    — a view that draws (with transforms and focus-ring outset) is partly cut off by the screen or a clipping ancestor
  *            (a view scrolled completely out of a clipping list is not a problem and is skipped)
  *  text    — a TextView's text is wider than its box and was not ellipsized
- *  overlap — a TextView's drawn text intersects another text, or a tile/image that isn't its ancestor
+ *  overlap — a TextView's drawn text intersects another text, or a tile/image (with its focus ring) that isn't its ancestor
  *            (artwork tagged Kit.BACKDROP is allowed behind text)
  */
 public final class Overflow {
@@ -42,6 +42,10 @@ public final class Overflow {
                     out.add("OVERFLOW overlap " + name(texts.get(i)) + " / " + name(s));
             }
         }
+        if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            for (int i = 0; i < texts.size(); i++) Log.v(TAG, "text " + name(texts.get(i)) + " " + textRects.get(i).toShortString());
+            for (int i = 0; i < solids.size(); i++) Log.v(TAG, "solid " + name(solids.get(i)) + " " + solidRects.get(i).toShortString());
+        }
         for (String s : out) Log.w(TAG, s);
         Log.i(TAG, "DONE " + out.size());
         return out;
@@ -57,9 +61,10 @@ public final class Overflow {
             if (scrolledAway(v, root, r)) return;
             String why = draws(v) ? clipped(v, root, r) : null;
             if (why != null) out.add("OVERFLOW clip " + name(v) + " " + why);
-            if ((v instanceof ImageView || v.getBackground() != null) && !Boolean.TRUE.equals(v.getTag(Kit.BACKDROP))) {
+            boolean ringed = outset > 0;
+            if ((v instanceof ImageView || v.getBackground() != null || ringed) && !Boolean.TRUE.equals(v.getTag(Kit.BACKDROP))) {
                 solids.add(v);
-                solidRects.add(toRoot(v, root, new RectF(0, 0, v.getWidth(), v.getHeight())));
+                solidRects.add(r);   // includes scale and the focus ring, so a ring over a heading counts
             }
         }
         if (v instanceof TextView) {

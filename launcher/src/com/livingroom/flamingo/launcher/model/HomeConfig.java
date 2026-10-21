@@ -2,11 +2,13 @@ package com.livingroom.flamingo.launcher.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
-/** Owner's launcher settings: layout, the five main slots, HDMI names. Text format, one key per line. */
+/** Owner's launcher settings: layout, the five main slots, HDMI names, hidden apps, All apps view. Text format, one key per line. */
 public final class HomeConfig {
     public enum Layout { A, G, N }
 
@@ -14,12 +16,17 @@ public final class HomeConfig {
     /** Package names, or "hdmi:N" for an input. */
     public List<String> main = new ArrayList<>();
     public Map<Integer, String> hdmiNames = new TreeMap<>();
+    /** Packages left out of All apps (TCL's own launchers by default). */
+    public Set<String> hidden = new LinkedHashSet<>();
+    /** All apps opens alphabetically instead of by group (the default). */
+    public boolean appsAz;
 
     public static HomeConfig defaults() {
         HomeConfig c = new HomeConfig();
         c.main = new ArrayList<>(Arrays.asList("com.google.android.youtube.tv", "com.netflix.ninja",
                 "in.startv.hotstar", "com.amazon.amazonvideo.livingroom", "com.apple.atve.androidtv.appletv"));
         c.hdmiNames.put(1, "PlayStation 5");
+        c.hidden.addAll(Arrays.asList("com.tcl.dashboard", "com.tcl.tv.tclhome_passive"));
         return c;
     }
 
@@ -28,6 +35,8 @@ public final class HomeConfig {
         b.append("main=").append(String.join(",", main)).append('\n');
         for (Map.Entry<Integer, String> e : hdmiNames.entrySet())
             b.append("hdmi.").append(e.getKey()).append('=').append(escape(e.getValue())).append('\n');
+        b.append("hidden=").append(String.join(",", hidden)).append('\n');
+        b.append("appsaz=").append(appsAz).append('\n');
         return b.toString();
     }
 
@@ -45,6 +54,8 @@ public final class HomeConfig {
                 if (k.equals("layout")) { c.layout = Layout.valueOf(v); any = true; }
                 else if (k.equals("main")) { c.main = v.isEmpty() ? new ArrayList<>() : new ArrayList<>(Arrays.asList(v.split(","))); any = true; }
                 else if (k.startsWith("hdmi.")) { c.hdmiNames.put(Integer.parseInt(k.substring(5)), v); any = true; }
+                else if (k.equals("hidden")) { c.hidden = new LinkedHashSet<>(v.isEmpty() ? new ArrayList<String>() : Arrays.asList(v.split(","))); any = true; }
+                else if (k.equals("appsaz")) { c.appsAz = Boolean.parseBoolean(v); any = true; }
             }
             return any ? c : d;
         } catch (RuntimeException e) {

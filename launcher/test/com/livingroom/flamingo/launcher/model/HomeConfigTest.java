@@ -25,6 +25,18 @@ public class HomeConfigTest {
         assertEquals("PlayStation 5", r.hdmiNames.get(1));
     }
 
+    @Test public void hiddenAndAzRoundTrip() {
+        HomeConfig c = HomeConfig.defaults();
+        assertTrue(c.hidden.contains("com.tcl.dashboard"));
+        assertTrue(c.hidden.contains("com.tcl.tv.tclhome_passive"));
+        assertFalse(c.appsAz);            // All apps opens by group unless the owner switches to A–Z
+        c.hidden.clear();
+        c.appsAz = true;
+        HomeConfig r = HomeConfig.parse(c.serialize());
+        assertTrue(r.hidden.isEmpty());   // an emptied list stays empty, not back to the defaults
+        assertTrue(r.appsAz);
+    }
+
     @Test public void awkwardNamesSurvive() {
         HomeConfig c = HomeConfig.defaults();
         c.hdmiNames.put(3, "a=b\nc\\d");

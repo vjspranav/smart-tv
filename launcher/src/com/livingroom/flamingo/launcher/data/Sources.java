@@ -8,6 +8,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.text.format.DateFormat;
 import android.util.Log;
+import com.livingroom.flamingo.launcher.model.AllApps;
 import com.livingroom.flamingo.launcher.model.AppEntry;
 import com.livingroom.flamingo.launcher.model.AppOrder;
 import com.livingroom.flamingo.launcher.model.HdmiPort;
@@ -43,7 +44,7 @@ public final class Sources {
     private volatile HomeConfig config;
     private volatile History history;
     private volatile List<AppEntry> appList = Collections.emptyList();
-    private volatile Map<String, Long> lastUsed = Collections.emptyMap();
+    private volatile Map<String, Long> lastUsed = Collections.emptyMap(), timeUsed = Collections.emptyMap();
     private volatile Map<String, MediaItem> watchNext = Collections.emptyMap();
     private volatile List<HdmiPort> ports = Collections.emptyList();
     private volatile String picture = "", wifi = "";
@@ -94,6 +95,7 @@ public final class Sources {
         if (apps == null) return;
         appList = apps.list();
         lastUsed = apps.lastUsed();
+        timeUsed = apps.timeUsed();
         ports = hdmi.ports(config.hdmiNames);
         picture = tv.pictureName();
         pictureChoosable = tv.canChoose();
@@ -128,7 +130,7 @@ public final class Sources {
 
     /** Everything a layout needs, from already-loaded state. stress=true swaps in worst-case data. */
     public Screen snapshot(boolean stress) {
-        if (stress) return Stress.screen(config.layout, clock(), ampm(), date());
+        if (stress) return allApps(Stress.screen(config.layout, clock(), ampm(), date()), Stress.apps(), config);
         HomeConfig cfg = config;
         Map<String, AppEntry> byPkg = new HashMap<>();
         Set<String> installed = new HashSet<>();
@@ -146,7 +148,15 @@ public final class Sources {
         }
         List<AppEntry> others = AppOrder.others(appList, cfg, lastUsed, c.getPackageName());
         MediaItem listen = history.latest(AppOrder.SPOTIFY);
-        return new Screen(cfg.layout, main, ports, others, listen, picture, clock(), ampm(), date());
+        return allApps(new Screen(cfg.layout, main, ports, others, listen, picture, clock(), ampm(), date()), appList, cfg);
+    }
+
+    private Screen allApps(Screen s, List<AppEntry> all, HomeConfig cfg) {
+        s.groups = AllApps.groups(all, cfg, timeUsed, c.getPackageName());
+        s.az = AllApps.az(all, cfg, c.getPackageName());
+        s.hidden = AllApps.hidden(all, cfg);
+        s.appsAz = cfg.appsAz;
+        return s;
     }
 
     private MediaItem continueFor(String pkg) { return MediaItem.pick(history.latest(pkg), watchNext.get(pkg)); }
@@ -192,6 +202,34 @@ public final class Sources {
     }
 
     public boolean openApp(String pkg) { return apps.launch(pkg); }
+
+    // ---- All apps ----
+
+    public void setHidden(String pkg, boolean hide) {
+        HomeConfig cfg = config();
+        if (hide) cfg.hidden.add(pkg); else cfg.hidden.remove(pkg);
+        saveConfig(cfg);
+    }
+
+    public void setAppsAz(boolean az) {
+        HomeConfig cfg = config();
+        if (cfg.appsAz == az) return;
+        cfg.appsAz = az;
+        saveConfig(cfg);
+    }
+
+    /** Puts pkg on the Home row in place of slot `index` (or moves it there if it's already on the row). */
+    public void pin(String pkg, int index) {
+        HomeConfig cfg = config();
+        int at = cfg.main.indexOf(pkg);
+        if (at >= 0) cfg.main.set(at, cfg.main.get(index));
+        if (index >= 0 && index < cfg.main.size()) cfg.main.set(index, pkg); else cfg.main.add(pkg);
+        saveConfig(cfg);
+    }
+
+    public boolean appInfo(String pkg) {
+        return start(c, new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.parse("package:" + pkg)));
+    }
 
     public boolean openInput(HdmiPort p) { return hdmi.open(p); }
 

@@ -44,17 +44,23 @@ final class Apps {
             for (ResolveInfo r : pm.queryIntentActivities(new Intent(Intent.ACTION_MAIN).addCategory(cat), 0))
                 if (!out.containsKey(r.activityInfo.packageName))
                     out.put(r.activityInfo.packageName, new AppEntry(r.activityInfo.packageName,
-                            r.loadLabel(pm).toString(), cat.equals(Intent.CATEGORY_LEANBACK_LAUNCHER)));
+                            r.loadLabel(pm).toString(), cat.equals(Intent.CATEGORY_LEANBACK_LAUNCHER),
+                            r.activityInfo.applicationInfo.category));
         return new ArrayList<>(out.values());
     }
 
-    Map<String, Long> lastUsed() {
+    Map<String, Long> lastUsed() { return usage(false); }
+
+    /** Foreground time over the last 30 days, for "most used first" in All apps. */
+    Map<String, Long> timeUsed() { return usage(true); }
+
+    private Map<String, Long> usage(boolean total) {
         Map<String, Long> out = new HashMap<>();
         try {
             long now = System.currentTimeMillis();
             UsageStatsManager u = (UsageStatsManager) c.getSystemService(Context.USAGE_STATS_SERVICE);
             for (UsageStats s : u.queryAndAggregateUsageStats(now - 30L * 86_400_000L, now).values())
-                out.put(s.getPackageName(), s.getLastTimeUsed());
+                out.put(s.getPackageName(), total ? s.getTotalTimeInForeground() : s.getLastTimeUsed());
         } catch (RuntimeException ignored) { }   // no usage access: fall back to A–Z
         return out;
     }

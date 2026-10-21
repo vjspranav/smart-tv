@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Apps Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700;900&family=Instrument+Serif:ital@0;1&family=Doto:wght@600;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f2ef;--fg:#1a1a1a;--muted:#6b6b6b;--card:#fff;--line:#e2ded8}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111;--fg:#eee;--muted:#999;--card:#1a1a1a;--line:#2a2a2a}}
+  :root[data-theme="dark"]{--bg:#111;--fg:#eee;--muted:#999;--card:#1a1a1a;--line:#2a2a2a}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+  main{max-width:1400px;margin:0 auto;padding:32px 16px 64px}
+  h1{font-size:26px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 20px;max-width:900px}
+  .spec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;font-size:13.5px}
+  .spec b{display:block}
+  .spec span{color:var(--muted)}
+  section{margin:0 0 36px}
+  section h2{font-size:18px;margin:0 0 4px}
+  section p{color:var(--muted);margin:0 0 12px;max-width:900px}
+
+  /* TV frame: 1em = 1/128 of the width, so the canvas is 128em × 72em (1em = 15px on the real TV) */
+  .tv{container-type:inline-size;aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;border-radius:10px;color:#fff;background:#060608;font-family:"Inter Tight",system-ui,sans-serif}
+  .tv *{box-sizing:border-box}
+  .tv>.c{position:absolute;inset:0;font-size:.78125cqw}
+  .abs{position:absolute}
+  .mono{font-family:"Space Mono",monospace}
+  .serif{font-family:"Instrument Serif",serif;font-weight:400}
+  .it{font-style:italic}
+  .dots{font-family:"Doto",monospace;font-weight:900}
+  .clip{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lbl{font-family:"Space Mono",monospace;font-size:.75em;letter-spacing:.2em;text-transform:uppercase}
+
+  /* brand banners (stand-ins for the real app banners) */
+  .ban{border-radius:.7em;display:flex;align-items:center;justify-content:center;font-weight:900;letter-spacing:-.02em;font-size:1.5em;white-space:nowrap}
+  .yt{background:#f1f1f1;color:#ff0033}.nf{background:#fff;color:#e50914}.hs{background:linear-gradient(120deg,#1f80e0,#b4148c)}
+  .pv{background:#1a6be0}.at{background:#151515;border:1px solid #333}.z5{background:#2b0a3d}
+  .sp{background:#121212;color:#1db954}.ym{background:#ff0033}
+  .focus{outline:.25em solid #fff;outline-offset:.35em;transform:scale(1.07)}
+
+  /* A */
+  .A-rail div{display:flex;justify-content:space-between;align-items:baseline;padding:.7em 0 .7em 1em;border-left:.2em solid transparent;opacity:.45;font-size:1.35em}
+  .A-rail div.on{opacity:1;border-left-color:#fff;font-weight:700}
+  .A-rail span{font-family:"Space Mono",monospace;font-size:.6em;opacity:.7}
+  .A-lbl{font-size:.85em;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+
+  /* G (G3 columns) */
+  .G-col{border-top:1px solid #ffffff33;padding:.9em 0 0;display:flex;flex-direction:column;opacity:.5;min-width:0}
+  .G-col.on{border-top:2px solid #fff;opacity:1}
+  .G-row{display:flex;justify-content:space-between;align-items:baseline;gap:1em;padding:.55em .8em;border-radius:.3em}
+  .G-row.on{background:#fff;color:#000}
+
+  /* N */
+  .N-grid{position:absolute;inset:0;background-image:radial-gradient(#ffffff17 .09em,transparent .1em);background-size:1.2em 1.2em}
+  .N-w{position:absolute;border-radius:1.6em;background:#121212;border:1px solid #ffffff1c;padding:1.3em}
+  .N-lbl{font-family:"Space Mono",monospace;font-size:.72em;letter-spacing:.18em;text-transform:uppercase;opacity:.55}
+  .N-pills{display:grid;gap:1.2em}
+  .N-app{border-radius:999px;border:1px solid #ffffff30;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;font-size:.95em;height:4.4em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1em}
+  .N-app.on{background:#fff;color:#000;border-color:#fff;outline:.2em solid #fff;outline-offset:.3em}
+  .red{color:#ff2a1a}
+  .gen{background:#1d1d22;font-weight:700;font-size:1.3em}.kd{background:#17b2e7}.vl{background:#ff8800}.mx{background:#1565c0}
+  /* view switch: Groups / A–Z */
+  .A-sw{display:inline-flex;border:1px solid #ffffff33;border-radius:99px;padding:.25em;gap:.25em;font-size:1em}
+  .A-sw span{padding:.35em 1.1em;border-radius:99px;opacity:.6}
+  .A-sw span.on{background:#fff;color:#000;opacity:1;font-weight:700}
+  .A-letters{display:flex;gap:1.55em;font-size:1.3em;font-weight:700}
+  .A-letters span{opacity:.35}.A-letters span.on{opacity:1;border-bottom:.15em solid #fff}
+  .N-sw{display:inline-flex;border:1px solid #ffffff30;border-radius:99px;padding:.25em;font-family:"Space Mono",monospace;font-size:.75em;letter-spacing:.15em}
+  .N-sw span{padding:.4em 1em;border-radius:99px;opacity:.55}.N-sw span.on{background:#fff;color:#000;opacity:1}
+</style>
+</head>
+<body>
+<main>
+  <h1>All apps — one dedicated screen, three styles</h1>
+  <p class="sub">Opened from an <b>All apps</b> tile at the end of the Apps row in Everything. It looks like whichever layout you use; all three behave the same. These are your real installed apps; banners are stand-ins for the real ones.</p>
+
+  <div class="spec">
+    <div><b>Groups</b><span>Watch · Listen · Players · TV &amp; tools — sorted automatically from what each app says it is, plus a list for the apps on this TV</span></div>
+    <div><b>Inside a group</b><span>Most used first, so the apps you reach for stay near the top</span></div>
+    <div><b>Menu button on an app</b><span>Pin to the Home row · Hide · App info</span></div>
+    <div><b>Groups or A–Z</b><span>Every style has a switch at the top (press ↑ to reach it): by group, or every app alphabetically with a letter index to jump. Your choice is remembered</span></div>
+    <div><b>Hidden</b><span>TCL Home and TCL Home Passive start hidden (TCL's own launchers); unhide any time from Hidden</span></div>
+  </div>
+
+  <section>
+    <h2>A · Cinema</h2>
+    <p>Same language as A's Everything: 16:9 banners and a white ring. Groups on the left jump the grid; the big title always names the focused app and what OK will do.</p>
+    <div class="tv"><div class="c">
+      <div class="abs" style="inset:0;background:radial-gradient(45% 60% at 86% 8%,#e5091440,transparent 70%),#0a0507"></div>
+      <div class="abs" style="right:6.4em;top:4.3em;font-size:1.6em;opacity:.85">10:42</div>
+      <div class="abs" style="left:6.4em;top:4.3em;width:80em">
+        <div class="A-lbl">All apps · Watch</div>
+        <div style="font-size:4.4em;font-weight:900;letter-spacing:-.035em;line-height:1.05;margin-top:.15em" class="clip">Netflix</div>
+        <div style="font-size:1.3em;opacity:.75;margin-top:.3em" class="clip">Continue Below · S1 E1 · OK to open · Menu to pin or hide</div>
+      </div>
+      <div class="abs" style="left:6.4em;top:14.6em"><div class="A-sw"><span class="on">Groups</span><span>A–Z</span></div></div>
+      <div class="abs A-rail" style="left:6.4em;top:20em;width:15em">
+        <div class="on">Watch <span>6</span></div>
+        <div>Listen <span>2</span></div>
+        <div>Players <span>4</span></div>
+        <div>TV &amp; tools <span>8</span></div>
+        <div style="opacity:.3">Hidden <span>2</span></div>
+      </div>
+      <div class="abs" style="left:25.6em;right:6.4em;top:20em">
+        <div class="A-lbl" style="margin-bottom:1em">Watch</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2.2em 2em">
+          <div class="ban yt" style="aspect-ratio:16/9">YouTube</div>
+          <div class="ban nf focus" style="aspect-ratio:16/9">NETFLIX</div>
+          <div class="ban hs" style="aspect-ratio:16/9">JioHotstar</div>
+          <div class="ban pv" style="aspect-ratio:16/9">prime video</div>
+          <div class="ban at" style="aspect-ratio:16/9"> tv</div>
+          <div class="ban z5" style="aspect-ratio:16/9">ZEE5</div>
+        </div>
+        <div class="A-lbl" style="margin:2.4em 0 1em">Listen</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2em">
+          <div class="ban sp" style="aspect-ratio:16/9">Spotify</div>
+          <div class="ban ym" style="aspect-ratio:16/9">YouTube Music</div>
+        </div>
+      </div>
+    </div></div>
+
+    <p style="margin-top:14px">A · A–Z: every app in one grid, alphabetical; the letter row jumps.</p>
+    <div class="tv"><div class="c">
+      <div class="abs" style="inset:0;background:radial-gradient(45% 60% at 86% 8%,#ff880033,transparent 70%),#0a0507"></div>
+      <div class="abs" style="right:6.4em;top:4.3em;font-size:1.6em;opacity:.85">10:42</div>
+      <div class="abs" style="left:6.4em;top:4.3em;width:80em">
+        <div class="A-lbl">All apps · A–Z · V</div>
+        <div style="font-size:4.4em;font-weight:900;letter-spacing:-.035em;line-height:1.05;margin-top:.15em" class="clip">VLC</div>
+        <div style="font-size:1.3em;opacity:.75;margin-top:.3em" class="clip">Players · OK to open · Menu to pin or hide</div>
+      </div>
+      <div class="abs" style="left:6.4em;top:14.6em;display:flex;align-items:center;gap:3em">
+        <div class="A-sw"><span>Groups</span><span class="on">A–Z</span></div>
+        <div class="A-letters"><span>A</span><span>J</span><span>K</span><span>M</span><span>N</span><span>P</span><span>Q</span><span>S</span><span>T</span><span>U</span><span class="on">V</span><span>W</span><span>Y</span><span>Z</span></div>
+      </div>
+      <div class="abs" style="left:6.4em;right:6.4em;top:21.5em;display:grid;grid-template-columns:repeat(5,1fr);gap:2.2em 2em">
+        <div class="ban gen" style="aspect-ratio:16/9">Quick Panel</div>
+        <div class="ban gen" style="aspect-ratio:16/9">Settings</div>
+        <div class="ban sp" style="aspect-ratio:16/9">Spotify</div>
+        <div class="ban gen" style="aspect-ratio:16/9">T-Solo</div>
+        <div class="ban gen" style="aspect-ratio:16/9;background:#d6141c">TV</div>
+        <div class="ban gen" style="aspect-ratio:16/9">User Center</div>
+        <div class="ban vl focus" style="aspect-ratio:16/9">VLC</div>
+        <div class="ban gen" style="aspect-ratio:16/9">Works with Alexa</div>
+        <div class="ban yt" style="aspect-ratio:16/9">YouTube</div>
+        <div class="ban ym" style="aspect-ratio:16/9">YouTube Music</div>
+        <div class="ban z5" style="aspect-ratio:16/9">ZEE5</div>
+      </div>
+    </div></div>
+  </section>
+
+  <section>
+    <h2>G · Editorial</h2>
+    <p>G3 columns: one column per group, the focused column opens up with the app's artwork and an italic line about it. Long groups scroll inside their column.</p>
+    <div class="tv"><div class="c" style="background:#0b0a09">
+      <div class="abs lbl" style="left:6.4em;top:5.8em;opacity:.55">All apps — <span class="serif it" style="font-size:1.6em;letter-spacing:0;text-transform:none;opacity:1;color:#fff">by group</span> / a–z</div>
+      <div class="abs lbl" style="right:6.4em;top:5.8em;opacity:.55">20 apps · ↑ Everything</div>
+      <div class="abs" style="left:6.4em;right:6.4em;top:11.5em;bottom:6.5em;display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr;gap:1.9em">
+        <div class="G-col on">
+          <div class="lbl" style="opacity:.8">01 — Watch</div>
+          <div style="margin:1.2em 0 1.6em;flex:1;min-height:12em;border-radius:.4em;position:relative;overflow:hidden;background:radial-gradient(60% 80% at 62% 35%,#e50914 0%,#7a0b0b 38%,#160606 72%),#0a0507">
+            <div class="abs" style="left:1.2em;bottom:1em;right:1.2em">
+              <div style="font-weight:900;font-size:2.6em;letter-spacing:-.03em" class="clip">Netflix</div>
+              <div class="serif it clip" style="font-size:1.5em;opacity:.9">continue Below, S1 E1</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3em 1.4em;font-size:1.5em">
+            <div class="G-row"><span class="clip">YouTube</span></div>
+            <div class="G-row on"><b class="clip">Netflix</b><span class="mono" style="font-size:.5em;flex:none">OK ›</span></div>
+            <div class="G-row"><span class="clip">JioHotstar</span></div>
+            <div class="G-row"><span class="clip">Prime Video</span></div>
+            <div class="G-row"><span class="clip">Apple TV</span></div>
+            <div class="G-row"><span class="clip">Zee 5</span></div>
+          </div>
+        </div>
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">02 — Listen</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">Spotify</div><div class="clip">YouTube Music</div></div>
+        </div>
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">03 — Players</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">Kodi</div><div class="clip">VLC</div><div class="clip">MX Player</div><div class="clip">Media Player</div></div>
+        </div>
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">04 — TV &amp; tools</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">TV</div><div class="clip">Play Store</div><div class="clip">Settings</div><div class="clip">MagiConnect</div><div class="clip">Quick Panel</div><div class="clip">T-Solo</div><div class="clip">Works with Alexa</div><div class="clip">User Center</div><div class="mono clip" style="font-size:.6em;opacity:.7;margin-top:.6em">HIDDEN · 2 ›</div></div>
+        </div>
+      </div>
+    </div></div>
+
+    <p style="margin-top:14px">G · A–Z: the same columns, now letter ranges; the focused column opens up the same way.</p>
+    <div class="tv"><div class="c" style="background:#0b0a09">
+      <div class="abs lbl" style="left:6.4em;top:5.8em;opacity:.55">All apps — by group / <span class="serif it" style="font-size:1.6em;letter-spacing:0;text-transform:none;opacity:1;color:#fff">a–z</span></div>
+      <div class="abs lbl" style="right:6.4em;top:5.8em;opacity:.55">20 apps · ↑ Everything</div>
+      <div class="abs" style="left:6.4em;right:6.4em;top:11.5em;bottom:6.5em;display:grid;grid-template-columns:1fr 2.4fr 1fr 1fr;gap:1.9em">
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">A — K</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">Apple TV</div><div class="clip">JioHotstar</div><div class="clip">Kodi</div></div>
+        </div>
+        <div class="G-col on">
+          <div class="lbl" style="opacity:.8">M — P</div>
+          <div style="margin:1.2em 0 1.6em;flex:1;min-height:12em;border-radius:.4em;position:relative;overflow:hidden;background:radial-gradient(60% 80% at 62% 35%,#e50914 0%,#7a0b0b 38%,#160606 72%),#0a0507">
+            <div class="abs" style="left:1.2em;bottom:1em;right:1.2em">
+              <div style="font-weight:900;font-size:2.6em;letter-spacing:-.03em" class="clip">Netflix</div>
+              <div class="serif it clip" style="font-size:1.5em;opacity:.9">continue Below, S1 E1</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3em 1.4em;font-size:1.5em">
+            <div class="G-row"><span class="clip">MagiConnect</span></div>
+            <div class="G-row on"><b class="clip">Netflix</b><span class="mono" style="font-size:.5em;flex:none">OK ›</span></div>
+            <div class="G-row"><span class="clip">Media Player</span></div>
+            <div class="G-row"><span class="clip">Play Store</span></div>
+            <div class="G-row"><span class="clip">MX Player</span></div>
+            <div class="G-row"><span class="clip">Prime Video</span></div>
+          </div>
+        </div>
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">Q — T</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">Quick Panel</div><div class="clip">Settings</div><div class="clip">Spotify</div><div class="clip">T-Solo</div><div class="clip">TV</div></div>
+        </div>
+        <div class="G-col">
+          <div class="lbl" style="opacity:.8">U — Z</div>
+          <div style="margin-top:auto;font-size:1.35em;line-height:1.6"><div class="clip">User Center</div><div class="clip">VLC</div><div class="clip">Works with Alexa</div><div class="clip">YouTube</div><div class="clip">YouTube Music</div><div class="clip">Zee 5</div></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section>
+    <h2>N · Nothing</h2>
+    <p>Each group is a widget on the dot grid; apps are monochrome pills with the one red dot on the focused app. Listen keeps the Spotify record, which spins only while music plays.</p>
+    <div class="tv"><div class="c" style="background:#000">
+      <div class="N-grid"></div>
+      <div class="abs dots" style="left:6.4em;top:4em;font-size:3.6em;line-height:1;letter-spacing:.04em">APPS</div>
+      <div class="abs mono" style="left:6.6em;top:9.4em;font-size:.95em;letter-spacing:.2em;opacity:.6">20 INSTALLED <span class="red">●</span> NETFLIX</div>
+      <div class="abs" style="right:6.4em;top:4.4em"><div class="N-sw"><span class="on">GROUPS</span><span>A–Z</span></div></div>
+
+      <div class="N-w" style="left:6.4em;top:14em;width:56em;height:27em;display:flex;flex-direction:column;justify-content:space-between">
+        <div class="N-lbl">Watch · 6</div>
+        <div>
+          <div style="font-size:2.2em;font-weight:700;letter-spacing:-.02em">Netflix</div>
+          <div class="mono" style="font-size:.8em;opacity:.6;margin:.4em 0 .9em">CONTINUE BELOW · S1 E1 · 46 MIN LEFT</div>
+          <div style="display:flex"><div style="width:6%;height:.55em;background-image:radial-gradient(circle,#fff .2em,transparent .22em);background-size:.7em .55em;background-repeat:repeat-x"></div><div style="width:94%;height:.55em;background-image:radial-gradient(circle,#ffffff33 .2em,transparent .22em);background-size:.7em .55em;background-repeat:repeat-x"></div></div>
+        </div>
+        <div class="N-pills" style="grid-template-columns:repeat(3,1fr)">
+          <div class="N-app">YouTube</div>
+          <div class="N-app on"><span class="red" style="margin-right:.6em">●</span>Netflix</div>
+          <div class="N-app">JioHotstar</div>
+          <div class="N-app">Prime Video</div>
+          <div class="N-app">Apple TV</div>
+          <div class="N-app">Zee 5</div>
+        </div>
+      </div>
+
+      <div class="N-w" style="left:64.4em;top:14em;width:26em;height:27em;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between">
+        <div class="N-lbl">Listen · 2</div>
+        <div class="abs" style="right:-5em;top:-3em;width:16em;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0 13%,#000 14% 16%,transparent 17%),repeating-radial-gradient(circle,#1b1b1b 0 .12em,#0a0a0a .12em .24em)"></div>
+        <div class="N-pills" style="grid-template-columns:1fr;position:relative">
+          <div class="N-app" style="height:3.6em;background:#121212">Spotify</div>
+          <div class="N-app" style="height:3.6em;background:#121212">YouTube Music</div>
+        </div>
+      </div>
+
+      <div class="N-w" style="left:92.4em;top:14em;width:29.2em;height:27em;display:flex;flex-direction:column;justify-content:space-between">
+        <div class="N-lbl">Players · 4</div>
+        <div class="N-pills" style="grid-template-columns:1fr 1fr">
+          <div class="N-app">Kodi</div>
+          <div class="N-app">VLC</div>
+          <div class="N-app">MX Player</div>
+          <div class="N-app">Media Player</div>
+        </div>
+      </div>
+
+      <div class="N-w" style="left:6.4em;right:6.4em;top:44em;bottom:6.4em;display:flex;flex-direction:column;justify-content:space-between">
+        <div class="N-lbl">TV &amp; tools · 8</div>
+        <div class="N-pills" style="grid-template-columns:repeat(5,1fr)">
+          <div class="N-app">TV</div>
+          <div class="N-app">Play Store</div>
+          <div class="N-app">Settings</div>
+          <div class="N-app">MagiConnect</div>
+          <div class="N-app">Quick Panel</div>
+          <div class="N-app">T-Solo</div>
+          <div class="N-app">Works with Alexa</div>
+          <div class="N-app">User Center</div>
+          <div class="N-app" style="border-style:dashed;opacity:.5">Hidden · 2</div>
+        </div>
+      </div>
+    </div></div>
+
+    <p style="margin-top:14px">N · A–Z: one drawer of pills, alphabetical, with a dot-matrix letter index.</p>
+    <div class="tv"><div class="c" style="background:#000">
+      <div class="N-grid"></div>
+      <div class="abs dots" style="left:6.4em;top:4em;font-size:3.6em;line-height:1;letter-spacing:.04em">A–Z</div>
+      <div class="abs mono" style="left:6.6em;top:9.4em;font-size:.95em;letter-spacing:.2em;opacity:.6">20 INSTALLED <span class="red">●</span> NETFLIX</div>
+      <div class="abs" style="right:6.4em;top:4.4em"><div class="N-sw"><span>GROUPS</span><span class="on">A–Z</span></div></div>
+      <div class="N-w" style="left:6.4em;right:6.4em;top:14em;bottom:6.4em;display:flex;flex-direction:column;justify-content:space-between">
+        <div class="dots" style="display:flex;gap:1.6em;font-size:1.9em;letter-spacing:.05em"><span style="opacity:.35">A</span><span style="opacity:.35">J</span><span style="opacity:.35">K</span><span style="opacity:.35">M</span><span class="red">N</span><span style="opacity:.35">P</span><span style="opacity:.35">Q</span><span style="opacity:.35">S</span><span style="opacity:.35">T</span><span style="opacity:.35">U</span><span style="opacity:.35">V</span><span style="opacity:.35">W</span><span style="opacity:.35">Y</span><span style="opacity:.35">Z</span></div>
+        <div>
+          <div style="font-size:2.2em;font-weight:700;letter-spacing:-.02em">Netflix</div>
+          <div class="mono" style="font-size:.8em;opacity:.6;margin:.4em 0 .9em">WATCH · CONTINUE BELOW · S1 E1 · 46 MIN LEFT</div>
+          <div style="display:flex;width:50%"><div style="width:6%;height:.55em;background-image:radial-gradient(circle,#fff .2em,transparent .22em);background-size:.7em .55em;background-repeat:repeat-x"></div><div style="width:94%;height:.55em;background-image:radial-gradient(circle,#ffffff33 .2em,transparent .22em);background-size:.7em .55em;background-repeat:repeat-x"></div></div>
+        </div>
+        <div class="N-pills" style="grid-template-columns:repeat(5,1fr)">
+          <div class="N-app">Apple TV</div><div class="N-app">JioHotstar</div><div class="N-app">Kodi</div><div class="N-app">MagiConnect</div><div class="N-app">Media Player</div>
+          <div class="N-app">MX Player</div><div class="N-app on"><span class="red" style="margin-right:.6em">●</span>Netflix</div><div class="N-app">Play Store</div><div class="N-app">Prime Video</div><div class="N-app">Quick Panel</div>
+          <div class="N-app">Settings</div><div class="N-app">Spotify</div><div class="N-app">T-Solo</div><div class="N-app">TV</div><div class="N-app">User Center</div>
+          <div class="N-app">VLC</div><div class="N-app">Works with Alexa</div><div class="N-app">YouTube</div><div class="N-app">YouTube Music</div><div class="N-app">Zee 5</div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+</main>
+</body>
+</html>

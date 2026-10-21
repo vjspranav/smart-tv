@@ -7,9 +7,9 @@ import com.livingroom.flamingo.launcher.data.Sources;
 public final class LayoutN extends LayoutView {
     private final LayoutA a;
 
-    public LayoutN(Context c, Sources src, Runnable openHomeSettings) {
-        super(c, src, openHomeSettings);
-        a = new LayoutA(c, src, openHomeSettings);
+    public LayoutN(Context c, Sources src, Runnable openHomeSettings, Runnable openAllApps) {
+        super(c, src, openHomeSettings, openAllApps);
+        a = new LayoutA(c, src, openHomeSettings, openAllApps);
         addView(a, new LayoutParams(-1, -1));
     }
 

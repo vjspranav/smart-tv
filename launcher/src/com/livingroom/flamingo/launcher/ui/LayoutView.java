@@ -7,13 +7,14 @@ import com.livingroom.flamingo.launcher.data.Sources;
 /** What Home needs from a layout. Each layout draws Home and Everything in its own style from the same Screen. */
 public abstract class LayoutView extends FrameLayout {
     protected final Sources src;
-    protected final Runnable openHomeSettings;
+    protected final Runnable openHomeSettings, openAllApps;
     protected Screen screen;
 
-    protected LayoutView(Context c, Sources src, Runnable openHomeSettings) {
+    protected LayoutView(Context c, Sources src, Runnable openHomeSettings, Runnable openAllApps) {
         super(c);
         this.src = src;
         this.openHomeSettings = openHomeSettings;
+        this.openAllApps = openAllApps;
         setClipChildren(false);
     }
 
