@@ -80,13 +80,13 @@ public final class LayoutN extends LayoutView {
         wArt.setClipToOutline(true);
         widget.addView(wArt, new LayoutParams(-1, -1));
         wLabel = caps(c, 18, 0x99ffffff);
-        widget.addView(wLabel, inset(-1, 36, Gravity.TOP));
+        widget.addView(wLabel, inset(-2, 36, Gravity.TOP));
         wTitle = Kit.label(c, bold, 52, Color.WHITE);
         wTitle.setLetterSpacing(-0.02f);
         Kit.fit(wTitle, 52, 34);
-        widget.addView(wTitle, inset(-1, 124, Gravity.BOTTOM));   // clear of the meta line (82 + 30 + 12)
+        widget.addView(wTitle, inset(-2, 124, Gravity.BOTTOM));   // clear of the meta line (82 + 30 + 12)
         wMeta = caps(c, 20, 0x99ffffff);
-        widget.addView(wMeta, inset(-1, 82, Gravity.BOTTOM));
+        widget.addView(wMeta, inset(-2, 82, Gravity.BOTTOM));
         wBar = new View(c);
         wBar.setBackground(bar);
         widget.addView(wBar, inset(16, 40, Gravity.BOTTOM));

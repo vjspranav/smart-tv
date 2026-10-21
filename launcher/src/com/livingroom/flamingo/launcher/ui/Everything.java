@@ -49,11 +49,16 @@ public final class Everything extends FrameLayout {
             else if (on) d = Kit.ring(v, radius, 5, outset, Color.WHITE);
             if (on && redDot) {
                 int w = v.getLayoutParams() != null && v.getLayoutParams().width > 0 ? v.getLayoutParams().width : v.getWidth();
-                d = new android.graphics.drawable.LayerDrawable(new Drawable[]{d,
-                        new InsetDrawable(Kit.rounded(Dots.RED, 7, 0, 0), w - 34, 20, 20, h - 34)});
+                GradientDrawable dot = new GradientDrawable();
+                dot.setShape(GradientDrawable.OVAL);
+                dot.setColor(Dots.RED);
+                android.graphics.drawable.LayerDrawable ld = new android.graphics.drawable.LayerDrawable(new Drawable[]{d,
+                        new InsetDrawable(dot, w - 34, 20, 20, h - 34)});
+                ld.setPaddingMode(android.graphics.drawable.LayerDrawable.PADDING_MODE_STACK);   // the ring's outset must not grow the dot
+                d = ld;
             }
             if (mono && v instanceof android.view.ViewGroup && ((android.view.ViewGroup) v).getChildAt(0) instanceof ImageView)
-                ((ImageView) ((android.view.ViewGroup) v).getChildAt(0)).setColorFilter(on ? null : Dots.GREY);
+                Dots.light((ImageView) ((android.view.ViewGroup) v).getChildAt(0), on);
             v.setTag(Kit.OUTSET, on ? outset : 0);
             v.setForeground(d);
             v.animate().scaleX(on ? grow : 1f).scaleY(on ? grow : 1f).setDuration(150).start();
@@ -94,7 +99,7 @@ public final class Everything extends FrameLayout {
             Style s = cinema(c);
             s.radius = 28;
             s.grow = 1.05f;
-            s.mono = s.redDot = s.led = s.metaCaps = s.dots = true;
+            s.mono = s.led = s.metaCaps = s.dots = true;   // no red dot on tiles (owner: looked off)
             s.title = Fonts.get(c, Fonts.DOTO, 900);
             s.titlePx = 84;
             s.titleSpacing = 0.02f;
@@ -216,9 +221,8 @@ public final class Everything extends FrameLayout {
         if (b != null) {
             ImageView iv = new ImageView(getContext());
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setImageBitmap(b);
+            if (st.mono) Dots.setMono(iv, b); else iv.setImageBitmap(b);
             iv.setContentDescription(label);
-            if (st.mono) iv.setColorFilter(Dots.GREY);
             iv.setOutlineProvider(clip);
             iv.setClipToOutline(true);
             f.addView(iv, new LayoutParams(-1, -1));
@@ -288,8 +292,7 @@ public final class Everything extends FrameLayout {
             case ALLAPPS: {
                 FrameLayout f = frame();
                 ImageView iv = new ImageView(getContext());
-                iv.setImageBitmap(mosaic());
-                if (st.mono) iv.setColorFilter(Dots.GREY);
+                if (st.mono) Dots.setMono(iv, mosaic()); else iv.setImageBitmap(mosaic());
                 iv.setOutlineProvider(clip);
                 iv.setClipToOutline(true);
                 iv.setTag(Kit.BACKDROP, true);   // the tile's own picture; its labels sit on it by design

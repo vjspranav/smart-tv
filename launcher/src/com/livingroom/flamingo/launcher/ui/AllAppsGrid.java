@@ -55,6 +55,7 @@ public final class AllAppsGrid extends AllAppsView {
         title.setLetterSpacing(st.titleSpacing);
         Kit.fit(title, 72, 48);
         meta = Kit.label(c, st.meta, st.metaPx - 6, st.metaColor);
+        if (st.metaCaps) { meta.setAllCaps(true); meta.setLetterSpacing(0.12f); }
         clock = Kit.label(c, mid, 34, 0xd9ffffff);
     }
 
@@ -224,9 +225,8 @@ public final class AllAppsGrid extends AllAppsView {
         if (b != null) {
             ImageView iv = new ImageView(getContext());
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            iv.setImageBitmap(b);
+            if (st.mono) Dots.setMono(iv, b); else iv.setImageBitmap(b);
             iv.setContentDescription(a.label);
-            if (st.mono) iv.setColorFilter(Dots.GREY);
             iv.setOutlineProvider(clip);
             iv.setClipToOutline(true);
             f.addView(iv, new LayoutParams(-1, -1));
