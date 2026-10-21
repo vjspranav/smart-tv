@@ -46,7 +46,13 @@ public final class Sources {
     private volatile Map<String, Long> lastUsed = Collections.emptyMap();
     private volatile Map<String, MediaItem> watchNext = Collections.emptyMap();
     private volatile List<HdmiPort> ports = Collections.emptyList();
-    private volatile String picture = "";
+    private volatile String picture = "", wifi = "";
+    private volatile boolean pictureChoosable;
+
+    // ~2 MB per 960×540 image; holds the five main slots plus Listen
+    private final Map<String, Bitmap> artCache = new java.util.LinkedHashMap<String, Bitmap>(8, 0.75f, true) {
+        @Override protected boolean removeEldestEntry(Map.Entry<String, Bitmap> e) { return size() > 6; }
+    };
 
     private final Runnable refresh = this::loadAll, notifyAll = this::fire, saveHistory = this::persistHistory;
 
@@ -90,7 +96,10 @@ public final class Sources {
         lastUsed = apps.lastUsed();
         ports = hdmi.ports(config.hdmiNames);
         picture = tv.pictureName();
+        pictureChoosable = tv.canChoose();
+        wifi = tv.wifiName();
         watchNext = new WatchNext(c, store).latestPerApp();
+        warmArt();
         main.post(notifyAll);
     }
 
@@ -154,7 +163,23 @@ public final class Sources {
 
     public Bitmap banner(String pkg) { return apps == null ? null : apps.banner(pkg); }
 
-    public Bitmap art(MediaItem m) { return m == null ? null : store.loadArt(m.artPath); }
+    /** Decoded artwork, cached; loadAll() decodes the main slots' art in the background so focus moves never decode. */
+    public Bitmap art(MediaItem m) {
+        if (m == null || m.artPath == null) return null;
+        synchronized (artCache) {
+            Bitmap b = artCache.get(m.artPath);
+            if (b != null) return b;
+        }
+        Bitmap b = store.loadArt(m.artPath);
+        if (b != null) synchronized (artCache) { artCache.put(m.artPath, b); }
+        return b;
+    }
+
+    private void warmArt() {
+        HomeConfig cfg = config;
+        for (String key : cfg.main) if (!key.startsWith("hdmi:")) art(continueFor(key));
+        art(history.latest(AppOrder.SPOTIFY));
+    }
 
     public boolean open(Screen.Slot s) {
         if (s.port != null) return hdmi.open(s.port);
@@ -177,13 +202,19 @@ public final class Sources {
     public boolean openWifi() { return tv.openWifi(); }
 
     /** Picture modes that can be set inline, in order; empty if TCL's library can't set them. */
-    public List<String> pictureChoices() { return new ArrayList<>(TvSettings.PICTURE.values()); }
+    public List<String> pictureChoices() {
+        return pictureChoosable ? new ArrayList<>(TvSettings.PICTURE.values()) : new ArrayList<String>();
+    }
+
+    /** Connected network name, or "" when unknown. */
+    public String wifi() { return wifi; }
 
     public void setPicture(String name) {
         bg.post(() -> {
             for (Map.Entry<Integer, String> e : TvSettings.PICTURE.entrySet())
                 if (e.getValue().equals(name) && tv.setPicture(e.getKey())) break;
             picture = tv.pictureName();
+            pictureChoosable = tv.canChoose();
             main.post(notifyAll);
         });
     }
@@ -201,7 +232,7 @@ public final class Sources {
     /** Debug: logs the current snapshot under tag FlamingoDump. */
     public void dump() {
         Screen s = snapshot(false);
-        Log.i("FlamingoDump", "layout=" + s.layout + " picture=" + s.picture + " clock=" + s.clock + s.ampm + " date=" + s.date);
+        Log.i("FlamingoDump", "layout=" + s.layout + " picture=" + s.picture + " choosable=" + pictureChoosable + " wifi=" + wifi + " clock=" + s.clock + s.ampm + " date=" + s.date);
         for (Screen.Slot sl : s.main)
             Log.i("FlamingoDump", "main " + sl.key() + " name=" + sl.name() + (sl.port != null ? " state=" + sl.port.state : "")
                     + (sl.cont != null ? " cont=" + sl.cont.title + " | " + sl.cont.subtitle + " pos=" + sl.cont.positionMs

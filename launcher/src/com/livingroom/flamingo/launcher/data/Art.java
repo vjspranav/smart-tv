@@ -6,17 +6,19 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-/** Bitmap helpers: everything is scaled once, stored small and as RGB_565 (half the memory of ARGB). */
+/** Bitmap helpers: everything is scaled once and stored small. Banners are RGB_565; full-screen art is ARGB_8888 so dark gradients don't band. */
 final class Art {
     private Art() { }
 
-    /** Center-crops src to exactly w×h, RGB_565. */
-    static Bitmap cover(Bitmap src, int w, int h) {
-        Bitmap out = Bitmap.createBitmap(w, h, Bitmap.Config.RGB_565);
-        float s = Math.max((float) w / src.getWidth(), (float) h / src.getHeight());
-        int cw = Math.round(w / s), ch = Math.round(h / s);
-        int x = (src.getWidth() - cw) / 2, y = (src.getHeight() - ch) / 2;
-        new Canvas(out).drawBitmap(src, new Rect(x, y, x + cw, y + ch), new Rect(0, 0, w, h), new Paint(Paint.FILTER_BITMAP_FLAG));
+    /**
+     * Scales src down (never up) to fit inside w×h, keeping its shape, ARGB_8888. Layouts decide how to show it:
+     * large 16:9 art goes full screen, anything smaller or another shape is shown as a card.
+     */
+    static Bitmap fit(Bitmap src, int w, int h) {
+        float s = Math.min(1f, Math.min((float) w / src.getWidth(), (float) h / src.getHeight()));
+        int ow = Math.max(1, Math.round(src.getWidth() * s)), oh = Math.max(1, Math.round(src.getHeight() * s));
+        Bitmap out = Bitmap.createBitmap(ow, oh, Bitmap.Config.ARGB_8888);
+        new Canvas(out).drawBitmap(src, new Rect(0, 0, src.getWidth(), src.getHeight()), new Rect(0, 0, ow, oh), new Paint(Paint.FILTER_BITMAP_FLAG));
         return out;
     }
 

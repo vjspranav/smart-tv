@@ -26,11 +26,12 @@ import java.util.List;
 public final class LayoutA extends LayoutView {
     private static final int W = 1920, H = 1080, SIDE = 96, TILE_W = 300, TILE_H = 169, GAP = 36, RING = 10;
     private static final float GROW = 1.08f;
-    private static final int ROWS_TOP = 360, ROW_H = 250, ROWS_SHOWN = 3;
+    // Text column width; artwork shown as a card sits to its right (see compose)
+    private static final int INFO_W = 1060;
+    private static final int ROWS_TOP = 330, ROW_H = 232, ROWS_SHOWN = 3;
 
     private final Typeface bold, black, mid;
     private final ImageView under, over;
-    private final View shade;
     private final FrameLayout homeGroup, allGroup;
     private final TextView eyebrow, title, meta, clock, allEyebrow, allTitle, allMeta;
     private final View progress, progressFill;
@@ -41,31 +42,29 @@ public final class LayoutA extends LayoutView {
     private final List<Integer> allRowOf = new ArrayList<>();
     private final List<LinearLayout> strips = new ArrayList<>();
     private int mainFocus = 0, allFocus = 0, firstRow = 0;
+    private int[] stripFirst = new int[0];
     private boolean everything;
     private Choice choice;
     private String heroKey = "";
+    // Composited heroes for the main slots (~2 MB each; Home and Everything variants), keyed by slot and artwork
+    private final java.util.Map<String, Bitmap> heroes = new java.util.LinkedHashMap<String, Bitmap>(8, 0.75f, true) {
+        @Override protected boolean removeEldestEntry(java.util.Map.Entry<String, Bitmap> e) { return size() > 8; }
+    };
 
     public LayoutA(Context c, Sources src, Runnable openHomeSettings) {
         super(c, src, openHomeSettings);
         bold = Fonts.get(c, Fonts.INTER, 700);
         black = Fonts.get(c, Fonts.INTER, 900);
         mid = Fonts.get(c, Fonts.INTER, 500);
-        setBackgroundColor(0xff0a0507);
+        // No background: the hero bitmap is always opaque and full screen, and every extra full-screen
+        // layer costs a fill per frame on this GPU. The window background is removed in Home for the same reason.
 
         under = backdrop(c);
         over = backdrop(c);
-        shade = new View(c);
-        shade.setTag(Kit.BACKDROP, true);
-        addView(shade, new LayoutParams(-1, -1));
-        setShade(false);
 
         homeGroup = new FrameLayout(c);
         homeGroup.setClipChildren(false);
         addView(homeGroup, new LayoutParams(-1, -1));
-        View scrim = new View(c);
-        scrim.setTag(Kit.BACKDROP, true);
-        scrim.setBackground(new GradientDrawable(GradientDrawable.Orientation.TR_BL, new int[]{0xb3000000, 0x00000000, 0x00000000}));
-        homeGroup.addView(scrim, new LayoutParams(-1, 420));
         clock = Kit.label(c, mid, 34, 0xd9ffffff);
         homeGroup.addView(clock, at(-2, -2, 0, 64, Gravity.END, SIDE));
         LinearLayout info = column(c);
@@ -84,7 +83,7 @@ public final class LayoutA extends LayoutView {
         bar.addView(progress, new LayoutParams(-1, -1));
         bar.addView(progressFill, new LayoutParams(0, -1));
         info.addView(bar, lp(560, 6, 28));
-        homeGroup.addView(info, at(1150, -2, SIDE, 250, Gravity.START, 0));
+        homeGroup.addView(info, at(INFO_W, -2, SIDE, 250, Gravity.START, 0));
 
         mainRow = new LinearLayout(c);
         homeGroup.addView(mainRow, at(-2, -2, 0, 0, Gravity.BOTTOM | Gravity.START, SIDE - pad()));
@@ -119,6 +118,7 @@ public final class LayoutA extends LayoutView {
         screen = s;
         clock.setText(s.clock + (s.ampm.isEmpty() ? "" : " " + s.ampm));
         if (rebuildMain) buildMain();
+        for (Screen.Slot sl : s.main) hero(sl);
         showSlot(mainFocus, false);
         buildAll();
     }
@@ -156,7 +156,10 @@ public final class LayoutA extends LayoutView {
         Context c = getContext();
         for (int r = 0; r < secs.size(); r++) {
             Sections.Section sec = secs.get(r);
-            LinearLayout row = column(c);
+            LinearLayout row = new LinearLayout(c) {
+                @Override public boolean hasOverlappingRendering() { return false; }   // see tileFrame()
+            };
+            row.setOrientation(LinearLayout.VERTICAL);
             row.setClipChildren(false);
             TextView label = caps(c, 22, 0x8cffffff);
             label.setText(sec.title);
@@ -178,6 +181,7 @@ public final class LayoutA extends LayoutView {
             rp.leftMargin = SIDE;
             rows.addView(row, rp);
         }
+        stripFirst = new int[strips.size()];
         allFocus = 0;
         if (keep != null) for (int i = 0; i < allItems.size(); i++) if (allItems.get(i).key.equals(keep)) { allFocus = i; break; }
         if (!allTiles.isEmpty()) {
@@ -261,9 +265,18 @@ public final class LayoutA extends LayoutView {
             default: {
                 FrameLayout f = tileFrame();
                 f.setBackground(Kit.rounded(0x1fffffff, 16, 1, 0x1fffffff));
+                Icons.Kind icon = Icons.forKey(it.key);
+                int textLeft = 22;
+                if (icon != null) {
+                    View ic = new View(getContext());
+                    ic.setBackground(new Icons(icon, 0xe6ffffff));
+                    ic.setTag(Kit.BACKDROP, true);   // decoration inside its own tile, not a solid under the label
+                    f.addView(ic, at(46, 46, 18, 13, Gravity.START, 0));
+                    textLeft = 18 + 46 + 12;
+                }
                 TextView l = Kit.label(getContext(), mid, 24, 0x99ffffff);
                 l.setText(it.label);
-                f.addView(l, at(-1, -2, 22, 22, Gravity.START, 0));
+                f.addView(l, at(-1, -2, textLeft, 24, Gravity.START, 0));
                 ((LayoutParams) l.getLayoutParams()).rightMargin = 22;
                 TextView v = Kit.label(getContext(), black, 40, Color.WHITE);
                 v.setText(it.value.isEmpty() ? "Open" : it.value);
@@ -279,14 +292,17 @@ public final class LayoutA extends LayoutView {
 
     /** Tile container. Not clipped itself, so its focus ring (foreground) can draw outside; content clips. */
     private FrameLayout tileFrame() {
-        return new FrameLayout(getContext());
+        // Fading a tile must not allocate an offscreen layer per frame; its background and image blending
+        // slightly differently at partial alpha is invisible in a 160 ms fade
+        return new FrameLayout(getContext()) {
+            @Override public boolean hasOverlappingRendering() { return false; }
+        };
     }
 
     private void setFocused(View v, boolean on) {
         v.setForeground(on ? Kit.ring(v, 16, 5, RING, Color.WHITE) : null);
         v.setTag(Kit.OUTSET, on ? RING : 0);
         v.animate().scaleX(on ? GROW : 1f).scaleY(on ? GROW : 1f).setDuration(150).start();
-        v.setElevation(on ? 1 : 0);
     }
 
     // ---------- hero ----------
@@ -315,12 +331,96 @@ public final class LayoutA extends LayoutView {
             fp.width = Math.round(560 * frac);
             progressFill.setLayoutParams(fp);
         }
-        String key = s.key() + "|" + (m != null ? m.artPath : "");
+        String key = s.key() + "|" + (m != null ? m.artPath : "") + (everything ? "|dim" : "");
         if (!key.equals(heroKey)) {
             heroKey = key;
-            Bitmap art = src.art(m);
-            crossfade(art != null ? art : Glow.forKey(s.key()), animate);
+            crossfade(everything ? dimmed(s) : hero(s), animate);
         }
+    }
+
+    /**
+     * The hero as one opaque bitmap: artwork (or the brand glow) with Home's left shade and the clock's corner
+     * fade drawn in. One full-screen bitmap per frame instead of three full-screen layers keeps the GPU in budget.
+     */
+    private Bitmap hero(Screen.Slot s) {
+        MediaItem m = s.cont;
+        String key = s.key() + "|" + (m != null ? m.artPath : "");
+        Bitmap b = heroes.get(key);
+        if (b != null) return b;
+        Bitmap art = src.art(m);
+        b = compose(art != null ? art : Glow.forKey(s.key()), art == null, new int[]{0xe6000000, 0x8c000000, 0x00000000}, true);
+        heroes.put(key, b);
+        return b;
+    }
+
+    /** Everything's backdrop: the slot's artwork under a much darker shade, also baked into one bitmap. */
+    private Bitmap dimmed(Screen.Slot s) {
+        String key = s.key() + "|" + (s.cont != null ? s.cont.artPath : "") + "|dim";
+        Bitmap b = heroes.get(key);
+        if (b != null) return b;
+        Bitmap art = src.art(s.cont);
+        b = compose(art != null ? art : Glow.forKey(s.key()), art == null, new int[]{0xfa000000, 0xf0000000, 0xd9000000}, false);
+        heroes.put(key, b);
+        return b;
+    }
+
+    /** Large 16:9 artwork fills the screen; anything smaller or another shape (Netflix's badged stills, album art) becomes a card. */
+    private static boolean fullBleed(Bitmap art) {
+        float aspect = (float) art.getWidth() / art.getHeight();
+        return art.getWidth() >= 900 && Math.abs(aspect - 16f / 9f) < 0.08f;
+    }
+
+    /** Composes the backdrop at half resolution (960×540): artwork full-bleed or as a card over its own colour glow, then shades. */
+    private static Bitmap compose(Bitmap art, boolean glow, int[] shade, boolean cornerFade) {
+        int w = 960, h = 540;
+        Bitmap b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        android.graphics.Canvas cv = new android.graphics.Canvas(b);
+        android.graphics.Paint pt = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG
+                | android.graphics.Paint.FILTER_BITMAP_FLAG | android.graphics.Paint.DITHER_FLAG);
+        android.graphics.Paint sp = new android.graphics.Paint(android.graphics.Paint.DITHER_FLAG);
+        sp.setShader(new android.graphics.LinearGradient(0, 0, w, 0, shade, null, android.graphics.Shader.TileMode.CLAMP));
+        if (glow || fullBleed(art)) {
+            float sc = Math.max((float) w / art.getWidth(), (float) h / art.getHeight());
+            float dw = art.getWidth() * sc, dh = art.getHeight() * sc;
+            cv.drawBitmap(art, null, new android.graphics.RectF((w - dw) / 2, (h - dh) / 2, (w + dw) / 2, (h + dh) / 2), pt);
+        } else {
+            // Card box: right of the text column (INFO_W), under the clock, above the tile row
+            float boxL = (SIDE + INFO_W) / 2f + 26, boxR = w - SIDE / 2f, boxT = 60, boxB = 300;
+            float sc = Math.min((boxR - boxL) / art.getWidth(), (boxB - boxT) / art.getHeight());
+            float cw = art.getWidth() * sc, ch = art.getHeight() * sc;
+            android.graphics.RectF card = new android.graphics.RectF(boxR - cw, (boxT + boxB - ch) / 2, boxR, (boxT + boxB + ch) / 2);
+            cv.drawColor(0xff0a0507);
+            // The artwork's average colour, lifted so dark stills still give a visible glow
+            float[] hsv = new float[3];
+            Color.colorToHSV(Bitmap.createScaledBitmap(art, 1, 1, true).getPixel(0, 0), hsv);
+            hsv[1] = Math.min(1f, hsv[1] * 1.4f);
+            hsv[2] = Math.max(hsv[2], 0.6f);
+            int avg = Color.HSVToColor(hsv);
+            pt.setShader(new android.graphics.RadialGradient(card.centerX(), card.centerY(), 520,
+                    new int[]{(avg & 0x00ffffff) | 0x99000000, (avg & 0x00ffffff) | 0x33000000, 0x00000000}, null,
+                    android.graphics.Shader.TileMode.CLAMP));
+            cv.drawRect(0, 0, w, h, pt);
+            cv.drawRect(0, 0, w, h, sp);   // shade under the card, so the card itself stays undimmed
+            pt.setShader(null);
+            pt.setColor(0xff000000);
+            pt.setShadowLayer(18, 0, 6, 0x99000000);
+            cv.drawRoundRect(card, 8, 8, pt);
+            pt.clearShadowLayer();
+            int save = cv.save();
+            android.graphics.Path clip = new android.graphics.Path();
+            clip.addRoundRect(card, 8, 8, android.graphics.Path.Direction.CW);
+            cv.clipPath(clip);
+            cv.drawBitmap(art, null, card, pt);
+            cv.restoreToCount(save);
+        }
+        if (glow || fullBleed(art)) cv.drawRect(0, 0, w, h, sp);
+        if (cornerFade) {
+            pt.setShader(new android.graphics.RadialGradient(w, 0, 235, new int[]{0x99000000, 0x4d000000, 0x00000000}, null,
+                    android.graphics.Shader.TileMode.CLAMP));
+            cv.drawRect(0, 0, w, h, pt);
+        }
+        b.prepareToDraw();
+        return b;
     }
 
     private static String metaText(MediaItem m) {
@@ -329,19 +429,17 @@ public final class LayoutA extends LayoutView {
         return m.subtitle != null ? m.subtitle : left != null ? left : "";
     }
 
+    /** The old image sits under the new one only while it fades in; otherwise only one full-screen bitmap draws. */
     private void crossfade(Bitmap b, boolean animate) {
         over.animate().cancel();
-        if (over.getDrawable() != null) under.setImageDrawable(over.getDrawable());
+        boolean had = over.getDrawable() != null;
+        if (had) under.setImageDrawable(over.getDrawable());
         over.setImageBitmap(b);
-        if (!animate) { over.setAlpha(1f); return; }
+        if (!animate || !had) { over.setAlpha(1f); under.setVisibility(INVISIBLE); return; }
+        under.setVisibility(VISIBLE);
         over.setAlpha(0f);
-        over.animate().alpha(1f).setDuration(220).withLayer().start();
-    }
-
-    private void setShade(boolean everythingMode) {
-        GradientDrawable g = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                everythingMode ? new int[]{0xf2000000, 0xd9000000, 0xb3000000} : new int[]{0xe6000000, 0x8c000000, 0x00000000});
-        shade.setBackground(g);
+        // ImageView without a background applies alpha to the bitmap directly, so no layer is needed
+        over.animate().alpha(1f).setDuration(220).withEndAction(() -> under.setVisibility(INVISIBLE)).start();
     }
 
     private void describe(Sections.Item it) {
@@ -375,19 +473,25 @@ public final class LayoutA extends LayoutView {
             View v = rows.getChildAt(r);
             if (animate) v.animate().alpha(a).setDuration(160).start(); else v.setAlpha(a);
         }
-        // horizontal: keep the focused tile's page of the strip in view
-        LinearLayout strip = strips.get(row);
-        int idx = strip.indexOfChild(allTiles.get(allFocus));
-        int first = 0;
-        while (idx >= first + visibleCount(strip, first)) first += Math.max(1, visibleCount(strip, first) - 1);
-        float tx = -(strip.getChildAt(first).getLeft());
-        if (strip.getChildAt(first).getWidth() == 0) tx = -first * (TILE_W + GAP);
-        if (animate) strip.animate().translationX(tx).setDuration(200).start(); else strip.setTranslationX(tx);
-        int shown = visibleCount(strip, first);
-        for (int i = 0; i < strip.getChildCount(); i++) {
-            float a = i >= first && i < first + shown ? 1f : 0f;
-            View v = strip.getChildAt(i);
-            if (animate) v.animate().alpha(a).setDuration(160).start(); else v.setAlpha(a);
+        // horizontal: every strip shows one whole page; the focused strip pages to keep its tile in view
+        LinearLayout focused = strips.get(row);
+        int idx = focused.indexOfChild(allTiles.get(allFocus));
+        int f = Math.min(stripFirst[row], idx);
+        while (idx >= f + visibleCount(focused, f)) f += Math.max(1, visibleCount(focused, f) - 1);
+        stripFirst[row] = f;
+        for (int r = 0; r < strips.size(); r++) {
+            LinearLayout strip = strips.get(r);
+            if (strip.getChildCount() == 0) continue;
+            int first = Math.min(stripFirst[r], strip.getChildCount() - 1), shown = visibleCount(strip, first);
+            float tx = -first * (TILE_W + GAP);
+            if (strip.getChildAt(first).getWidth() > 0) tx = -strip.getChildAt(first).getLeft();
+            boolean anim = animate && r == row;
+            if (anim) strip.animate().translationX(tx).setDuration(200).start(); else strip.setTranslationX(tx);
+            for (int i = 0; i < strip.getChildCount(); i++) {
+                float a = i >= first && i < first + shown ? 1f : 0f;
+                View v = strip.getChildAt(i);
+                if (anim) v.animate().alpha(a).setDuration(160).start(); else { v.animate().cancel(); v.setAlpha(a); }
+            }
         }
     }
 
@@ -468,16 +572,15 @@ public final class LayoutA extends LayoutView {
         if (on == everything) return;
         everything = on;
         choice = null;
-        setShade(on);
-        float target = on ? 0.45f : 1f;
-        over.animate().alpha(target).setDuration(220).withLayer().start();
-        under.setAlpha(target);
+        heroKey = "";   // swap to the dimmed (or normal) composite of the current slot
+        showSlot(mainFocus, false);
         fade(homeGroup, !on);
         fade(allGroup, on);
         if (on && !allTiles.isEmpty()) {
             setFocused(allTiles.get(allFocus), false);
             allFocus = 0;
             firstRow = 0;
+            java.util.Arrays.fill(stripFirst, 0);
             setFocused(allTiles.get(0), true);
             describe(allItems.get(0));
             page(false);

@@ -2,7 +2,6 @@ package com.livingroom.flamingo.launcher;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,7 +20,7 @@ import com.livingroom.flamingo.launcher.ui.SettingsView;
 
 /**
  * The launcher's only activity. Hosts the chosen layout (or Home screen settings) and routes keys.
- * Debug extras: layout=A|G|N, screen=home|everything|settings, focus=first|last, stress, check, dump, probe, kittest, notcl.
+ * Debug extras: reset (config back to defaults), layout=A|G|N, screen=home|everything|settings, focus=first|last, stress, check, dump, probe, kittest, notcl.
  */
 public class Home extends Activity {
     private final Handler h = new Handler(Looper.getMainLooper());
@@ -51,10 +50,11 @@ public class Home extends Activity {
             return;
         }
         stress = in.getBooleanExtra("stress", false);
+        getWindow().setBackgroundDrawable(null);   // the layout covers the screen; avoid a full-screen fill per frame
         root = new FrameLayout(this);
-        root.setBackgroundColor(Color.BLACK);
         root.setClipChildren(false);
         setContentView(root);
+        if (in.getBooleanExtra("reset", false)) src.saveConfig(HomeConfig.defaults());
         String forced = in.getStringExtra("layout");
         if (forced != null) {
             HomeConfig cfg = src.config();
@@ -106,7 +106,7 @@ public class Home extends Activity {
 
     @Override protected void onResume() {
         super.onResume();
-        if (src != null) { src.requestRefresh(); h.removeCallbacks(tick); h.post(tick); }
+        if (root != null) { src.requestRefresh(); h.removeCallbacks(tick); h.post(tick); }
     }
 
     @Override protected void onPause() {

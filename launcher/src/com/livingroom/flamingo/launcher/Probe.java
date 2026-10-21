@@ -21,11 +21,13 @@ final class Probe {
     private static void watchNext(Context c) {
         String[] cols = {TvContract.WatchNextPrograms.COLUMN_PACKAGE_NAME, TvContract.WatchNextPrograms.COLUMN_TITLE,
                 TvContract.WatchNextPrograms.COLUMN_EPISODE_TITLE, TvContract.WatchNextPrograms.COLUMN_DURATION_MILLIS,
-                TvContract.WatchNextPrograms.COLUMN_LAST_ENGAGEMENT_TIME_UTC_MILLIS};
+                TvContract.WatchNextPrograms.COLUMN_LAST_ENGAGEMENT_TIME_UTC_MILLIS, TvContract.WatchNextPrograms.COLUMN_POSTER_ART_URI,
+                TvContract.WatchNextPrograms.COLUMN_THUMBNAIL_URI, TvContract.WatchNextPrograms.COLUMN_POSTER_ART_ASPECT_RATIO};
         try (Cursor q = c.getContentResolver().query(TvContract.WatchNextPrograms.CONTENT_URI, cols, null, null, null)) {
             Log.i(TAG, "WATCHNEXT_ROWS=" + (q == null ? "null" : q.getCount()));
             for (int i = 0; q != null && i < 20 && q.moveToNext(); i++)
-                Log.i(TAG, "WATCHNEXT " + q.getString(0) + " | " + q.getString(1) + " | " + q.getString(2) + " | " + q.getLong(3) + " | " + q.getLong(4));
+                Log.i(TAG, "WATCHNEXT " + q.getString(0) + " | " + q.getString(1) + " | " + q.getString(2) + " | " + q.getLong(3) + " | " + q.getLong(4)
+                        + " | poster=" + q.getString(5) + " | thumb=" + q.getString(6) + " | aspect=" + q.getString(7));
         } catch (Throwable t) {
             Log.i(TAG, "WATCHNEXT_ERROR=" + t);
         }

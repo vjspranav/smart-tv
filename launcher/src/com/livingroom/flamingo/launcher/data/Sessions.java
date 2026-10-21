@@ -83,7 +83,7 @@ final class Sessions {
         if (b == null) b = md.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
         if (b == null) b = md.getBitmap(MediaMetadata.METADATA_KEY_DISPLAY_ICON);
         if (b == null) return null;
-        String rel = store.saveArt(key, Art.cover(b, 960, 540));
+        String rel = store.saveArt(key, Art.fit(b, 960, 540));
         if (rel != null) artFor.put(m.pkg, m.title);
         return rel;
     }

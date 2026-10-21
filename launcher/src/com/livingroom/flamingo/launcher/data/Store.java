@@ -59,7 +59,7 @@ public final class Store {
     public Bitmap loadArt(String rel) {
         if (rel == null) return null;
         BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inPreferredConfig = Bitmap.Config.RGB_565;
+        o.inPreferredConfig = Bitmap.Config.ARGB_8888;
         return BitmapFactory.decodeFile(new File(dir, rel).getPath(), o);
     }
 }

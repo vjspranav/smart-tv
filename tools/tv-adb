@@ -2,7 +2,9 @@
 # Runs adb against the Living Room TV from the Mac.
 # The TV never shows the auth prompt to the Mac, so the adb server must hold the Pi's trusted key.
 # Usage: tools/tv-adb <adb args...>     (TV=host:port to override)
-TV="${TV:-192.168.0.12:5555}"
+# The TV's DHCP address changes; the last one found is cached here
+CACHE="$HOME/.android/tv-addr"
+TV="${TV:-$(cat "$CACHE" 2>/dev/null || echo 192.168.0.12:5555)}"
 KEY="$HOME/.android/pi_adbkey"
 
 state() { adb devices 2>/dev/null | awk -v tv="$TV" '$1 == tv { print $2 }'; }
@@ -18,8 +20,21 @@ if [ "$(state)" != device ]; then
   # adb connect can block for minutes on an unreachable host; cap it at 8 s
   adb connect "$TV" >/dev/null 2>&1 & pid=$!
   ( sleep 8; kill "$pid" 2>/dev/null ) >/dev/null 2>&1 & killer=$!
-  wait "$pid" 2>/dev/null; kill "$killer" 2>/dev/null
+  wait "$pid" 2>/dev/null; kill "$killer" 2>/dev/null; wait "$killer" 2>/dev/null
   i=0; while [ $i -lt 5 ] && [ "$(state)" != device ]; do sleep 1; i=$((i + 1)); done
+fi
+# Not there: look for an open adb port on the same /24 and keep the first one that is this TV model
+if [ "$(state)" != device ] && [ -z "$TV_NOSCAN" ]; then
+  net="${TV%.*}"
+  for host in $(for i in $(seq 1 254); do (nc -z -G 1 "$net.$i" 5555 2>/dev/null && echo "$net.$i") & done; wait); do
+    TV="$host:5555"
+    adb connect "$TV" >/dev/null 2>&1
+    sleep 1
+    if [ "$(state)" = device ] && adb -s "$TV" shell getprop ro.product.name 2>/dev/null | grep -q G10_4K; then
+      echo "$TV" > "$CACHE"; echo "tv-adb: TV found at $TV" >&2; break
+    fi
+    adb disconnect "$TV" >/dev/null 2>&1
+  done
 fi
 [ "$(state)" = device ] || { echo "tv-adb: TV not reachable ($TV)" >&2; exit 2; }
 

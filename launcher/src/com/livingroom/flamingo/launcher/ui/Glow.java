@@ -31,7 +31,7 @@ final class Glow {
     static Bitmap forKey(String key) {
         Bitmap b = CACHE.get(key);
         if (b != null) return b;
-        b = Bitmap.createBitmap(480, 270, Bitmap.Config.RGB_565);
+        b = Bitmap.createBitmap(480, 270, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(b);
         c.drawColor(0xff0a0507);
         Paint p = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);

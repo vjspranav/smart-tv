@@ -1,7 +1,7 @@
 #!/bin/sh
 # Opens launcher screens on the TV with check=1, collects FlamingoOverflow lines and screenshots.
 # Usage: tools/overflow-check.sh [kittest | stress]
-#   no arg  → every layout (A G N) × screen (home everything settings) × focus (first last), normal data
+#   LAYOUTS="A" limits the layouts. no arg  → every layout (A G N) × screen (home everything settings) × focus (first last), normal data
 #   stress  → the same with stress data (long names, 40 apps, missing art)
 #   kittest → the UI kit's planted-problem screen only (expects exactly 4 OVERFLOW lines)
 # Exit 0 only if no OVERFLOW lines (kittest: exactly 4). Screenshots: investigations/overflow/<case>.png
@@ -36,7 +36,7 @@ fi
 
 stress=false; suffix=""
 [ "$1" = stress ] && { stress=true; suffix="-stress"; }
-for layout in A G N; do
+for layout in ${LAYOUTS:-A G N}; do
   for screen in home everything settings; do
     for focus in first last; do
       run_case "$layout-$screen-$focus$suffix" --es layout $layout --es screen $screen --es focus $focus --ez stress $stress

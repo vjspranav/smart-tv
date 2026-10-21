@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Debug check for the no-overflow rule, run on the TV after layout. Reports:
- *  clip    — a view (with transforms and focus-ring outset) is partly cut off by the screen or a clipping ancestor
+ *  clip    — a view that draws (with transforms and focus-ring outset) is partly cut off by the screen or a clipping ancestor
  *            (a view scrolled completely out of a clipping list is not a problem and is skipped)
  *  text    — a TextView's text is wider than its box and was not ellipsized
  *  overlap — a TextView's drawn text intersects another text, or a tile/image that isn't its ancestor
@@ -33,7 +33,8 @@ public final class Overflow {
         for (int i = 0; i < texts.size(); i++) {
             for (int j = i + 1; j < texts.size(); j++)
                 if (RectF.intersects(textRects.get(i), textRects.get(j)))
-                    out.add("OVERFLOW overlap " + name(texts.get(i)) + " / " + name(texts.get(j)));
+                    out.add("OVERFLOW overlap " + name(texts.get(i)) + " / " + name(texts.get(j))
+                            + " " + textRects.get(i).toShortString() + " " + textRects.get(j).toShortString());
             for (int j = 0; j < solids.size(); j++) {
                 View s = solids.get(j);
                 if (s != texts.get(i) && !isAncestor(s, texts.get(i)) && !isAncestor(texts.get(i), s)
@@ -54,7 +55,7 @@ public final class Overflow {
             float outset = o instanceof Integer ? (Integer) o : 0;
             RectF r = toRoot(v, root, new RectF(-outset, -outset, v.getWidth() + outset, v.getHeight() + outset));
             if (scrolledAway(v, root, r)) return;
-            String why = clipped(v, root, r);
+            String why = draws(v) ? clipped(v, root, r) : null;
             if (why != null) out.add("OVERFLOW clip " + name(v) + " " + why);
             if ((v instanceof ImageView || v.getBackground() != null) && !Boolean.TRUE.equals(v.getTag(Kit.BACKDROP))) {
                 solids.add(v);
@@ -69,8 +70,12 @@ public final class Overflow {
                 boolean ellipsized = l.getEllipsisCount(0) > 0;
                 if (!ellipsized && (l.getLineCount() > t.getMaxLines() || l.getLineWidth(0) > avail + 1))
                     out.add("OVERFLOW text " + name(t));
-                float left = t.getTotalPaddingLeft() + l.getLineLeft(0), top = t.getTotalPaddingTop() + l.getLineTop(0);
-                float right = t.getTotalPaddingLeft() + Math.min(l.getLineRight(0), avail);
+                // Single-line layouts are laid out very wide, so place the drawn text from the gravity instead
+                float w = Math.min(l.getLineWidth(0), avail), left = t.getTotalPaddingLeft();
+                int hg = android.view.Gravity.getAbsoluteGravity(t.getGravity(), t.getLayoutDirection()) & android.view.Gravity.HORIZONTAL_GRAVITY_MASK;
+                if (hg == android.view.Gravity.CENTER_HORIZONTAL) left += (avail - w) / 2;
+                else if (hg == android.view.Gravity.RIGHT) left += avail - w;
+                float top = t.getTotalPaddingTop() + l.getLineTop(0), right = left + w;
                 float bottom = t.getTotalPaddingTop() + l.getLineBottom(Math.min(l.getLineCount(), t.getMaxLines()) - 1);
                 texts.add(t);
                 textRects.add(toRoot(t, root, new RectF(left, top, right, bottom)));
@@ -113,6 +118,11 @@ public final class Overflow {
             }
         }
         return null;
+    }
+
+    /** Pure layout containers draw nothing, so only their children can be cut off. */
+    private static boolean draws(View v) {
+        return !(v instanceof ViewGroup) || v.getBackground() != null || v.getForeground() != null;
     }
 
     private static boolean isAncestor(View a, View v) {

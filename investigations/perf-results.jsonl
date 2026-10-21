@@ -15,3 +15,21 @@
 {"label": "N-record-on", "frames": 907, "janky": 0, "janky_pct": 0.0, "p50": 19, "p90": 21, "p95": 21, "p99": 22, "pss_kb": 16142, "pass": false}
 {"label":"N-idle-cpu","top":"13.3 0.0 0.0 13.0 0.5 0.0 13.0 1.0 0.0 "}
 {"label": "N-idle-record-on", "frames": 693, "janky": 0, "janky_pct": 0.0, "p50": 6, "p90": 6, "p95": 6, "p99": 8, "pss_kb": 15971, "pass": true}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.R8s676HUD6/keys.monkey: 1 file pushed, 0 skipped. 1.1 MB/s (1828 bytes in 0.002s)
+{"label": "A-home", "frames": 360, "janky": 24, "janky_pct": 6.67, "p50": 18, "p90": 26, "p95": 29, "p99": 40, "pss_kb": 42383, "elapsed_s": 11.0, "pass": false}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.Mx0uGg40Fl/keys.monkey: 1 file pushed, 0 skipped. 56.8 MB/s (3751 bytes in 0.000s)
+{"label": "A-everything", "frames": 536, "janky": 9, "janky_pct": 1.68, "p50": 14, "p90": 16, "p95": 18, "p99": 29, "pss_kb": 27891, "elapsed_s": 19.0, "pass": false}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.ORqIADH0K3/keys.monkey: 1 file pushed, 0 skipped. 17.3 MB/s (1828 bytes in 0.000s)
+{"label": "A-home", "frames": 360, "janky": 24, "janky_pct": 6.67, "p50": 18, "p90": 26, "p95": 29, "p99": 38, "pss_kb": 42590, "elapsed_s": 11.0, "pass": false}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.JEmzaByl1I/keys.monkey: 1 file pushed, 0 skipped. 62.1 MB/s (3751 bytes in 0.000s)
+{"label": "A-everything", "frames": 536, "janky": 11, "janky_pct": 2.05, "p50": 14, "p90": 16, "p95": 18, "p99": 25, "pss_kb": 27360, "elapsed_s": 18.0, "pass": false}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.8OODnLkMWh/keys.monkey: 1 file pushed, 0 skipped. 30.1 MB/s (1828 bytes in 0.000s)
+{"label": "A-home", "frames": 360, "janky": 25, "janky_pct": 6.94, "p50": 18, "p90": 25, "p95": 30, "p99": 40, "pss_kb": 42330, "elapsed_s": 11.0, "pass": false}
+/var/folders/n7/_p8n9nh92xqcq0plvppgycw40000gn/T/tmp.spu9RlqIks/keys.monkey: 1 file pushed, 0 skipped. 60.0 MB/s (3751 bytes in 0.000s)
+{"label": "A-everything", "frames": 538, "janky": 9, "janky_pct": 1.67, "p50": 14, "p90": 16, "p95": 18, "p99": 21, "pss_kb": 28358, "elapsed_s": 19.0, "pass": false}
+{"label": "A-home", "frames": 360, "janky": 0, "janky_pct": 0.0, "p50": 7, "p90": 7, "p95": 7, "p99": 8, "pss_kb": 45702, "elapsed_s": 10.0, "pass": true}
+{"label": "A-everything", "frames": 534, "janky": 5, "janky_pct": 0.94, "p50": 7, "p90": 8, "p95": 9, "p99": 23, "pss_kb": 61871, "elapsed_s": 18.0, "pass": true}
+{"label": "A-home", "frames": 360, "janky": 0, "janky_pct": 0.0, "p50": 7, "p90": 7, "p95": 7, "p99": 8, "pss_kb": 52657, "elapsed_s": 10.0, "pass": true}
+{"label": "A-everything", "frames": 536, "janky": 1, "janky_pct": 0.19, "p50": 7, "p90": 7, "p95": 8, "p99": 11, "pss_kb": 51933, "elapsed_s": 18.0, "pass": true}
+{"label": "A-home", "frames": 360, "janky": 0, "janky_pct": 0.0, "p50": 7, "p90": 7, "p95": 7, "p99": 8, "pss_kb": 52929, "elapsed_s": 10.0, "pass": true}
+{"label": "A-everything", "frames": 536, "janky": 2, "janky_pct": 0.37, "p50": 7, "p90": 7, "p95": 8, "p99": 10, "pss_kb": 51913, "elapsed_s": 18.0, "pass": true}

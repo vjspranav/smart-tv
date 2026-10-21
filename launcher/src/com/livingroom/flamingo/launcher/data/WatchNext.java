@@ -56,15 +56,15 @@ final class WatchNext {
         return out;
     }
 
-    /** Cached as art/wn-<pkg>-<hash>.png so each poster is fetched once. */
+    /** Cached as art/wn9-<pkg>-<hash>.png so each poster is fetched once; full size where the CDN allows. */
     private String poster(MediaItem m, String uri) {
         if (uri == null) return null;
-        String key = "wn-" + m.pkg + "-" + Integer.toHexString(uri.hashCode());
+        String key = "wn9-" + m.pkg + "-" + Integer.toHexString(uri.hashCode());
         String rel = "art/" + key.replaceAll("[^A-Za-z0-9._-]", "_") + ".png";
         if (store.loadArt(rel) != null) return rel;
-        try (InputStream in = open(uri)) {
+        try (InputStream in = open(com.livingroom.flamingo.launcher.model.PosterUrl.clean(uri))) {
             Bitmap b = in == null ? null : BitmapFactory.decodeStream(in);
-            return b == null ? null : store.saveArt(key, Art.cover(b, 960, 540));
+            return b == null ? null : store.saveArt(key, Art.fit(b, 960, 540));
         } catch (Exception e) {
             return null;
         }

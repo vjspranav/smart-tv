@@ -12,8 +12,42 @@ import java.util.Map;
  * or changed library only costs the inline value. Sound and sleep open TCL's own screens.
  */
 final class TvSettings {
-    /** TCL picture-mode ids → names, as read from this TV (see investigations/probe-launcher.txt). */
+    /**
+     * TCL picture-mode ids → the names TCL's own Settings shows, from TvSettings.apk
+     * (PictureManager2.getPictureMappingValues + the pm_* strings). Game ids carry a sub-mode offset.
+     */
+    static final Map<Integer, String> NAMES = new LinkedHashMap<>();
+    /** The SDR modes that can be set inline, in TCL's menu order. HDR/Dolby content has its own set. */
     static final Map<Integer, String> PICTURE = new LinkedHashMap<>();
+    static {
+        PICTURE.put(10, "Intelligent");
+        PICTURE.put(1, "Vivid");
+        PICTURE.put(0, "Standard");
+        PICTURE.put(4, "Sport");
+        PICTURE.put(3, "Movie");
+        NAMES.putAll(PICTURE);
+        for (int g = 5; g <= 7; g++) NAMES.put(g, "Game");
+        NAMES.put(8, "PC");
+        NAMES.put(12, "Photo");
+        NAMES.put(27, "IMAX");
+        NAMES.put(60, "Filmmaker");
+        int[] hdr = {16, 31}; // HDR10 and HLG blocks share one layout
+        for (int b : hdr) {
+            NAMES.put(b, "Standard");
+            NAMES.put(b + 1, "Vivid");
+            NAMES.put(b + 3, "Movie");
+            NAMES.put(b + 4, "Sport");
+            for (int g = 5; g <= 7; g++) NAMES.put(b + g, "Game");
+            NAMES.put(b + 8, "PC");
+            NAMES.put(b + 10, "Intelligent");
+        }
+        NAMES.put(29, "Filmmaker");
+        NAMES.put(43, "Filmmaker");
+        NAMES.put(46, "Dolby Vision Bright");
+        NAMES.put(47, "Dolby Vision Dark");
+        NAMES.put(48, "Dolby Vision Game");
+        NAMES.put(51, "Dolby Vision IQ");
+    }
 
     private final Context c;
     private final boolean useTcl;
@@ -23,12 +57,17 @@ final class TvSettings {
         this.useTcl = useTcl;
     }
 
-    /** Current picture mode name, "Mode n" for an unmapped id, or "Open" when it can't be read. */
+    /** Current picture mode name, or "" when it can't be read or isn't one we know (the tile then says Open). */
     String pictureName() {
         Integer id = pictureId();
-        if (id == null) return "Open";
-        String n = PICTURE.get(id);
-        return n != null ? n : "Mode " + id;
+        String n = id == null ? null : NAMES.get(id);
+        return n != null ? n : "";
+    }
+
+    /** True when the current mode is an SDR one, so the inline SDR choices apply. */
+    boolean canChoose() {
+        Integer id = pictureId();
+        return id != null && PICTURE.containsKey(id);
     }
 
     Integer pictureId() {
@@ -53,6 +92,19 @@ final class TvSettings {
             return Boolean.TRUE.equals(ok);
         } catch (Throwable t) {
             return false;
+        }
+    }
+
+    /** Connected Wi-Fi network name; "" if not connected or the name is hidden (needs location permission). */
+    @SuppressWarnings("deprecation")
+    String wifiName() {
+        try {
+            android.net.wifi.WifiManager w = c.getSystemService(android.net.wifi.WifiManager.class);
+            String ssid = w.getConnectionInfo().getSSID();
+            if (ssid == null || ssid.contains("<unknown")) return "";
+            return ssid.replaceAll("^\"|\"$", "");
+        } catch (Throwable t) {
+            return "";
         }
     }
 

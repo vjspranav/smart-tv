@@ -9,7 +9,7 @@ public class HomeConfigTest {
         HomeConfig c = HomeConfig.defaults();
         assertEquals(HomeConfig.Layout.A, c.layout);
         assertEquals(Arrays.asList("com.google.android.youtube.tv", "com.netflix.ninja", "in.startv.hotstar",
-                "com.amazon.amazonvideo.livingroom", "hdmi:1"), c.main);
+                "com.amazon.amazonvideo.livingroom", "com.apple.atve.androidtv.appletv"), c.main);
         assertEquals("PlayStation 5", c.hdmiNames.get(1));
     }
 

@@ -71,13 +71,21 @@ public final class Sections {
         tv.items.add(new Item(Kind.SETTING, "picture", "Picture", s.picture, src::openPicture, src.pictureChoices(), null));
         tv.items.add(new Item(Kind.SETTING, "sound", "Sound", "Open", src::openSound, null, null));
         tv.items.add(new Item(Kind.SETTING, "sleep", "Sleep timer", "Open", src::openSleep, null, null));
-        tv.items.add(new Item(Kind.SETTING, "wifi", "Wi-Fi", "Open", src::openWifi, null, null));
+        tv.items.add(new Item(Kind.SETTING, "wifi", "Wi-Fi", src.wifi().isEmpty() ? "Open" : src.wifi(), src::openWifi, null, null));
         tv.items.add(new Item(Kind.SETTING, "all", "All settings", "Open", src::openAllSettings, null, null));
         out.add(tv);
 
         Section home = new Section("Home screen");
-        home.items.add(new Item(Kind.HOME, "home", "Home screen", "Layout " + s.layout, openHomeSettings, null, null));
+        home.items.add(new Item(Kind.HOME, "home", "Home screen", layoutName(s.layout), openHomeSettings, null, null));
         out.add(home);
         return out;
+    }
+
+    public static String layoutName(com.livingroom.flamingo.launcher.model.HomeConfig.Layout l) {
+        switch (l) {
+            case G: return "Editorial";
+            case N: return "Nothing";
+            default: return "Cinema";
+        }
     }
 }

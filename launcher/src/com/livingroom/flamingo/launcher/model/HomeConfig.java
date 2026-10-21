@@ -18,7 +18,7 @@ public final class HomeConfig {
     public static HomeConfig defaults() {
         HomeConfig c = new HomeConfig();
         c.main = new ArrayList<>(Arrays.asList("com.google.android.youtube.tv", "com.netflix.ninja",
-                "in.startv.hotstar", "com.amazon.amazonvideo.livingroom", "hdmi:1"));
+                "in.startv.hotstar", "com.amazon.amazonvideo.livingroom", "com.apple.atve.androidtv.appletv"));
         c.hdmiNames.put(1, "PlayStation 5");
         return c;
     }

@@ -30,10 +30,16 @@ public class AppOrderTest {
                 pkgs(AppOrder.others(installed, HomeConfig.defaults(), new HashMap<>(), "self")));
     }
 
+    static HomeConfig withHdmi() {
+        HomeConfig c = HomeConfig.defaults();
+        c.main.set(4, "hdmi:1");
+        return c;
+    }
+
     @Test public void mainSlotsSkipMissingButKeepHdmi() {
         Set<String> installed = new HashSet<>(Arrays.asList("com.google.android.youtube.tv", "com.netflix.ninja",
                 "com.amazon.amazonvideo.livingroom"));
         assertEquals(Arrays.asList("com.google.android.youtube.tv", "com.netflix.ninja",
-                "com.amazon.amazonvideo.livingroom", "hdmi:1"), AppOrder.mainSlots(HomeConfig.defaults(), installed));
+                "com.amazon.amazonvideo.livingroom", "hdmi:1"), AppOrder.mainSlots(withHdmi(), installed));
     }
 }
