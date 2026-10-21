@@ -5,9 +5,9 @@
 #   ./debloat.sh restore    re-enable the list
 # Runs from the Mac (adb via Homebrew). The TV only trusts the Pi's key, so start adb with it:
 #   adb kill-server; ADB_VENDOR_KEYS=$HOME/.android/pi_adbkey adb start-server
-# Google TV's home (com.google.android.apps.tv.launcherx) is also disabled, by tools/become-home.sh (2026-10-21),
-# so Flamingo is the Home app. It is not in the list below on purpose: undo with tools/undo-home.sh.
-# Never disable com.google.android.tungsten.setupwraith (the Setup Wizard) outside become-home.sh's few seconds.
+# Google TV's home (launcherx) and the Setup Wizard (setupwraith) are also disabled, by tools/become-home.sh
+# (2026-10-21), so Flamingo is the Home app (setupwraith must stay off, or boot lands on its black recovery screen).
+# They are not in the list below on purpose: undo both with tools/undo-home.sh.
 # Uninstalled outright (not reversible here; reinstall from Play Store if wanted):
 #   com.overdevs.at4k (AT4K Launcher, 2026-10-21: user found it laggy)
 #   com.livingroom.preview (throwaway layout preview spike, 2026-10-20)

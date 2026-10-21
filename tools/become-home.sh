@@ -1,9 +1,11 @@
 #!/bin/sh
-# Makes Flamingo the TV's Home app: the owner's "safer XDA" method (decided 2026-10-20, after the Wi-Fi RCA).
-#   Google TV's launcher (launcherx) is disabled and stays off (frees its memory).
-#   The Setup Wizard (setupwraith) is off only for the seconds it takes to press Home, then re-enabled — always,
-#   even if this script fails or is interrupted. (Its first-setup Wi-Fi entry was deleted with it on 2026-10-20;
-#   the Wi-Fi is now the owner's own entry, checked before and after.)
+# Makes Flamingo the TV's Home app: the XDA method (owner's decision, 2026-10-21).
+#   Google TV's launcher (launcherx) and the Setup Wizard (setupwraith) are both disabled and stay off.
+#   setupwraith must stay off: its RecoveryActivity is a direct-boot-aware HOME (priority 1), so with it enabled
+#   every boot lands on its black recovery screen instead of Flamingo (seen 2026-10-21). With it off, boot uses
+#   Settings' FallbackHome, which hands over to Flamingo once the TV unlocks.
+#   Wi-Fi: on 2026-10-20 disabling setupwraith deleted the Wizard-created network; the owner's own "John Doe 5G"
+#   entry survived three setupwraith toggles on 2026-10-21. It is checked before and after.
 # Run only with the owner present and their Wi-Fi password at hand. Undo: tools/undo-home.sh.
 here="$(cd "$(dirname "$0")" && pwd)"; A="$here/tv-adb"
 F=com.livingroom.flamingo.launcher; GTV=com.google.android.apps.tv.launcherx
@@ -28,8 +30,7 @@ WRAITH=com.google.android.tungsten.setupwraith; WIFI="John Doe 5G"
 watcher=$!
 rm -f /tmp/.flamingo-home-done
 finish() { touch /tmp/.flamingo-home-done; kill $watcher 2>/dev/null; }
-# The Setup Wizard comes back on whatever happens
-trap '"$A" shell pm enable "$WRAITH" >/dev/null 2>&1; finish' EXIT
+trap finish EXIT
 trap 'exit 130' INT TERM
 fail() { echo "become-home: FAIL — $1; undoing"; "$here/undo-home.sh"; exit 1; }
 
@@ -41,7 +42,6 @@ fail() { echo "become-home: FAIL — $1; undoing"; "$here/undo-home.sh"; exit 1;
 "$A" shell cmd role add-role-holder android.app.role.HOME "$F" || echo "become-home: note — role assignment refused; relying on the Home press"
 "$A" shell cmd package set-home-activity "$F/.Home" >/dev/null 2>&1
 "$A" shell input keyevent KEYCODE_HOME; sleep 3
-"$A" shell pm enable "$WRAITH" || echo "become-home: WARNING — re-enabling the Setup Wizard failed; re-enable it in Settings › Apps"
 # Verify what the Home button really does. (Not `cmd package resolve-activity`: it ignores the HOME role and
 # reports setupwraith's RecoveryActivity by priority, while the Home key follows the role — seen 2026-10-21.)
 "$A" shell dumpsys role | grep -A1 'name=android.app.role.HOME' | grep -q "holders=$F" || fail "Flamingo does not hold the HOME role"
@@ -50,7 +50,7 @@ for i in 1 2 3; do
   "$A" shell input keyevent KEYCODE_HOME; sleep 3
   "$A" shell dumpsys activity activities | grep -m1 mResumedActivity | grep -q "$F/.Home" || fail "Home press $i (from Settings) did not open Flamingo"
 done
-"$A" shell pm list packages -e | grep -q "$WRAITH" || fail "the Setup Wizard is not enabled"
+"$A" shell pm list packages -d | grep -q "$WRAITH" || fail "the Setup Wizard is not off"
 "$A" shell cmd wifi list-networks | grep -q "$WIFI" || fail "'$WIFI' disappeared"
 "$A" shell cmd wifi status | grep -q "$WIFI" || fail "not connected to '$WIFI'"
-echo "become-home: PASS — Home opens Flamingo; Setup Wizard on; '$WIFI' saved and connected; Google TV's launcher off. Undo: tools/undo-home.sh"
+echo "become-home: PASS — Home opens Flamingo; '$WIFI' saved and connected; Google TV's launcher and Setup Wizard off. Undo: tools/undo-home.sh"
