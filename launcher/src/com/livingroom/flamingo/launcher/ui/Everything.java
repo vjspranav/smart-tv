@@ -36,14 +36,24 @@ public final class Everything extends FrameLayout {
         int radius = 16, outset = 10;
         float grow = 1.08f, dim = 1f, titleSpacing = 0f, titlePx = 84, metaPx = 32, eyebrowPx = 24, labelPx = 22;
         boolean underline, numbered;
+        // N: banners grey until focused, a red dot in the focus ring, inputs with an LED, mono caps meta, dot-grid backdrops
+        boolean mono, redDot, led, metaCaps, dots;
         Typeface title, meta, caps, bold, black, mid;
         int metaColor = 0xccffffff, base = 0xff0a0507;   // base: All apps' backdrop colour
+        int panel = 0x1fffffff, panelStroke = 0x1fffffff; // fixed (text) tiles
 
         /** A's ring around the tile, or G's bar under it (h: the tile's height, which places the bar). */
         public void mark(View v, boolean on, int h) {
             Drawable d = null;
             if (on && underline) d = new InsetDrawable(Kit.rounded(Color.WHITE, 2, 0, 0), 0, h + outset - 4, 0, -outset);
             else if (on) d = Kit.ring(v, radius, 5, outset, Color.WHITE);
+            if (on && redDot) {
+                int w = v.getLayoutParams() != null && v.getLayoutParams().width > 0 ? v.getLayoutParams().width : v.getWidth();
+                d = new android.graphics.drawable.LayerDrawable(new Drawable[]{d,
+                        new InsetDrawable(Kit.rounded(Dots.RED, 7, 0, 0), w - 34, 20, 20, h - 34)});
+            }
+            if (mono && v instanceof android.view.ViewGroup && ((android.view.ViewGroup) v).getChildAt(0) instanceof ImageView)
+                ((ImageView) ((android.view.ViewGroup) v).getChildAt(0)).setColorFilter(on ? null : Dots.GREY);
             v.setTag(Kit.OUTSET, on ? outset : 0);
             v.setForeground(d);
             v.animate().scaleX(on ? grow : 1f).scaleY(on ? grow : 1f).setDuration(150).start();
@@ -76,6 +86,26 @@ public final class Everything extends FrameLayout {
             s.eyebrowPx = 20;
             s.labelPx = 18;
             s.base = 0xff05030a;
+            return s;
+        }
+
+        /** N · Nothing: soft widget tiles on a dot grid, grey banners that light up in colour on focus, a red dot. */
+        public static Style nothing(Context c) {
+            Style s = cinema(c);
+            s.radius = 28;
+            s.grow = 1.05f;
+            s.mono = s.redDot = s.led = s.metaCaps = s.dots = true;
+            s.title = Fonts.get(c, Fonts.DOTO, 900);
+            s.titlePx = 84;
+            s.titleSpacing = 0.02f;
+            s.meta = s.caps = Fonts.get(c, Fonts.MONO);
+            s.metaPx = 24;
+            s.metaColor = 0x99ffffff;
+            s.eyebrowPx = 20;
+            s.labelPx = 18;
+            s.base = 0xff000000;
+            s.panel = 0xff121212;
+            s.panelStroke = 0x1cffffff;
             return s;
         }
     }
@@ -114,6 +144,7 @@ public final class Everything extends FrameLayout {
         title.setLetterSpacing(st.titleSpacing);
         Kit.fit(title, st.titlePx, 52);
         meta = Kit.label(c, st.meta, st.metaPx, st.metaColor);
+        if (st.metaCaps) { meta.setAllCaps(true); meta.setLetterSpacing(0.12f); }
         head.addView(eyebrow, lp(-1, -2, 0));
         head.addView(title, lp(-1, -2, 14));
         head.addView(meta, lp(-1, -2, 8));
@@ -187,11 +218,12 @@ public final class Everything extends FrameLayout {
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setImageBitmap(b);
             iv.setContentDescription(label);
+            if (st.mono) iv.setColorFilter(Dots.GREY);
             iv.setOutlineProvider(clip);
             iv.setClipToOutline(true);
             f.addView(iv, new LayoutParams(-1, -1));
         } else {
-            f.setBackground(Kit.rounded(0xff1d1d22, st.radius, 0, 0));
+            f.setBackground(st.led ? Kit.rounded(st.panel, st.radius, 1, st.panelStroke) : Kit.rounded(0xff1d1d22, st.radius, 0, 0));
             TextView t = Kit.label(getContext(), st.bold, 34, Color.WHITE);
             t.setGravity(Gravity.CENTER);
             t.setText(label);
@@ -205,6 +237,36 @@ public final class Everything extends FrameLayout {
     public View inputTile(HdmiPort p) {
         FrameLayout f = frame();
         boolean on = p.state == HdmiPort.State.ON;
+        if (st.led) {
+            // N: a plain widget with an LED: red and glowing when the device is on, dark otherwise
+            f.setBackground(Kit.rounded(st.panel, st.radius, 1, st.panelStroke));
+            if (on) {
+                View glow = new View(getContext());
+                glow.setBackground(Kit.rounded(0x40ff2a1a, 17, 0, 0));
+                glow.setTag(Kit.BACKDROP, true);
+                LayoutParams gp = new LayoutParams(34, 34, Gravity.TOP | Gravity.END);
+                gp.topMargin = 16;
+                gp.rightMargin = 16;
+                f.addView(glow, gp);
+            }
+            View led = new View(getContext());
+            led.setBackground(Kit.rounded(on ? Dots.RED : 0xff333333, 8, 0, 0));
+            led.setTag(Kit.BACKDROP, true);
+            LayoutParams lp = new LayoutParams(16, 16, Gravity.TOP | Gravity.END);
+            lp.topMargin = 25;
+            lp.rightMargin = 25;
+            f.addView(led, lp);
+            TextView name = Kit.label(getContext(), st.bold, 36, Color.WHITE);
+            name.setText(p.name);
+            Kit.fit(name, 36, 26);
+            f.addView(name, bottom(24, 24, 54));
+            TextView s = Kit.label(getContext(), st.caps, 18, 0x99ffffff);
+            s.setLetterSpacing(0.15f);
+            s.setAllCaps(true);
+            s.setText("HDMI " + p.port + " · " + Sections.state(p));
+            f.addView(s, bottom(24, 24, 24));
+            return f;
+        }
         GradientDrawable g = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                 p.state == HdmiPort.State.EMPTY ? new int[]{0xff1d1d22, 0xff16161a} : new int[]{0xff00439c, 0xff0070d1});
         g.setCornerRadius(st.radius);
@@ -227,6 +289,7 @@ public final class Everything extends FrameLayout {
                 FrameLayout f = frame();
                 ImageView iv = new ImageView(getContext());
                 iv.setImageBitmap(mosaic());
+                if (st.mono) iv.setColorFilter(Dots.GREY);
                 iv.setOutlineProvider(clip);
                 iv.setClipToOutline(true);
                 iv.setTag(Kit.BACKDROP, true);   // the tile's own picture; its labels sit on it by design
@@ -241,7 +304,7 @@ public final class Everything extends FrameLayout {
             }
             default: {
                 FrameLayout f = frame();
-                f.setBackground(Kit.rounded(0x1fffffff, st.radius, 1, 0x1fffffff));
+                f.setBackground(Kit.rounded(st.panel, st.radius, 1, st.panelStroke));
                 Icons.Kind icon = Icons.forKey(it.key);
                 int textLeft = 22;
                 if (icon != null) {

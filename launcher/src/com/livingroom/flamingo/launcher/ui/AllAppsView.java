@@ -142,8 +142,18 @@ public abstract class AllAppsView extends FrameLayout {
             if (mode == Mode.HIDDEN) { mode = before; rebuild("hidden"); } else close.run();
             return true;
         }
+        Target cur = targets.get(focus);
+        // Groups: → from a group goes into its apps (the grid already shows that group at the top)
+        if (mode == Mode.GROUPS && k == KeyEvent.KEYCODE_DPAD_RIGHT && cur.group != null) {
+            int first = jumpTarget(cur);
+            if (first >= 0) move(first, true);
+            return true;
+        }
         int n = Nav.find(items, focus, k, this);
         if (n < 0) return true;
+        // ← from an app back to the list lands on that app's own group (layout positions ignore the grid's scroll)
+        if (mode == Mode.GROUPS && cur.app != null && targets.get(n).app == null && targets.get(n).mode == null)
+            for (int i = 0; i < targets.size(); i++) if (targets.get(i).group == groupOf(cur.app)) { n = i; break; }
         // Coming up into the view switch lands on the current view, so leaving the apps never flips it
         if (targets.get(n).mode != null && targets.get(focus).mode == null)
             for (int i = 0; i < targets.size(); i++) if (targets.get(i).mode == mode) { n = i; break; }

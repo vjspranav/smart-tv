@@ -103,8 +103,10 @@ public class Home extends Activity {
     /** All apps in the current layout's style. The layout underneath stops drawing while it's open. */
     private void showAllApps(boolean on) {
         if (on && allApps == null) {
-            Everything.Style st = src.config().layout == HomeConfig.Layout.G ? Everything.Style.editorial(this) : Everything.Style.cinema(this);
-            allApps = new AllAppsGrid(this, src, st, () -> showAllApps(false));   // N gets its own style in Task 10
+            HomeConfig.Layout l = src.config().layout;
+            Everything.Style st = l == HomeConfig.Layout.G ? Everything.Style.editorial(this)
+                    : l == HomeConfig.Layout.N ? Everything.Style.nothing(this) : Everything.Style.cinema(this);
+            allApps = new AllAppsGrid(this, src, st, () -> showAllApps(false));
             root.addView(allApps, new FrameLayout.LayoutParams(-1, -1));
             allApps.bind(src.snapshot(stress));
             layout.setVisibility(View.INVISIBLE);

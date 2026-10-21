@@ -33,9 +33,11 @@ public final class AllAppsGrid extends AllAppsView {
     private final List<View> paged = new ArrayList<>();     // views on the sheet that page in and out
     private final List<int[]> spans = new ArrayList<>();    // their [top, bottom, isTile] on the sheet
     private final List<View> rail = new ArrayList<>();
+    private final java.util.Map<AllApps.Group, Integer> heads = new java.util.HashMap<>();   // group → its heading in paged
     private final List<TextView> letters = new ArrayList<>();
     private int off, tileW, tileH;
     private final int baseColor;
+    private android.graphics.drawable.Drawable dots;
 
     public AllAppsGrid(Context c, Sources src, Everything.Style st, Runnable close) {
         super(c, src, close);
@@ -61,6 +63,7 @@ public final class AllAppsGrid extends AllAppsView {
         paged.clear();
         spans.clear();
         rail.clear();
+        heads.clear();
         letters.clear();
         off = 0;
         Context c = getContext();
@@ -79,8 +82,13 @@ public final class AllAppsGrid extends AllAppsView {
         addView(clock, cp);
 
         // render every backdrop colour now, so moving focus never draws one mid-animation (only a handful exist)
-        for (AppEntry a : screen.az) glow(Glow.color(a.pkg));
-        glow(0xff5b5b66);
+        if (st.dots) {   // N: one static dot grid instead of per-app colour
+            if (dots == null) dots = Dots.grid(getResources());
+            setBackground(dots);
+        } else {
+            for (AppEntry a : screen.az) glow(Glow.color(a.pkg));
+            glow(0xff5b5b66);
+        }
 
         int sheetX;
         if (mode == Mode.HIDDEN) {
@@ -140,6 +148,7 @@ public final class AllAppsGrid extends AllAppsView {
                 TextView l = caps(c, st.labelPx, 0x8cffffff);
                 l.setText(s.group.title);
                 sheet.addView(l, at(-1, 30, 0, y));
+                heads.put(s.group, paged.size());
                 page(l, y, y + 30, false);
                 y += 60;   // heading 30 + 30 clear of a focused tile's growth and ring
                 y = grid(s.apps, cols, tileH, y) + 40;
@@ -217,6 +226,7 @@ public final class AllAppsGrid extends AllAppsView {
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setImageBitmap(b);
             iv.setContentDescription(a.label);
+            if (st.mono) iv.setColorFilter(Dots.GREY);
             iv.setOutlineProvider(clip);
             iv.setClipToOutline(true);
             f.addView(iv, new LayoutParams(-1, -1));
@@ -248,7 +258,11 @@ public final class AllAppsGrid extends AllAppsView {
         describe(t);
         markRailAndLetter(t);
         // always re-applied: in G the tiles beside the focused one dim, and all light up when focus leaves the grid
-        scrollTo(t.app != null ? items.get(now) : null, animate && (t.app != null || st.dim < 1f));
+        if (t.group != null && heads.containsKey(t.group)) {
+            // moving along the group list is the choice: its apps slide up to the top live, no OK needed
+            off = spans.get(heads.get(t.group))[0];
+            scrollTo(null, animate);
+        } else scrollTo(t.app != null ? items.get(now) : null, animate && (t.app != null || st.dim < 1f));
     }
 
     private void styleFocus(int i, boolean on) {
@@ -294,14 +308,15 @@ public final class AllAppsGrid extends AllAppsView {
         } else if (t.group != null) {
             eyebrow.setText("ALL APPS · GROUPS");
             title.setText(t.group.title);
-            meta.setText("OK to jump to " + t.group.title);
+            int count = 0;
+            for (AllApps.Section g : screen.groups) if (g.group == t.group) count = g.apps.size();
+            meta.setText(count + (count == 1 ? " app" : " apps") + " · → to browse");
         } else {
             eyebrow.setText("ALL APPS");
             title.setText("Hidden apps");
             meta.setText(screen.hidden.size() + " hidden · OK to see them · hold OK on one to unhide");
         }
-        int brand = t.app != null ? Glow.color(t.app.pkg) : 0xff5b5b66;
-        setBackground(glow(brand));
+        if (!st.dots) setBackground(glow(t.app != null ? Glow.color(t.app.pkg) : 0xff5b5b66));
     }
 
     /**
