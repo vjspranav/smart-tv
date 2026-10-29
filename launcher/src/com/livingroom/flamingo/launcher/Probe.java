@@ -7,12 +7,16 @@ import android.media.tv.TvInputInfo;
 import android.media.tv.TvInputManager;
 import android.util.Log;
 
-/** Debug-only checks of what this TV lets a normal app read. Started with `--es probe read|setpic`. */
+/**
+ * Debug-only checks of what this TV lets a normal app read. Started with `--es probe read|setpic|unglobal`
+ * (`unglobal` lifts a FIELD_GLOBAL picture override, which blocks automatic game mode; see TvSettings.setPicture).
+ */
 final class Probe {
     private static final String TAG = "FlamingoProbe";
 
     static void run(Context c, String what, int pic) {
-        if ("setpic".equals(what)) { setPicture(pic); picture(); return; }
+        if ("setpic".equals(what)) { setPicture(pic, "EN_PICTURE_MODE_FIELD_NORMAL"); picture(); return; }
+        if ("unglobal".equals(what)) { setPicture(pic, "EN_PICTURE_MODE_FIELD_GLOBAL_OFF"); picture(); return; }
         watchNext(c);
         picture();
         inputs(c);
@@ -48,14 +52,15 @@ final class Probe {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private static void setPicture(int mode) {
+    private static void setPicture(int mode, String fieldName) {
         try {
             Object m = pq();
+            Class apply = Class.forName("com.tcl.tv.pq.EnApplyType");
             Class field = Class.forName("com.tcl.tv.pq.EnPicModeFieldType");
             Class act = Class.forName("com.tcl.tv.pq.EnTclActType");
-            Object ok = m.getClass().getMethod("setPictureMode", int.class, int.class, field, act)
-                    .invoke(m, 0, mode, Enum.valueOf(field, "EN_PICTURE_MODE_FIELD_GLOBAL"), Enum.valueOf(act, "EN_TCL_ACT_EXEC_SAVE"));
-            Log.i(TAG, "SET_PICTURE_MODE " + mode + " -> " + ok);
+            Object ok = m.getClass().getMethod("setPictureMode", int.class, apply, int.class, field, act)
+                    .invoke(m, 0, Enum.valueOf(apply, "EN_APPLY_CURRENT"), mode, Enum.valueOf(field, fieldName), Enum.valueOf(act, "EN_TCL_ACT_EXEC_SAVE"));
+            Log.i(TAG, "SET_PICTURE_MODE " + mode + " " + fieldName + " -> " + ok);
         } catch (Throwable t) {
             Log.i(TAG, "SET_PICTURE_MODE_ERROR=" + t);
         }

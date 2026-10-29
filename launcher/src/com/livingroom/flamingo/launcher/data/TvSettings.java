@@ -80,15 +80,21 @@ final class TvSettings {
         }
     }
 
-    /** Sets a picture mode; false if the TV refused or the library is missing. */
+    /**
+     * Sets a picture mode for the current input, exactly as TCL's own Settings does (PictureManager2.setPictureMode:
+     * EN_APPLY_CURRENT + FIELD_NORMAL). Never FIELD_GLOBAL: that saves a top-priority override on every input, and
+     * the PS5's automatic game mode (ALLM) is then refused ("priority ... too low so return"), 2026-10-30.
+     */
     @SuppressWarnings({"unchecked", "rawtypes"})
     boolean setPicture(int id) {
         if (!useTcl) return false;
         try {
             Object m = pq();
-            Class field = Class.forName("com.tcl.tv.pq.EnPicModeFieldType"), act = Class.forName("com.tcl.tv.pq.EnTclActType");
-            Object ok = m.getClass().getMethod("setPictureMode", int.class, int.class, field, act)
-                    .invoke(m, 0, id, Enum.valueOf(field, "EN_PICTURE_MODE_FIELD_GLOBAL"), Enum.valueOf(act, "EN_TCL_ACT_EXEC_SAVE"));
+            Class apply = Class.forName("com.tcl.tv.pq.EnApplyType"), field = Class.forName("com.tcl.tv.pq.EnPicModeFieldType"),
+                    act = Class.forName("com.tcl.tv.pq.EnTclActType");
+            Object ok = m.getClass().getMethod("setPictureMode", int.class, apply, int.class, field, act)
+                    .invoke(m, 0, Enum.valueOf(apply, "EN_APPLY_CURRENT"), id, Enum.valueOf(field, "EN_PICTURE_MODE_FIELD_NORMAL"),
+                            Enum.valueOf(act, "EN_TCL_ACT_EXEC_SAVE"));
             return Boolean.TRUE.equals(ok);
         } catch (Throwable t) {
             return false;
