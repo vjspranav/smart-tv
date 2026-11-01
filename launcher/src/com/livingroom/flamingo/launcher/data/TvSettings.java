@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Picture mode through TCL's shared library (com.tcl.tv.display → TvPqManager), by reflection so a missing
- * or changed library only costs the inline value. Sound and sleep open TCL's own screens.
+ * or changed library only costs the displayed value. All setting changes belong to TCL's own screens.
  */
 final class TvSettings {
     /**
@@ -17,15 +17,12 @@ final class TvSettings {
      * (PictureManager2.getPictureMappingValues + the pm_* strings). Game ids carry a sub-mode offset.
      */
     static final Map<Integer, String> NAMES = new LinkedHashMap<>();
-    /** The SDR modes that can be set inline, in TCL's menu order. HDR/Dolby content has its own set. */
-    static final Map<Integer, String> PICTURE = new LinkedHashMap<>();
     static {
-        PICTURE.put(10, "Intelligent");
-        PICTURE.put(1, "Vivid");
-        PICTURE.put(0, "Standard");
-        PICTURE.put(4, "Sport");
-        PICTURE.put(3, "Movie");
-        NAMES.putAll(PICTURE);
+        NAMES.put(10, "Intelligent");
+        NAMES.put(1, "Vivid");
+        NAMES.put(0, "Standard");
+        NAMES.put(4, "Sport");
+        NAMES.put(3, "Movie");
         for (int g = 5; g <= 7; g++) NAMES.put(g, "Game");
         NAMES.put(8, "PC");
         NAMES.put(12, "Photo");
@@ -64,12 +61,6 @@ final class TvSettings {
         return n != null ? n : "";
     }
 
-    /** True when the current mode is an SDR one, so the inline SDR choices apply. */
-    boolean canChoose() {
-        Integer id = pictureId();
-        return id != null && PICTURE.containsKey(id);
-    }
-
     Integer pictureId() {
         if (!useTcl) return null;
         try {
@@ -77,27 +68,6 @@ final class TvSettings {
             return (Integer) m.getClass().getMethod("getPictureMode").invoke(m);
         } catch (Throwable t) {
             return null;
-        }
-    }
-
-    /**
-     * Sets a picture mode for the current input, exactly as TCL's own Settings does (PictureManager2.setPictureMode:
-     * EN_APPLY_CURRENT + FIELD_NORMAL). Never FIELD_GLOBAL: that saves a top-priority override on every input, and
-     * the PS5's automatic game mode (ALLM) is then refused ("priority ... too low so return"), 2026-10-30.
-     */
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    boolean setPicture(int id) {
-        if (!useTcl) return false;
-        try {
-            Object m = pq();
-            Class apply = Class.forName("com.tcl.tv.pq.EnApplyType"), field = Class.forName("com.tcl.tv.pq.EnPicModeFieldType"),
-                    act = Class.forName("com.tcl.tv.pq.EnTclActType");
-            Object ok = m.getClass().getMethod("setPictureMode", int.class, apply, int.class, field, act)
-                    .invoke(m, 0, Enum.valueOf(apply, "EN_APPLY_CURRENT"), id, Enum.valueOf(field, "EN_PICTURE_MODE_FIELD_NORMAL"),
-                            Enum.valueOf(act, "EN_TCL_ACT_EXEC_SAVE"));
-            return Boolean.TRUE.equals(ok);
-        } catch (Throwable t) {
-            return false;
         }
     }
 
@@ -118,7 +88,7 @@ final class TvSettings {
         return Class.forName("com.tcl.tv.pq.TvPqManager").getMethod("getInstance").invoke(null);
     }
 
-    boolean openPicture() { return Sources.start(c, new Intent().setComponent(new ComponentName("com.android.tv.settings", "com.tcl.settings.PictureActivity"))); }
+    boolean openPicture() { return Sources.start(c, new Intent(Settings.ACTION_DISPLAY_SETTINGS).setComponent(new ComponentName("com.android.tv.settings", "com.tcl.settings.PictureActivity"))); }
     boolean openSound() { return Sources.start(c, new Intent().setComponent(new ComponentName("com.android.tv.settings", "com.tcl.settings.SoundActivity"))); }
     boolean openSleep() { return Sources.start(c, new Intent("com.tcl.action.sleep")); }
     boolean openAll() { return Sources.start(c, new Intent(Settings.ACTION_SETTINGS)); }

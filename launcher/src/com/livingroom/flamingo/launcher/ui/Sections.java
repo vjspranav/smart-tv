@@ -18,16 +18,14 @@ public final class Sections {
         public final Kind kind;
         public final String key, label, value;   // value: state, current setting, or Spotify's track ("" if none)
         public final Runnable action;
-        public final List<String> choices;       // non-empty → OK opens an inline chooser instead of action
         public final HdmiPort port;              // INPUT only
 
-        Item(Kind kind, String key, String label, String value, Runnable action, List<String> choices, HdmiPort port) {
+        Item(Kind kind, String key, String label, String value, Runnable action, HdmiPort port) {
             this.kind = kind;
             this.key = key;
             this.label = label;
             this.value = value == null ? "" : value;
             this.action = action;
-            this.choices = choices == null ? new ArrayList<String>() : choices;
             this.port = port;
         }
     }
@@ -50,29 +48,29 @@ public final class Sections {
         List<Section> out = new ArrayList<>();
         Section inputs = new Section("Inputs");
         for (final HdmiPort p : s.inputs)
-            inputs.items.add(new Item(Kind.INPUT, "hdmi:" + p.port, p.name, state(p), () -> src.openInput(p), null, p));
+            inputs.items.add(new Item(Kind.INPUT, "hdmi:" + p.port, p.name, state(p), () -> src.openInput(p), p));
         out.add(inputs);
 
         Section apps = new Section("Apps");
         // All apps leads the row so it's one step from wherever you enter the row (owner: easier to reach)
-        apps.items.add(new Item(Kind.ALLAPPS, "allapps", "All apps", s.az.size() + " apps", openAllApps, null, null));
+        apps.items.add(new Item(Kind.ALLAPPS, "allapps", "All apps", s.az.size() + " apps", openAllApps, null));
         // Spotify's tile carries what's playing (a separate Listen row only repeated the app; owner: redundant)
         String track = s.listen == null || s.listen.title == null ? ""
                 : s.listen.title + (s.listen.subtitle != null ? " — " + s.listen.subtitle : "");
         for (final AppEntry a : s.apps)
-            apps.items.add(new Item(Kind.APP, a.pkg, a.label, a.pkg.equals(AppOrder.SPOTIFY) ? track : "", () -> src.openApp(a.pkg), null, null));
+            apps.items.add(new Item(Kind.APP, a.pkg, a.label, a.pkg.equals(AppOrder.SPOTIFY) ? track : "", () -> src.openApp(a.pkg), null));
         out.add(apps);
 
         Section tv = new Section("TV");
-        tv.items.add(new Item(Kind.SETTING, "picture", "Picture", s.picture, src::openPicture, src.pictureChoices(), null));
-        tv.items.add(new Item(Kind.SETTING, "sound", "Sound", "Open", src::openSound, null, null));
-        tv.items.add(new Item(Kind.SETTING, "sleep", "Sleep timer", "Open", src::openSleep, null, null));
-        tv.items.add(new Item(Kind.SETTING, "wifi", "Wi-Fi", src.wifi().isEmpty() ? "Open" : src.wifi(), src::openWifi, null, null));
-        tv.items.add(new Item(Kind.SETTING, "all", "All settings", "Open", src::openAllSettings, null, null));
+        tv.items.add(new Item(Kind.SETTING, "picture", "Picture", s.picture, src::openPicture, null));
+        tv.items.add(new Item(Kind.SETTING, "sound", "Sound", "Open", src::openSound, null));
+        tv.items.add(new Item(Kind.SETTING, "sleep", "Sleep timer", "Open", src::openSleep, null));
+        tv.items.add(new Item(Kind.SETTING, "wifi", "Wi-Fi", src.wifi().isEmpty() ? "Open" : src.wifi(), src::openWifi, null));
+        tv.items.add(new Item(Kind.SETTING, "all", "All settings", "Open", src::openAllSettings, null));
         out.add(tv);
 
         Section home = new Section("Home screen");
-        home.items.add(new Item(Kind.HOME, "home", "Home screen", layoutName(s.layout), openHomeSettings, null, null));
+        home.items.add(new Item(Kind.HOME, "home", "Home screen", layoutName(s.layout), openHomeSettings, null));
         out.add(home);
         return out;
     }

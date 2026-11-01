@@ -48,7 +48,6 @@ public final class Sources {
     private volatile Map<String, MediaItem> watchNext = Collections.emptyMap();
     private volatile List<HdmiPort> ports = Collections.emptyList();
     private volatile String picture = "", wifi = "";
-    private volatile boolean pictureChoosable;
 
     // ~2 MB per 960×540 image; holds the five main slots plus Listen
     private final Map<String, Bitmap> artCache = new java.util.LinkedHashMap<String, Bitmap>(8, 0.75f, true) {
@@ -98,7 +97,6 @@ public final class Sources {
         timeUsed = apps.timeUsed();
         ports = hdmi.ports(config.hdmiNames);
         picture = tv.pictureName();
-        pictureChoosable = tv.canChoose();
         wifi = tv.wifiName();
         watchNext = new WatchNext(c, store).latestPerApp();
         warmArt();
@@ -239,23 +237,8 @@ public final class Sources {
     public boolean openAllSettings() { return tv.openAll(); }
     public boolean openWifi() { return tv.openWifi(); }
 
-    /** Picture modes that can be set inline, in order; empty if TCL's library can't set them. */
-    public List<String> pictureChoices() {
-        return pictureChoosable ? new ArrayList<>(TvSettings.PICTURE.values()) : new ArrayList<String>();
-    }
-
     /** Connected network name, or "" when unknown. */
     public String wifi() { return wifi; }
-
-    public void setPicture(String name) {
-        bg.post(() -> {
-            for (Map.Entry<Integer, String> e : TvSettings.PICTURE.entrySet())
-                if (e.getValue().equals(name) && tv.setPicture(e.getKey())) break;
-            picture = tv.pictureName();
-            pictureChoosable = tv.canChoose();
-            main.post(notifyAll);
-        });
-    }
 
     static boolean start(Context c, Intent i) {
         if (i == null) return false;
@@ -270,7 +253,7 @@ public final class Sources {
     /** Debug: logs the current snapshot under tag FlamingoDump. */
     public void dump() {
         Screen s = snapshot(false);
-        Log.i("FlamingoDump", "layout=" + s.layout + " picture=" + s.picture + " choosable=" + pictureChoosable + " wifi=" + wifi + " clock=" + s.clock + s.ampm + " date=" + s.date);
+        Log.i("FlamingoDump", "layout=" + s.layout + " picture=" + s.picture + " wifi=" + wifi + " clock=" + s.clock + s.ampm + " date=" + s.date);
         for (Screen.Slot sl : s.main)
             Log.i("FlamingoDump", "main " + sl.key() + " name=" + sl.name() + (sl.port != null ? " state=" + sl.port.state : "")
                     + (sl.cont != null ? " cont=" + sl.cont.title + " | " + sl.cont.subtitle + " pos=" + sl.cont.positionMs

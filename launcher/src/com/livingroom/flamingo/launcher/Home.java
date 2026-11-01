@@ -45,7 +45,7 @@ public class Home extends Activity {
         super.onCreate(b);
         Intent in = getIntent();
         String probe = in.getStringExtra("probe");
-        if (probe != null) { Probe.run(this, probe, in.getIntExtra("pic", -1)); finish(); return; }
+        if (probe != null) { Probe.run(this, probe); finish(); return; }
         if (in.getBooleanExtra("notcl", false)) Sources.tclAllowed = false;
         if (in.getBooleanExtra("kittest", false)) { debugScreen(Debug.kitTest(this)); return; }
         src = Sources.get(this);

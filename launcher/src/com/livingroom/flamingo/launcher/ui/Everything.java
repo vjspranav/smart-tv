@@ -134,7 +134,6 @@ public final class Everything extends FrameLayout {
     private int[] stripFirst = new int[0];
     private Screen screen;
     private List<Sections.Section> secs;
-    private Choice choice;
     private boolean shown, moved;   // moved: the owner has moved since opening, so refreshes keep their place
 
     /** leave: Back, or Up from the top row (back to Home). */
@@ -412,8 +411,7 @@ public final class Everything extends FrameLayout {
     private void describe(Sections.Item it) {
         eyebrow.setText(it.kind == Sections.Kind.INPUT ? "INPUT · HDMI " + it.port.port : sectionName(it).toUpperCase());
         title.setText(it.label);
-        meta.setText(choice != null && choice.item == it ? "← → choose · OK to apply · Back to cancel"
-                : it.kind == Sections.Kind.INPUT ? Sections.state(it.port) + " · press OK to switch"
+        meta.setText(it.kind == Sections.Kind.INPUT ? Sections.state(it.port) + " · press OK to switch"
                 : it.kind == Sections.Kind.APP ? (it.value.isEmpty() ? "Press OK to open" : "Now playing · " + it.value)
                 : it.kind == Sections.Kind.ALLAPPS ? it.value + " · by group or A to Z" : it.value);
     }
@@ -480,12 +478,10 @@ public final class Everything extends FrameLayout {
             if (k == KeyEvent.KEYCODE_BACK || k == KeyEvent.KEYCODE_DPAD_UP) leave.run();
             return true;
         }
-        if (choice != null) return chooserKey(k);
         if (k == KeyEvent.KEYCODE_BACK) { leave.run(); return true; }
         if (k == KeyEvent.KEYCODE_DPAD_CENTER || k == KeyEvent.KEYCODE_ENTER) {
             Sections.Item it = items.get(focus);
-            if (!it.choices.isEmpty()) { choice = new Choice(it); showChoice(); }
-            else it.action.run();
+            it.action.run();
             return true;
         }
         int n = Nav.find(tiles, focus, k, rows);
@@ -506,30 +502,9 @@ public final class Everything extends FrameLayout {
         page(animate);
     }
 
-    private boolean chooserKey(int k) {
-        if (k == KeyEvent.KEYCODE_DPAD_LEFT || k == KeyEvent.KEYCODE_DPAD_RIGHT) {
-            choice.move(k == KeyEvent.KEYCODE_DPAD_RIGHT ? 1 : -1);
-            showChoice();
-        } else if (k == KeyEvent.KEYCODE_DPAD_CENTER || k == KeyEvent.KEYCODE_ENTER) {
-            src.setPicture(choice.value());
-            choice = null;
-        } else if (k == KeyEvent.KEYCODE_BACK) {
-            choice = null;
-            build();
-        }
-        return true;
-    }
-
-    private void showChoice() {
-        TextView v = tiles.get(focus).findViewWithTag("value");
-        if (v != null) v.setText(choice.display());
-        describe(choice.item);
-    }
-
-    /** Opening the screen: forget any chooser, start at the first tile. */
+    /** Opening the screen: start at the first tile. */
     public void reset(boolean shownNow) {
         shown = shownNow;
-        choice = null;
         moved = false;
         if (tiles.isEmpty()) return;
         firstRow = 0;
