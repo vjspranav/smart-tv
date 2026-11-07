@@ -1,0 +1,313 @@
+Verified distinct cleared global slots: 210 (codecs 0..29 x ranges 0..6).
+
+SOURCE: live-evening.log
+11-01 18:06:37.571  8137  8137 I PictureCheck: PICTURE_MODE=1
+11-01 18:06:37.577   570   570 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:06:37.577   570   570 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:37.577   570   570 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:37.577   570   570 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 1 priority is 1
+11-01 18:06:37.579  8137  8137 I PictureCheck: CLEAR_SAVED_GLOBAL_LOCK_4ARG mode=1 result=true
+11-01 18:06:37.581  8137  8137 I PictureCheck: AFTER_MODE=1
+11-01 18:06:37.582  8137  8137 I PictureCheck: getMemcConfig=3
+11-01 18:06:37.583  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:06:37.583  8137  8137 I PictureCheck: getMemcJudder=10
+11-01 18:06:51.591   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:06:51.591   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:51.591   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:51.592   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 1 priority is 1
+11-01 18:06:51.611   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:51.611   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:51.615   570   570 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:51.615   570   570 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:06:52.935  8137  8137 I PictureCheck: PICTURE_MODE=3
+11-01 18:06:52.936  8137  8137 I PictureCheck: getMemcConfig=1
+11-01 18:06:52.937  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:06:52.937  8137  8137 I PictureCheck: getMemcJudder=7
+11-01 18:07:14.174  8137  8137 I PictureCheck: PICTURE_MODE=10
+11-01 18:07:14.175  8137  8137 I PictureCheck: getMemcConfig=2
+11-01 18:07:14.175  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:14.175  8137  8137 I PictureCheck: getMemcJudder=9
+11-01 18:07:16.312  8137  8137 I PictureCheck: PICTURE_MODE=3
+11-01 18:07:16.314  8137  8137 I PictureCheck: getMemcConfig=1
+11-01 18:07:16.314  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:16.315  8137  8137 I PictureCheck: getMemcJudder=7
+11-01 18:07:16.858   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:16.858   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:19.864   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:07:19.864   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:19.864   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:19.864   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 1 priority is 1
+11-01 18:07:20.493  8137  8137 I PictureCheck: PICTURE_MODE=1
+11-01 18:07:20.494  8137  8137 I PictureCheck: getMemcConfig=3
+11-01 18:07:20.495  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:20.495  8137  8137 I PictureCheck: getMemcJudder=10
+11-01 18:07:44.789  8137  8137 I PictureCheck: PICTURE_MODE=0
+11-01 18:07:44.791  8137  8137 I PictureCheck: getMemcConfig=2
+11-01 18:07:44.794  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:44.794  8137  8137 I PictureCheck: getMemcJudder=9
+11-01 18:07:46.956  8137  8137 I PictureCheck: PICTURE_MODE=1
+11-01 18:07:46.957  8137  8137 I PictureCheck: getMemcConfig=3
+11-01 18:07:46.958  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:46.958  8137  8137 I PictureCheck: getMemcJudder=10
+11-01 18:07:47.679   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:07:47.679   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:47.679   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:47.679   570   818 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 1 priority is 1
+11-01 18:07:47.686   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:47.686   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:47.687   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:47.687   570   818 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:07:49.111  8137  8137 I PictureCheck: PICTURE_MODE=3
+11-01 18:07:49.112  8137  8137 I PictureCheck: getMemcConfig=1
+11-01 18:07:49.112  8137  8137 I PictureCheck: getMemcBlur=10
+11-01 18:07:49.113  8137  8137 I PictureCheck: getMemcJudder=7
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=0,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=1,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=2,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=3,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=4,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=5,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.572   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=6,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=7,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=8,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=9,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=10,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=11,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=12,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=13,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=14,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.573   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=15,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=16,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=17,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=18,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.574   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=19,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=20,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=21,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=22,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=23,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.575   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=24,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=25,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=26,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=27,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=28,dynamicrange=6,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=0,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=1,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=2,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=3,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=4,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=5,picmode=255,priority=0
+11-01 18:06:37.576   570   570 I VIDEOFUNC: TclpqStatus [dataSetPicMode,1502] codec=29,dynamicrange=6,picmode=255,priority=0
+
+SOURCE: postboot.log
+11-01 18:09:58.795   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:09:58.795   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.795   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.795   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 3 priority is 1
+11-01 18:09:58.800   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.800   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.803   566   566 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.803   566   566 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.807   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:09:58.807   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+
+SOURCE: ps5-reconnected.log
+11-01 18:10:18.164   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:18.164   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:18.468   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 1 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=1,dynamic_range is 1
+11-01 18:10:18.469   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =1 enPicMode is 21 priority is 2
+11-01 18:10:20.249  3865  3865 I PictureCheck: PICTURE_MODE=21
+11-01 18:10:20.250  3865  3865 I PictureCheck: getMemcConfig=0
+11-01 18:10:20.250  3865  3865 I PictureCheck: getMemcBlur=0
+11-01 18:10:20.250  3865  3865 I PictureCheck: getMemcJudder=0
+11-01 18:10:41.704   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 0 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=0,dynamic_range is 0
+11-01 18:10:41.704   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:41.704   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:41.707   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =0 enPicMode is 3 priority is 1
+11-01 18:10:41.752   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:41.752   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=21,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:43.085  3865  3865 I PictureCheck: PICTURE_MODE=3
+11-01 18:10:43.086  3865  3865 I PictureCheck: getMemcConfig=1
+11-01 18:10:43.087  3865  3865 I PictureCheck: getMemcBlur=10
+11-01 18:10:43.087  3865  3865 I PictureCheck: getMemcJudder=7
+11-01 18:10:44.060   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:44.060   566   821 I VIDEOFUNC: TclpqStatus [dataGetPicMode,1495] inputdevice=15,enDynamicRange=0,picmode=255,priority=0
+11-01 18:10:44.365   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,805] bAllm is 1 allmMode is 1 dolby_game is 0 bVrr is 0 deviceID[15]->gameModeConfigStatus is 2,isConnect=1,dynamic_range is 1
+11-01 18:10:44.366   566   821 I VIDEOFUNC: TclpqStatus [signalGameStatusProc,854] bGameOn is =1 enPicMode is 21 priority is 2
+11-01 18:10:46.204  3865  3865 I PictureCheck: PICTURE_MODE=21
+11-01 18:10:46.205  3865  3865 I PictureCheck: getMemcConfig=0
+11-01 18:10:46.205  3865  3865 I PictureCheck: getMemcBlur=0
+11-01 18:10:46.206  3865  3865 I PictureCheck: getMemcJudder=0
