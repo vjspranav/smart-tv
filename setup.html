@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14151f">
+<title>Install the remote</title>
+<link rel="stylesheet" href="/app.css">
+<style>
+  
+  .page { max-width: 560px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 20px) 18px 40px; position: relative; }
+  h1 { font-size: 26px; letter-spacing: -0.02em; margin: 8px 0 6px; }
+  h2 { font-size: 18px; margin: 0 0 4px; }
+  p, li { color: var(--muted); }
+  .lead { margin: 0 0 18px; }
+  .card { background: var(--glass); border: 1px solid var(--line); border-radius: 20px; padding: 18px; margin: 14px 0; }
+  .card.mine { border-color: var(--accent); }
+  ol { padding-left: 20px; margin: 10px 0 0; }
+  li { margin: 8px 0; line-height: 1.45; }
+  li strong, p strong { color: var(--text); font-weight: 600; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 18px; border-radius: 14px;
+         background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none; margin: 4px 0; }
+  .btn.ghost { background: var(--glass-strong); color: var(--text); }
+  code { font: 600 14px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text); word-break: break-all; }
+  .check { display: flex; gap: 10px; align-items: center; margin: 6px 0; color: var(--text); }
+  .check i { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex: none; }
+  .check.good i { background: var(--ok); } .check.bad i { background: var(--danger); }
+  .page a:not(.btn) { color: var(--accent); text-underline-offset: 3px; }
+  .back { color: var(--muted); text-decoration: none; }
+</style>
+<script defer src="/setup.js"></script>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><i id="glow-a"></i><i id="glow-b"></i></div>
+<main class="page">
+  <a class="back" href="/">Back to the remote</a>
+  <h1>Install the remote</h1>
+  <p class="lead">Installing puts the remote on your home screen, full screen, without the browser bar. Your phone has to trust this Pi once so the remote can run over HTTPS.</p>
+
+  <section class="card" aria-label="This device">
+    <h2>This device</h2>
+    <div class="check" id="c-secure"><i></i><span>Checking connection</span></div>
+    <div class="check" id="c-installed"><i></i><span>Checking install</span></div>
+    <div id="install-now" hidden><button class="btn" id="install-button" type="button">Install app</button></div>
+    <p id="go-ip" hidden>On Android, install from <a class="btn" href="https://192.168.0.48/setup">Open https://192.168.0.48</a></p>
+  </section>
+
+  <section class="card" id="ios">
+    <h2>iPhone and iPad</h2>
+    <ol>
+      <li>In <strong>Safari</strong>, download the profile: <a class="btn ghost" href="http://remote.local/local-ca.mobileconfig">Download profile</a> and tap <strong>Allow</strong>.</li>
+      <li>Open <strong>Settings</strong>, tap <strong>Profile Downloaded</strong> near the top, then <strong>Install</strong>.</li>
+      <li>Go to <strong>Settings › General › About › Certificate Trust Settings</strong> and turn on <strong>Living Room Remote Local CA</strong>. Without this switch, HTTPS fails.</li>
+      <li>Open <a href="https://remote.local/">https://remote.local</a> in Safari.</li>
+      <li>Tap <strong>Share › Add to Home Screen</strong>, keep <strong>Open as Web App</strong> on, then <strong>Add</strong>.</li>
+    </ol>
+  </section>
+
+  <section class="card" id="android">
+    <h2>Android</h2>
+    <p>Install from the Pi's address. Chrome won't install from <code>remote.local</code> on Android, only bookmark it.</p>
+    <ol>
+      <li>Download the certificate: <a class="btn ghost" href="/local-ca.crt" download="living-room-remote-ca.crt">Download certificate</a></li>
+      <li>Open <strong>Settings</strong> and search for <strong>CA certificate</strong>. On most phones it is under <strong>Security › More security settings › Encryption &amp; credentials › Install a certificate › CA certificate</strong>. Tap <strong>Install anyway</strong> and pick the downloaded file.</li>
+      <li>Fully close Chrome, then open <a href="https://192.168.0.48/">https://192.168.0.48</a>. You should see no warning page.</li>
+      <li>Open the <strong>⋮</strong> menu and tap <strong>Install app</strong>.</li>
+    </ol>
+    <p>If your router ever gives the Pi a different address, reserve <code>192.168.0.48</code> for it in the router settings.</p>
+  </section>
+
+  <section class="card">
+    <h2>Certificate fingerprint</h2>
+    <p>To confirm you installed the right certificate, its SHA-256 fingerprint starts with <code>42:37:FA:68</code> and ends with <code>31:F3:7A:D7</code>.</p>
+  </section>
+</main>
+</body>
+</html>

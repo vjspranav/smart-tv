@@ -1,0 +1,161 @@
+{
+ "builtin": [
+  {
+   "id": "all-lights",
+   "name": "All lights",
+   "devices": [
+    "living-light",
+    "living-lamp",
+    "vjs-light",
+    "green-light",
+    "snehal-light",
+    "dining-light",
+    "kitchen-light"
+   ]
+  },
+  {
+   "id": "all-acs",
+   "name": "All ACs",
+   "devices": [
+    "living-ac",
+    "vjs-ac",
+    "green-ac",
+    "snehal-ac"
+   ]
+  },
+  {
+   "id": "all-fans",
+   "name": "All fans",
+   "devices": [
+    "living-fan",
+    "vjs-fan",
+    "green-fan",
+    "snehal-fan",
+    "dining-fan"
+   ]
+  },
+  {
+   "id": "living",
+   "name": "Living",
+   "devices": [
+    "living-ac",
+    "living-fan",
+    "living-light",
+    "living-lamp"
+   ]
+  },
+  {
+   "id": "living-lights",
+   "name": "Living lights",
+   "devices": [
+    "living-light",
+    "living-lamp"
+   ]
+  },
+  {
+   "id": "vjs",
+   "name": "VJS",
+   "devices": [
+    "vjs-ac",
+    "vjs-fan",
+    "vjs-light"
+   ]
+  },
+  {
+   "id": "vjs-lights",
+   "name": "VJS lights",
+   "devices": [
+    "vjs-light"
+   ]
+  },
+  {
+   "id": "green",
+   "name": "Green",
+   "devices": [
+    "green-ac",
+    "green-fan",
+    "green-light"
+   ]
+  },
+  {
+   "id": "green-lights",
+   "name": "Green lights",
+   "devices": [
+    "green-light"
+   ]
+  },
+  {
+   "id": "snehal",
+   "name": "Snehal",
+   "devices": [
+    "snehal-ac",
+    "snehal-fan",
+    "snehal-light"
+   ]
+  },
+  {
+   "id": "snehal-lights",
+   "name": "Snehal lights",
+   "devices": [
+    "snehal-light"
+   ]
+  },
+  {
+   "id": "dining",
+   "name": "Dining",
+   "devices": [
+    "dining-fan",
+    "dining-light"
+   ]
+  },
+  {
+   "id": "dining-lights",
+   "name": "Dining lights",
+   "devices": [
+    "dining-light"
+   ]
+  },
+  {
+   "id": "kitchen",
+   "name": "Kitchen",
+   "devices": [
+    "kitchen-light"
+   ]
+  },
+  {
+   "id": "kitchen-lights",
+   "name": "Kitchen lights",
+   "devices": [
+    "kitchen-light"
+   ]
+  }
+ ],
+ "groups": [],
+ "routines": [
+  {
+   "id": "good-night",
+   "name": "Good night",
+   "icon": "moon",
+   "steps": [
+    {
+     "group": "vjs-lights",
+     "changes": {
+      "power": true,
+      "brightness": 10,
+      "color_temp": 0
+     }
+    },
+    {
+     "devices": [
+      "vjs-ac"
+     ],
+     "changes": {
+      "power": true,
+      "target_temp": 24,
+      "off_timer_min": 120
+     }
+    }
+   ]
+  }
+ ]
+}

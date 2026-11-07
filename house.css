@@ -1,0 +1,27 @@
+/* House view: the flat as a live 3D model, full screen over Home (house.js). Toasts (z 50) stay on top. */
+.house-view { position: fixed; inset: 0; z-index: 40; background: #0d1015; overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; }
+.house-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.house-bar { position: absolute; z-index: 3; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 8px;
+  padding: calc(env(safe-area-inset-top) + 10px) 12px 10px; pointer-events: none; }
+.house-bar > * { pointer-events: auto; }
+.house-bar .grow { flex: 1; }
+.house-btn { height: 36px; min-width: 36px; padding: 0 14px; display: inline-grid; place-items: center; border-radius: 999px;
+  background: rgba(16, 19, 28, 0.86); color: #f6f7fd; font: 650 14px/1 var(--font); border: 1px solid rgba(255, 255, 255, 0.12); }
+  /* no backdrop blur: over a 3D view that redraws every frame, the blur would be redone every frame too */
+.house-btn.icon { padding: 0; width: 36px; }
+.house-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.house-btn[aria-pressed="true"] { color: #12142a; background: #b8aaff; border-color: transparent; }
+.house-btn:focus-visible { outline: 2px solid #b8aaff; outline-offset: 2px; }
+.house-label { position: absolute; z-index: 2; transform: translate(-50%, -50%); font: 650 12px/1 var(--font); color: rgba(255, 255, 255, 0.86);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9); pointer-events: none; white-space: nowrap; }
+.house-unplaced { position: absolute; z-index: 3; left: 12px; right: 12px; bottom: calc(env(safe-area-inset-bottom) + 12px);
+  text-align: center; font: 500 12px/1.4 var(--font); color: #9aa0b8; pointer-events: none; }
+.house-unplaced:empty { display: none; }
+.house-loading { position: absolute; inset: 0; margin: 0; display: grid; place-items: center; font: 500 14px/1.4 var(--font); color: #9aa0b8; }
+@media (prefers-reduced-motion: reduce) { .house-btn { transition: none; } }
+/* the walking joystick, bottom left while walking */
+.house-stick { position: absolute; z-index: 3; left: 18px; bottom: calc(env(safe-area-inset-bottom) + 34px); width: 104px; height: 104px;
+  border-radius: 50%; background: rgba(16, 19, 28, 0.5); border: 1px solid rgba(255, 255, 255, 0.18); touch-action: none; display: grid; place-items: center; }
+.house-stick[hidden] { display: none; }
+.house-stick span { width: 42px; height: 42px; border-radius: 50%; background: rgba(246, 247, 253, 0.9); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); pointer-events: none; }

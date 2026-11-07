@@ -1,0 +1,11 @@
+[Unit]
+Description=Forward TV Remote HTTP
+Requires=tv-remote-http.socket
+After=tv-remote-http.socket
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:8765
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes

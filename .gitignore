@@ -1,0 +1,12 @@
+tv-bridge/build/
+tools/qa/node_modules/
+tools/qa/*.png
+tools/qa/apps.json
+certs/*.key
+__pycache__/
+remote-config.json
+tv-address.txt
+icon-cache/
+apps-cache.json
+devices.json
+runtime/

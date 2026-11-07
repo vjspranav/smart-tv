@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadContent</key>
+			<data>
+			MIIEQDCCAqigAwIBAgIUNvpvzxQvaifXyob5u7ySMQ51mE8wDQYJ
+			KoZIhvcNAQELBQAwJjEkMCIGA1UEAwwbTGl2aW5nIFJvb20gUmVt
+			b3RlIExvY2FsIENBMB4XDTI2MTAxODIwMDA1OVoXDTM2MTAxNTIw
+			MDA1OVowJjEkMCIGA1UEAwwbTGl2aW5nIFJvb20gUmVtb3RlIExv
+			Y2FsIENBMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA
+			ke8CSHr20DvtcOSLilUP1iEYnZJ03c6HDU2F6RFbCDTktnn9eQsg
+			qg9Qqu565I7fZRSAnoc2NiEStJjv6PgdquKHUZ5nKwvK2Egmt/DN
+			x8sjf4TwJLZ369v9Dehl1FX28sHcY6ftB7IkVukf68VEVvWoO0x0
+			mhbmILCCH2+1ChlVz61GGHOo4WPmrVhzkJ5bc20GI1KEBc4S+5x0
+			CcTrP+au/SMNcZ/fbvLSsFvLuivP6NJYkFnhLa/7AdH3q74CX4cC
+			xSLinlmJloQxoZArAemdlR1c3b3pq1Gaoe6OlmQC7YKVI2zJQfq3
+			bMN2c+fzGtfixoskbFP42zuv0b/aBPWmjv6AZYoZEAnqVvROOijQ
+			jNzvYf75KHh84NrBq1IhcWqGFBkRTmO5g82akCQhKI3N8vBzVXiS
+			lRFTfhhgRJyJD4+TmKUZjg2MHjTjHA+tzRMnOI1EjSQNE9SGXQaZ
+			b08vl4cx0kIwMCOopDoDgp+5v6D0gWGaX04h3LEEEJoHAgMBAAGj
+			ZjBkMB0GA1UdDgQWBBRCK+UpVjlPgo8U/LcNuZ7hgQ1P9TAfBgNV
+			HSMEGDAWgBRCK+UpVjlPgo8U/LcNuZ7hgQ1P9TASBgNVHRMBAf8E
+			CDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjANBgkqhkiG9w0BAQsF
+			AAOCAYEAHmvHvU5poAtj9gidwi/E3FTEuvX//n0k89wzyQF6zSGn
+			lWIT42WzLZlxb9dTAAllyiflC5IsleyBBPe5ripTjBLnXYA/d+Kf
+			Z7IMA1f2S3MkzHKRkqZEDV4og7XZMA5cZcYEXgncBoFs5E1b8H3L
+			Wtw8WS5yzRWlyY/JHd7E54layQiTMqv+85mfttGdFg6CdUFIMfH3
+			pbXmC7i8dQHAZpRxyzo5Z12MnLVLQm1pHVUrNwB+jFMUcBgKFo5c
+			1Y0YQrS2t2zTWseDjdO/GBLQ6fuPOmEOCEotYBrgoMi+3CYEefXK
+			bfoI2WjbNYcKTyWinR6ceDk3YzdD0MwQyM6YjpkTr0yGvAHV/5pg
+			iz+bsO5Xu4S0i05c6VwPN1Z86/y7ztLhUgT2bdwEiHDJE0G3bnQf
+			XHPVzPdeF5ddvuR6srdOAbhI8CiKRk+LQGLmk063iQzi3BePX1v5
+			Woj0CCljcLkr/TLyOlE8WxsRKfgcwzHpFUtyGFJVByKPPk/4HL9T
+			</data>
+			<key>PayloadDisplayName</key>
+			<string>Living Room Remote Local CA</string>
+			<key>PayloadIdentifier</key>
+			<string>local.livingroom.remote.ca.cert</string>
+			<key>PayloadType</key>
+			<string>com.apple.security.root</string>
+			<key>PayloadUUID</key>
+			<string>9AADBC5D-13C0-5E70-8D18-88771EF8045D</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Lets this device open the Living Room remote over HTTPS.</string>
+	<key>PayloadDisplayName</key>
+	<string>Living Room Remote</string>
+	<key>PayloadIdentifier</key>
+	<string>local.livingroom.remote.ca</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>10E6C09A-1557-53DA-8B2E-518DF74B136A</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

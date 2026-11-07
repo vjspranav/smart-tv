@@ -1,0 +1,6 @@
+[Unit]
+Description=TV Remote standard HTTP port
+[Socket]
+ListenStream=80
+[Install]
+WantedBy=sockets.target

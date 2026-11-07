@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en" class="locked" data-version="__PAGE_VERSION__">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#eef1f8" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Home">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<link rel="icon" href="/icon-192.png">
+<title>Home</title>
+<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/home.css">
+<link rel="stylesheet" href="/house.css">
+<script defer src="/app.js"></script>
+<script defer src="/home.js"></script>
+<script defer src="/home-overview.js"></script>
+<script defer src="/connect.js"></script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v8M6.6 6.6a7.5 7.5 0 1 0 10.8 0"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20h-5.5v-5.5h-5V20H4Z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 6 4 11l5 5M4 11h10.5a5 5 0 0 1 0 10H12"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></symbol>
+  <symbol id="i-input" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M9 11h6m-2.5-2.5L15 11l-2.5 2.5"/></symbol>
+  <symbol id="i-picture" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="m4 17 5-5.5 4 4 2.5-2.5L20 17.5"/><circle cx="16" cy="9" r="1.3"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0"/><circle class="fill" cx="12" cy="19.2" r="1.3"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4Z"/><path d="m16 9.5 5 5m0-5-5 5"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path class="fill" d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect class="fill" x="6" y="5" width="4.2" height="14" rx="1.2"/><rect class="fill" x="13.8" y="5" width="4.2" height="14" rx="1.2"/></symbol>
+  <symbol id="i-back10" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></symbol>
+  <symbol id="i-fwd10" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3L19.5 9"/><path d="M19.5 4.5V9H15"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path class="fill" d="M5 6.2v11.6a1 1 0 0 0 1.55.83l8.4-5.8a1 1 0 0 0 0-1.66l-8.4-5.8A1 1 0 0 0 5 6.2Z"/><rect class="fill" x="16.5" y="5" width="2.6" height="14" rx="1"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path class="fill" d="M19 6.2v11.6a1 1 0 0 1-1.55.83l-8.4-5.8a1 1 0 0 1 0-1.66l8.4-5.8A1 1 0 0 1 19 6.2Z"/><rect class="fill" x="4.9" y="5" width="2.6" height="14" rx="1"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-captions" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M10.5 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></symbol>
+  <symbol id="i-remote" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="4"/><circle cx="12" cy="9" r="2.3"/><path d="M10.5 15.5h3"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10.5v3"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5 13.8 9l5.7 1.8-5.7 1.8L12 18.5l-1.8-5.9L4.5 10.8 10.2 9Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10Z"/></symbol>
+  <symbol id="i-gamepad" viewBox="0 0 24 24"><path d="M7.5 7h9a4.5 4.5 0 0 1 4.4 5.4l-.8 4a2.4 2.4 0 0 1-4.1 1.1L14 15.5h-4l-2 2a2.4 2.4 0 0 1-4.1-1.1l-.8-4A4.5 4.5 0 0 1 7.5 7Z"/><path d="M8 10v3M6.5 11.5h3M15.5 11h.01M17 12.5h.01"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m14.5 5.5 4 4L8 20H4v-4Z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 4h4M7 7l1 13h8l1-13"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-pad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-trackpad" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="4"/><circle class="fill" cx="12" cy="12" r="1.8"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-routine" viewBox="0 0 24 24"><path d="M5 6h9M5 12h14M5 18h6"/><path d="m16 15.5 3 2.5-3 2.5"/></symbol>
+</svg>
+
+<div class="ambient" aria-hidden="true"><i id="glow-a"></i><i id="glow-b"></i><i id="glow-c"></i></div>
+
+<main class="app" id="app">
+  <header class="top">
+    <div class="mode-switch" id="mode-switch" role="radiogroup" aria-label="Control">
+      <div class="mode-pill">
+        <i class="mode-ink" aria-hidden="true"></i>
+        <button type="button" role="radio" data-mode="tv" aria-checked="true">TV</button>
+        <button type="button" role="radio" data-mode="home" aria-checked="false">Home</button>
+      </div>
+    </div>
+    <div class="home-title" id="home-title">
+      <strong id="home-room-name">Home</strong>
+      <span id="home-summary" aria-live="polite"></span>
+    </div>
+    <button class="status" id="status" type="button" aria-live="polite">
+      <span class="dot" id="dot"></span>
+      <span class="status-text">
+        <strong id="app-name">Living Room TV</strong>
+        <span id="app-detail">Connecting</span>
+      </span>
+    </button>
+    <a class="install-pill" id="install-pill" href="/setup" hidden>Install app</a>
+    <button class="round-btn" id="open-settings" type="button" aria-label="TV controls"><svg><use href="#i-sliders"/></svg></button>
+    <button class="round-btn power" id="power" type="button" aria-label="Turn TV off"><svg><use href="#i-power"/></svg></button>
+  </header>
+
+  <div class="pager" id="pager">
+    <!-- Page 1: Now playing -->
+    <section class="page now-page" id="p-now" aria-label="Now playing">
+      <div class="now-full" id="now-full" hidden>
+        <div class="big-art" id="big-art"><img id="art" alt="" hidden><img id="art-logo" class="art-logo" alt="" hidden></div>
+        <div class="now-meta">
+          <p class="title" id="title"></p>
+          <p class="artist" id="artist"></p>
+        </div>
+        <div class="seek" id="seek">
+          <div class="track" id="track" role="slider" tabindex="0" aria-label="Playback position" aria-valuemin="0">
+            <i class="fill" id="track-fill"></i><i class="thumb" id="track-thumb"></i>
+          </div>
+          <div class="times"><span id="elapsed">0:00</span><span id="scrub-hint" hidden></span><span id="remaining"></span></div>
+        </div>
+        <div class="transport">
+          <button type="button" id="t-prev" aria-label="Back 10 seconds"><svg><use id="t-prev-icon" href="#i-back10"/></svg><small id="t-prev-label">10</small></button>
+          <button type="button" class="play" id="t-play" aria-label="Play"><svg><use id="t-play-icon" href="#i-play"/></svg></button>
+          <button type="button" id="t-next" aria-label="Forward 10 seconds"><svg><use id="t-next-icon" href="#i-fwd10"/></svg><small id="t-next-label">10</small></button>
+        </div>
+        <div class="volume" data-volume>
+          <button type="button" data-key="volume_down" aria-label="Volume down"><svg><use href="#i-minus"/></svg></button>
+          <label class="vol-slider"><span class="visually-hidden">Volume</span><input type="range" min="0" max="100" value="0" data-volume-input><output data-volume-value>–</output></label>
+          <button type="button" data-key="volume_up" aria-label="Volume up"><svg><use href="#i-plus"/></svg></button>
+        </div>
+        <section class="queue" id="queue" hidden>
+          <h3>Up next</h3>
+          <ol id="queue-list"></ol>
+        </section>
+      </div>
+      <div class="now-limited" id="now-limited" hidden>
+        <div class="limited-logo" id="limited-logo"></div>
+        <p class="title" id="limited-title"></p>
+        <p class="empty-sub">This app doesn't share what's playing, so there's no seeker or artwork. These controls still work.</p>
+        <div class="transport">
+          <button type="button" data-key="rewind" aria-label="Rewind"><svg><use href="#i-back10"/></svg></button>
+          <button type="button" class="play" data-key="play_pause" aria-label="Play or pause"><svg><use href="#i-play"/></svg></button>
+          <button type="button" data-key="forward" aria-label="Fast forward"><svg><use href="#i-fwd10"/></svg></button>
+        </div>
+        <div class="volume" data-volume>
+          <button type="button" data-key="volume_down" aria-label="Volume down"><svg><use href="#i-minus"/></svg></button>
+          <label class="vol-slider"><span class="visually-hidden">Volume</span><input type="range" min="0" max="100" value="0" data-volume-input><output data-volume-value>–</output></label>
+          <button type="button" data-key="volume_up" aria-label="Volume up"><svg><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <div class="now-empty" id="now-empty">
+        <div class="empty-orb" aria-hidden="true"><svg><use href="#i-wave"/></svg></div>
+        <p class="empty-title">Nothing playing</p>
+        <p class="empty-sub" id="empty-sub">Start something and it shows up here, with the seeker and artwork.</p>
+        <div class="recent-row grid" id="recent-row"></div>
+      </div>
+    </section>
+
+    <!-- Page 2: Remote -->
+    <section class="page remote-page" id="p-remote" aria-label="Remote">
+      <button class="mini" id="mini" type="button" hidden aria-label="Open now playing">
+        <span class="mini-art" id="mini-art"><img id="mini-img" alt="" hidden></span>
+        <span class="mini-meta"><span class="mini-title" id="mini-title"></span><span class="mini-sub" id="mini-sub"></span></span>
+        <span class="mini-play" id="mini-play" role="button" aria-label="Play or pause"><svg><use id="mini-play-icon" href="#i-play"/></svg></span>
+        <i class="mini-bar"><i id="mini-fill"></i></i>
+      </button>
+
+      <div class="shortcuts" id="shortcuts" aria-label="Shortcuts"></div>
+
+      <div class="pad-zone" id="pad-zone">
+        <div class="pad" id="pad" role="group" aria-label="Navigation pad: swipe or tap an edge to move, tap the centre to select">
+          <span class="edge up"><svg><use href="#i-chev"/></svg></span>
+          <span class="edge right"><svg><use href="#i-chev"/></svg></span>
+          <span class="edge down"><svg><use href="#i-chev"/></svg></span>
+          <span class="edge left"><svg><use href="#i-chev"/></svg></span>
+          <span class="ok" id="ok">OK</span>
+          <span class="ripple" id="ripple"></span>
+        </div>
+        <div class="trackpad" id="trackpad" hidden role="group" aria-label="Trackpad: swipe to move, tap to select">
+          <span class="blob" id="blob"></span>
+          <span class="trackpad-hint" id="trackpad-hint">Swipe to move. Tap to select.</span>
+        </div>
+        <div class="wake-layer" id="wake-layer" hidden>
+          <button class="wake" id="wake" type="button"><svg><use href="#i-power"/></svg><span>Turn on TV</span></button>
+        </div>
+      </div>
+
+      <div class="tip" id="tip" hidden>
+        <span><strong>Prefer swiping?</strong> Try the trackpad in remote settings.</span>
+        <button type="button" id="tip-try">Try it</button>
+        <button type="button" class="tip-x" id="tip-close" aria-label="Dismiss tip"><svg><use href="#i-close"/></svg></button>
+      </div>
+      <nav class="keys" aria-label="TV keys">
+        <button type="button" data-key="back" aria-label="Back"><svg><use href="#i-back"/></svg></button>
+        <button type="button" data-key="home" aria-label="Home"><svg><use href="#i-home"/></svg></button>
+        <button type="button" id="open-keyboard" aria-label="Type on TV"><svg><use href="#i-keyboard"/></svg></button>
+        <button type="button" id="open-voice" aria-label="Voice search"><svg><use href="#i-mic"/></svg></button>
+        <button type="button" data-key="captions" aria-label="Subtitles"><svg><use href="#i-captions"/></svg></button>
+      </nav>
+
+      <div class="volume" data-volume>
+        <button type="button" data-key="mute" aria-label="Mute"><svg><use href="#i-mute"/></svg></button>
+        <button type="button" data-key="volume_down" aria-label="Volume down"><svg><use href="#i-minus"/></svg></button>
+        <label class="vol-slider"><span class="visually-hidden">Volume</span><input type="range" min="0" max="100" value="0" data-volume-input><output data-volume-value>–</output></label>
+        <button type="button" data-key="volume_up" aria-label="Volume up"><svg><use href="#i-plus"/></svg></button>
+      </div>
+    </section>
+
+    <!-- Page 3: Apps -->
+    <section class="page apps-page" id="p-apps" aria-label="Apps">
+      <label class="search"><svg><use href="#i-search"/></svg><span class="visually-hidden">Search apps</span>
+        <input id="app-search" type="search" placeholder="Search apps" autocomplete="off" spellcheck="false"></label>
+      <div class="apps-scroll" id="apps-scroll">
+        <p class="apps-hint">Touch and hold an app to add it to your shortcuts.</p>
+        <div id="apps-list"><p class="muted">Loading apps from the TV</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="home" id="home" aria-label="Home controls" hidden></section>
+
+  <nav class="tabbar" id="tabbar" aria-label="Pages">
+    <i class="tab-ink" id="tab-ink"></i>
+    <button type="button" data-page="0"><svg><use href="#i-wave"/></svg><span>Now playing</span></button>
+    <button type="button" data-page="1"><svg><use href="#i-remote"/></svg><span>Remote</span></button>
+    <button type="button" data-page="2"><svg><use href="#i-grid"/></svg><span>Apps</span></button>
+  </nav>
+  <nav class="tabbar home-tabbar" id="home-tabbar" aria-label="Rooms" hidden><i class="tab-ink" id="home-ink"></i></nav>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="banner" id="banner" hidden><strong id="banner-title"></strong><span id="banner-text"></span></div>
+<div class="routine-run" id="routine-run" hidden><span class="spinner"></span><span id="routine-text"></span></div>
+
+<!-- TV controls: things that change the TV -->
+<dialog class="sheet" id="settings-sheet" aria-labelledby="qs-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><h2 id="qs-title">TV controls</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <section class="qs-block">
+      <h3>TV settings <span class="qs-sub">Opens on the TV screen</span></h3>
+      <div class="chip-row wrap">
+        <button type="button" class="chip" data-tv-action="settings"><svg><use href="#i-settings"/></svg>All settings</button>
+        <button type="button" class="chip" data-tv-action="picture"><svg><use href="#i-picture"/></svg>Picture</button>
+        <button type="button" class="chip" data-tv-action="sound"><svg><use href="#i-sound"/></svg>Sound</button>
+        <button type="button" class="chip" data-tv-action="wifi"><svg><use href="#i-wifi"/></svg>Wi-Fi</button>
+      </div>
+    </section>
+    <section class="qs-block">
+      <h3>Switch input</h3>
+      <div class="chip-row">
+        <button type="button" class="chip" data-input="1"><svg><use href="#i-gamepad"/></svg>HDMI 1 (PS5)</button>
+        <button type="button" class="chip" data-input="2"><svg><use href="#i-input"/></svg>HDMI 2</button>
+        <button type="button" class="chip" data-input="3"><svg><use href="#i-input"/></svg>HDMI 3</button>
+      </div>
+    </section>
+    <section class="qs-block">
+      <h3>Sleep timer <span class="qs-note" id="sleep-note"></span></h3>
+      <div class="chip-row" id="sleep-row">
+        <button type="button" class="chip" data-sleep="0">Off</button>
+        <button type="button" class="chip" data-sleep="15">15 min</button>
+        <button type="button" class="chip" data-sleep="30">30 min</button>
+        <button type="button" class="chip" data-sleep="60">1 hour</button>
+        <button type="button" class="chip" data-sleep="90">90 min</button>
+      </div>
+    </section>
+    <section class="qs-block">
+      <h3>Routines</h3>
+      <div class="routine-list" id="routine-list"></div>
+      <button type="button" class="link-btn" id="new-routine"><svg><use href="#i-plus"/></svg>New routine</button>
+    </section>
+    <button type="button" class="to-remote" id="open-remote-settings">
+      <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>
+      <span><strong>Remote settings</strong><small>D-pad or trackpad, haptics, shortcuts. Only this phone</small></span>
+      <svg class="chev"><use href="#i-chev"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<!-- Remote settings: things that only change this phone's remote -->
+<dialog class="sheet" id="remote-sheet" aria-labelledby="rs-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><button type="button" class="x" id="rs-back" aria-label="Back to TV controls"><svg><use href="#i-back"/></svg></button><h2 id="rs-title" class="grow">Remote settings</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <p class="sheet-note">These change this remote on this phone. The TV is not affected.</p>
+    <section class="qs-block">
+      <h3>Controls</h3>
+      <div class="segmented" id="mode-seg" role="radiogroup" aria-label="Control style">
+        <button type="button" role="radio" data-mode="dpad"><svg><use href="#i-pad"/></svg>D-pad</button>
+        <button type="button" role="radio" data-mode="trackpad"><svg><use href="#i-trackpad"/></svg>Trackpad</button>
+      </div>
+      <div class="speed" id="speed-block">
+        <span>Trackpad speed</span>
+        <div class="segmented three" id="speed-seg" role="radiogroup" aria-label="Trackpad speed">
+          <button type="button" role="radio" data-speed="slow">Slow</button>
+          <button type="button" role="radio" data-speed="normal">Normal</button>
+          <button type="button" role="radio" data-speed="fast">Fast</button>
+        </div>
+      </div>
+    </section>
+    <section class="qs-block">
+      <h3>On this phone</h3>
+      <label class="toggle"><span><strong>Haptics</strong><small>Small vibration on each press (Android)</small></span><input type="checkbox" id="pref-haptics"></label>
+      <label class="toggle"><span><strong>TV notifications</strong><small>Show the TV's notifications here</small></span><input type="checkbox" id="pref-notify"></label>
+      <label class="toggle"><span><strong>Lock screen controls</strong><small>Experimental. Shows playback on the phone's lock screen</small></span><input type="checkbox" id="pref-lock"></label>
+    </section>
+    <section class="qs-block qs-links">
+      <button type="button" class="link-btn" id="qs-phones"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Phones</button>
+      <button type="button" class="link-btn" id="edit-shortcuts"><svg><use href="#i-pencil"/></svg>Edit shortcuts</button>
+      <button type="button" class="link-btn" id="qs-reconnect"><svg><use href="#i-wifi"/></svg>Reconnect to TV</button>
+      <a class="link-btn" href="/setup"><svg><use href="#i-spark"/></svg>Install on this phone</a>
+    </section>
+  </div>
+</dialog>
+
+<!-- Keyboard -->
+<dialog class="sheet" id="keyboard-sheet" aria-labelledby="kb-title">
+  <form class="sheet-body" id="keyboard-form">
+    <header class="sheet-head"><h2 id="kb-title">Type on TV</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <p class="kb-status" id="kb-status">Connecting to the TV keyboard</p>
+    <div class="type-row">
+      <input id="kb-text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="500" placeholder="Type here">
+      <button type="submit" class="accent-btn" aria-label="Done"><svg><use href="#i-check"/></svg></button>
+    </div>
+    <button type="button" class="link-btn" id="kb-global"><svg><use href="#i-search"/></svg>Search all of Google TV instead</button>
+  </form>
+</dialog>
+
+<!-- Voice -->
+<dialog class="sheet voice-sheet" id="voice-sheet" aria-labelledby="voice-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><h2 id="voice-title">Voice search</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <div class="voice-orb" id="voice-orb"><i></i><i></i><svg><use href="#i-mic"/></svg></div>
+    <p class="voice-text" id="voice-text">Listening</p>
+    <form class="type-row" id="voice-form" hidden>
+      <input id="voice-input" placeholder="Type a search" autocomplete="off">
+      <button type="submit" class="accent-btn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+    </form>
+  </div>
+</dialog>
+
+<!-- Shortcut editor -->
+<dialog class="sheet" id="shortcut-sheet" aria-labelledby="sc-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><h2 id="sc-title">Shortcuts</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <p class="muted">These sit above the pad on the Remote page.</p>
+    <ul class="edit-list" id="sc-list"></ul>
+    <h3>Add</h3>
+    <div class="chip-row wrap" id="sc-add"></div>
+  </div>
+</dialog>
+
+<!-- Routine editor -->
+<dialog class="sheet" id="routine-sheet" aria-labelledby="rt-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><h2 id="rt-title">Routine</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <label class="field"><span>Name</span><input id="rt-name" maxlength="40" placeholder="Movie night"></label>
+    <ol class="edit-list steps" id="rt-steps"></ol>
+    <h3>Add a step</h3>
+    <div class="chip-row wrap" id="rt-add"></div>
+    <div class="sheet-actions">
+      <button type="button" class="ghost-btn danger" id="rt-delete">Delete</button>
+      <button type="button" class="accent-btn wide" id="rt-save">Save routine</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- App actions -->
+<dialog class="sheet" id="app-sheet" aria-labelledby="as-title">
+  <div class="sheet-body">
+    <header class="sheet-head"><h2 id="as-title">App</h2><button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></header>
+    <div class="sheet-actions column">
+      <button type="button" class="accent-btn wide" id="as-open">Open on TV</button>
+      <button type="button" class="ghost-btn wide" id="as-shortcut">Add to shortcuts</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet device-sheet" id="device-sheet" aria-labelledby="ds-title">
+  <div class="sheet-body">
+    <header class="sheet-head">
+      <div class="ds-head"><h2 id="ds-title">Device</h2><span id="ds-sub" class="muted"></span></div>
+      <button type="button" class="x" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </header>
+    <div id="ds-controls" class="ds-controls"></div>
+  </div>
+</dialog>
+
+<audio id="lock-audio" loop hidden></audio>
+</body>
+</html>

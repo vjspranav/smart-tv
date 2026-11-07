@@ -1,0 +1,11 @@
+[Unit]
+Description=Forward TV Remote HTTPS
+Requires=tv-remote-https.socket
+After=tv-remote-https.socket
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:8443
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes

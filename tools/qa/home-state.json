@@ -1,0 +1,984 @@
+{
+ "version": 16,
+ "rooms": [
+  {
+   "id": "living",
+   "name": "Living"
+  },
+  {
+   "id": "vjs",
+   "name": "VJS"
+  },
+  {
+   "id": "green",
+   "name": "Green"
+  },
+  {
+   "id": "snehal",
+   "name": "Snehal"
+  },
+  {
+   "id": "dining",
+   "name": "Dining"
+  },
+  {
+   "id": "kitchen",
+   "name": "Kitchen"
+  }
+ ],
+ "devices": [
+  {
+   "id": "living-ac",
+   "room": "living",
+   "kind": "ac",
+   "name": "AC",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "mode": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "cool",
+      "dry",
+      "fan",
+      "auto"
+     ]
+    },
+    "target_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 16,
+     "max": 30,
+     "step": 0.5,
+     "unit": "\u00b0"
+    },
+    "indoor_temp": {
+     "type": "number",
+     "readonly": true,
+     "min": null,
+     "max": null,
+     "step": null,
+     "unit": "\u00b0"
+    },
+    "fan_speed": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "auto",
+      "silent",
+      "low",
+      "medium",
+      "high",
+      "full"
+     ]
+    },
+    "swing_v": {
+     "type": "bool",
+     "readonly": false
+    },
+    "swing_h": {
+     "type": "bool",
+     "readonly": false
+    },
+    "eco": {
+     "type": "bool",
+     "readonly": false
+    },
+    "turbo": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "display": {
+     "type": "bool",
+     "readonly": false
+    },
+    "off_timer_min": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 1440,
+     "step": 30,
+     "unit": ""
+    }
+   },
+   "state": {
+    "power": false,
+    "mode": "cool",
+    "target_temp": 24,
+    "indoor_temp": 28.1,
+    "fan_speed": "auto",
+    "swing_v": false,
+    "swing_h": false,
+    "eco": false,
+    "turbo": false,
+    "sleep": false,
+    "display": true,
+    "off_timer_min": 0
+   },
+   "updated_at": 1792446700.300689
+  },
+  {
+   "id": "living-fan",
+   "room": "living",
+   "kind": "fan",
+   "name": "Fan",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "speed": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 5,
+     "step": 1,
+     "unit": ""
+    },
+    "boost": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "timer_h": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      6
+     ]
+    },
+    "light": {
+     "type": "bool",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "speed": 3,
+    "boost": false,
+    "sleep": false,
+    "timer_h": 0,
+    "light": false
+   },
+   "updated_at": 1792446700.300703
+  },
+  {
+   "id": "living-light",
+   "room": "living",
+   "kind": "light",
+   "name": "Tubelight",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.300709
+  },
+  {
+   "id": "living-lamp",
+   "room": "living",
+   "kind": "light",
+   "name": "Lamp",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.3007119
+  },
+  {
+   "id": "vjs-ac",
+   "room": "vjs",
+   "kind": "ac",
+   "name": "AC",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "mode": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "cool",
+      "dry",
+      "fan",
+      "auto"
+     ]
+    },
+    "target_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 16,
+     "max": 30,
+     "step": 0.5,
+     "unit": "\u00b0"
+    },
+    "indoor_temp": {
+     "type": "number",
+     "readonly": true,
+     "min": null,
+     "max": null,
+     "step": null,
+     "unit": "\u00b0"
+    },
+    "fan_speed": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "auto",
+      "silent",
+      "low",
+      "medium",
+      "high",
+      "full"
+     ]
+    },
+    "swing_v": {
+     "type": "bool",
+     "readonly": false
+    },
+    "swing_h": {
+     "type": "bool",
+     "readonly": false
+    },
+    "eco": {
+     "type": "bool",
+     "readonly": false
+    },
+    "turbo": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "display": {
+     "type": "bool",
+     "readonly": false
+    },
+    "off_timer_min": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 1440,
+     "step": 30,
+     "unit": ""
+    }
+   },
+   "state": {
+    "power": false,
+    "mode": "cool",
+    "target_temp": 24,
+    "indoor_temp": 28.1,
+    "fan_speed": "auto",
+    "swing_v": false,
+    "swing_h": false,
+    "eco": false,
+    "turbo": false,
+    "sleep": false,
+    "display": true,
+    "off_timer_min": 0
+   },
+   "updated_at": 1792446700.300717
+  },
+  {
+   "id": "vjs-fan",
+   "room": "vjs",
+   "kind": "fan",
+   "name": "Fan",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "speed": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 5,
+     "step": 1,
+     "unit": ""
+    },
+    "boost": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "timer_h": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      6
+     ]
+    },
+    "light": {
+     "type": "bool",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "speed": 3,
+    "boost": false,
+    "sleep": false,
+    "timer_h": 0,
+    "light": false
+   },
+   "updated_at": 1792446700.3007202
+  },
+  {
+   "id": "vjs-light",
+   "room": "vjs",
+   "kind": "light",
+   "name": "Light",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.3007228
+  },
+  {
+   "id": "green-ac",
+   "room": "green",
+   "kind": "ac",
+   "name": "AC",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "mode": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "cool",
+      "dry",
+      "fan",
+      "auto"
+     ]
+    },
+    "target_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 16,
+     "max": 30,
+     "step": 0.5,
+     "unit": "\u00b0"
+    },
+    "indoor_temp": {
+     "type": "number",
+     "readonly": true,
+     "min": null,
+     "max": null,
+     "step": null,
+     "unit": "\u00b0"
+    },
+    "fan_speed": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "auto",
+      "silent",
+      "low",
+      "medium",
+      "high",
+      "full"
+     ]
+    },
+    "swing_v": {
+     "type": "bool",
+     "readonly": false
+    },
+    "swing_h": {
+     "type": "bool",
+     "readonly": false
+    },
+    "eco": {
+     "type": "bool",
+     "readonly": false
+    },
+    "turbo": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "display": {
+     "type": "bool",
+     "readonly": false
+    },
+    "off_timer_min": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 1440,
+     "step": 30,
+     "unit": ""
+    }
+   },
+   "state": {
+    "power": false,
+    "mode": "cool",
+    "target_temp": 24,
+    "indoor_temp": 28.1,
+    "fan_speed": "auto",
+    "swing_v": false,
+    "swing_h": false,
+    "eco": false,
+    "turbo": false,
+    "sleep": false,
+    "display": true,
+    "off_timer_min": 0
+   },
+   "updated_at": 1792446700.300726
+  },
+  {
+   "id": "green-fan",
+   "room": "green",
+   "kind": "fan",
+   "name": "Fan",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "speed": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 5,
+     "step": 1,
+     "unit": ""
+    },
+    "boost": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "timer_h": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      6
+     ]
+    },
+    "light": {
+     "type": "bool",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "speed": 3,
+    "boost": false,
+    "sleep": false,
+    "timer_h": 0,
+    "light": false
+   },
+   "updated_at": 1792446700.300729
+  },
+  {
+   "id": "green-light",
+   "room": "green",
+   "kind": "light",
+   "name": "Light",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.300732
+  },
+  {
+   "id": "snehal-ac",
+   "room": "snehal",
+   "kind": "ac",
+   "name": "AC",
+   "online": false,
+   "error": "Not responding",
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "mode": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "cool",
+      "dry",
+      "fan",
+      "auto"
+     ]
+    },
+    "target_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 16,
+     "max": 30,
+     "step": 0.5,
+     "unit": "\u00b0"
+    },
+    "indoor_temp": {
+     "type": "number",
+     "readonly": true,
+     "min": null,
+     "max": null,
+     "step": null,
+     "unit": "\u00b0"
+    },
+    "fan_speed": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      "auto",
+      "silent",
+      "low",
+      "medium",
+      "high",
+      "full"
+     ]
+    },
+    "swing_v": {
+     "type": "bool",
+     "readonly": false
+    },
+    "swing_h": {
+     "type": "bool",
+     "readonly": false
+    },
+    "eco": {
+     "type": "bool",
+     "readonly": false
+    },
+    "turbo": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "display": {
+     "type": "bool",
+     "readonly": false
+    },
+    "off_timer_min": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 1440,
+     "step": 30,
+     "unit": ""
+    }
+   },
+   "state": {
+    "power": false,
+    "mode": "cool",
+    "target_temp": 24,
+    "indoor_temp": 28.1,
+    "fan_speed": "auto",
+    "swing_v": false,
+    "swing_h": false,
+    "eco": false,
+    "turbo": false,
+    "sleep": false,
+    "display": true,
+    "off_timer_min": 0
+   },
+   "updated_at": 1792446700.300735
+  },
+  {
+   "id": "snehal-fan",
+   "room": "snehal",
+   "kind": "fan",
+   "name": "Fan",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "speed": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 5,
+     "step": 1,
+     "unit": ""
+    },
+    "boost": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "timer_h": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      6
+     ]
+    },
+    "light": {
+     "type": "bool",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "speed": 3,
+    "boost": false,
+    "sleep": false,
+    "timer_h": 0,
+    "light": false
+   },
+   "updated_at": 1792446700.300738
+  },
+  {
+   "id": "snehal-light",
+   "room": "snehal",
+   "kind": "light",
+   "name": "Light",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.3007412
+  },
+  {
+   "id": "dining-fan",
+   "room": "dining",
+   "kind": "fan",
+   "name": "Fan",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "speed": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 5,
+     "step": 1,
+     "unit": ""
+    },
+    "boost": {
+     "type": "bool",
+     "readonly": false
+    },
+    "sleep": {
+     "type": "bool",
+     "readonly": false
+    },
+    "timer_h": {
+     "type": "enum",
+     "readonly": false,
+     "values": [
+      0,
+      1,
+      2,
+      3,
+      6
+     ]
+    },
+    "light": {
+     "type": "bool",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "speed": 3,
+    "boost": false,
+    "sleep": false,
+    "timer_h": 0,
+    "light": false
+   },
+   "updated_at": 1792446700.3007429
+  },
+  {
+   "id": "dining-light",
+   "room": "dining",
+   "kind": "light",
+   "name": "Tubelight",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.300746
+  },
+  {
+   "id": "kitchen-light",
+   "room": "kitchen",
+   "kind": "light",
+   "name": "Light",
+   "online": true,
+   "error": null,
+   "capabilities": {
+    "power": {
+     "type": "bool",
+     "readonly": false
+    },
+    "brightness": {
+     "type": "number",
+     "readonly": false,
+     "min": 1,
+     "max": 100,
+     "step": 1,
+     "unit": "%"
+    },
+    "color_temp": {
+     "type": "number",
+     "readonly": false,
+     "min": 0,
+     "max": 100,
+     "step": 1,
+     "unit": ""
+    },
+    "color": {
+     "type": "color",
+     "readonly": false
+    }
+   },
+   "state": {
+    "power": false,
+    "brightness": 80,
+    "color_temp": 50,
+    "color": null
+   },
+   "updated_at": 1792446700.300749
+  }
+ ]
+}

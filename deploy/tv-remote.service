@@ -1,0 +1,15 @@
+[Unit]
+Description=Living Room TV web remote
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/tv-remote
+Environment=ADB_PATH=/home/flamingo/tv-remote/runtime/usr/bin/adb
+Environment=LD_LIBRARY_PATH=/home/flamingo/tv-remote/runtime/usr/lib/aarch64-linux-gnu/android:/home/flamingo/tv-remote/runtime/usr/lib/aarch64-linux-gnu
+Environment=LISTEN_HOST=0.0.0.0
+ExecStart=/usr/bin/python3 %h/tv-remote/server.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

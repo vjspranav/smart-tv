@@ -1,0 +1,11 @@
+[Unit]
+Description=Publish remote.local TV remote hostname
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 %h/tv-remote/publish_mdns.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
